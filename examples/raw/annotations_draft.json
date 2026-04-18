@@ -909,7 +909,7 @@
         "value": "Les moins ch\u00e8res (821 \u2013 1 844 \u20ac/m\u00b2)"
       }
     ],
-    "aria_label": "This horizontal stacked bar chart, shows the political breakdown of French municipalities according to their real estate prices per square meter, divided into five categories ranging from the least expensive (€821 - €1 844/m²) to the most expensive (€3 863 -€10 276/m²). Each bar represents 100% of the municipalities in a price category, subdivided into segments according to political orientation (Extr\u00eame gauche, Gauche, Centre, Divers, Droite, Extr\u00eame Droite). There is a year filter on the DVF Data, with 2025 selected. No tooltip is visible, no segment is highlighted.",
+    "aria_label": "This horizontal stacked bar chart, shows the political breakdown of French municipalities according to their real estate prices per square meter, divided into five categories ranging from the least expensive (\u20ac821 - \u20ac1 844/m\u00b2) to the most expensive (\u20ac3 863 -\u20ac10 276/m\u00b2). Each bar represents 100% of the municipalities in a price category, subdivided into segments according to political orientation (Extr\u00eame gauche, Gauche, Centre, Divers, Droite, Extr\u00eame Droite). There is a year filter on the DVF Data, with 2025 selected. No tooltip is visible, no segment is highlighted.",
     "confidence": "medium",
     "_source_image": "quintile-1.png"
   },
@@ -1436,5 +1436,159 @@
     "aria_label": "This is a tourism dashboard for the Auvergne-Rh\u00f4ne-Alpes region of France. Key performance indicators show 14.6 million arrivals in 2024 (up 2,3% in 2024 versus 2023), 8.81 overnight stays per inhabitant (in 2024), 604.83 arrivals per km\u00b2 (in 2024), and 2.595K tourist itineraries, with a tourism score of 0.65 out of 1.00. A seasonal table of overnight stays by month shows August as the peak month across all years (reaching 2,793,000 in 2022), while a combo chart compares annual tourist spending in M\u20ac across French regions with \u00cele-de-France leading with a significant margin and Auvergne-Rh\u00f4ne-Alpes second, alongside a line showing each region's share of GDP, with the right Y-axis ranging from 0 to 15%. There is a map of the region showing points of interest for different touristic itineraries.",
     "confidence": "medium",
     "_source_image": "tourisme-powerbi.png"
+  },
+  {
+    "chart_type": "Box plot",
+    "numbers": [
+      { "label": "Y-axis min", "value": "0" },
+      { "label": "Y-axis max", "value": "20" },
+      { "label": "Maths - whisker min", "value": "9" },
+      { "label": "Maths - Q1", "value": "11,5" },
+      { "label": "Maths - median", "value": "13,5" },
+      { "label": "Maths - Q3", "value": "14" },
+      { "label": "Maths - whisker max", "value": "15" },
+      { "label": "Maths - outlier (Lucas)", "value": "20" },
+      { "label": "Fran\u00e7ais - whisker min", "value": "8" },
+      { "label": "Fran\u00e7ais - Q1", "value": "10,5" },
+      { "label": "Fran\u00e7ais - median", "value": "11" },
+      { "label": "Fran\u00e7ais - Q3", "value": "12" },
+      { "label": "Fran\u00e7ais - whisker max", "value": "14,5" },
+      { "label": "Histoire - whisker min", "value": "4" },
+      { "label": "Histoire - Q1", "value": "11" },
+      { "label": "Histoire - median", "value": "13" },
+      { "label": "Histoire - Q3", "value": "15,5" },
+      { "label": "Histoire - whisker max", "value": "20" },
+      { "label": "Sciences - whisker min", "value": "6,5" },
+      { "label": "Sciences - Q1", "value": "9,5" },
+      { "label": "Sciences - median", "value": "10" },
+      { "label": "Sciences - Q3", "value": "11" },
+      { "label": "Sciences - whisker max", "value": "13,5" },
+      { "label": "Arts - whisker min", "value": "13" },
+      { "label": "Arts - Q1", "value": "15" },
+      { "label": "Arts - median", "value": "15,5" },
+      { "label": "Arts - Q3", "value": "15,5" },
+      { "label": "Arts - whisker max", "value": "18" },
+      { "label": "Sport - whisker min", "value": "9" },
+      { "label": "Sport - Q1", "value": "11" },
+      { "label": "Sport - median", "value": "12" },
+      { "label": "Sport - Q3", "value": "13" },
+      { "label": "Sport - whisker max", "value": "15" }
+    ],
+    "layers": [
+      "Each subject has a distinct colored box plot: Maths in pink, Fran\u00e7ais in light pink, Histoire in yellow, Sciences in light gray, Arts in blue, Sport in dark gray",
+      "A single outlier point labeled 'Lucas' is shown in Maths at approximately 20/20",
+      "Median lines are drawn across each box in a darker shade of the box color",
+      "Whiskers extend from the boxes to minimum and maximum non-outlier values"
+    ],
+    "filters": [
+      "Legend marker for outlier: 'Lucas' (pink dot)",
+      "Six subject categories on X-axis: Maths, Fran\u00e7ais, Histoire, Sciences, Arts, Sport"
+    ],
+    "aria_label": "Box plot titled 'R\u00e9sultats scolaires par mati\u00e8re - Classe 4A (avec valeurs extr\u00eames)' showing grade distributions for six subjects in class 4A. The Y-axis labeled 'Notes sur 20' has a range 0 to 20 and the X-axis shows the subjects: Maths, Français, Histoire, Sciences, Arts, Sport. Arts shows the highest median with a narrow interquartile range, while Sciences shows the lowest median. Histoire has the widest spread. A notable outlier labeled 'Lucas' appears in Maths at 20/20. No tooltips are present.",
+    "confidence": "medium",
+    "_source_image": "boxplot_02_outliers.png"
+  },
+  {
+    "chart_type": "Box plot",
+    "numbers": [
+      { "label": "Y-axis", "value": "0" },
+      { "label": "Y-axis", "value": "5" },
+      { "label": "Y-axis", "value": "10" },
+      { "label": "Y-axis", "value": "15" },
+      { "label": "Y-axis", "value": "20" },
+      { "label": "X-axis", "value": "Maths" },
+      { "label": "X-axis", "value": "Fran\u00e7ais" },
+      { "label": "X-axis", "value": "Histoire" },
+      { "label": "X-axis", "value": "Sciences" },
+      { "label": "X-axis", "value": "Arts" },
+      { "label": "X-axis", "value": "Sport" },
+      {
+        "label": "tooltip",
+        "value": "Maths - min: 2, Q1: ~8.5, m\u00e9diane: ~13, Q3: ~15, max: 20"
+      },
+      {
+        "label": "tooltip",
+        "value": "Fran\u00e7ais - min: ~11, Q1: ~12, m\u00e9diane: ~12, Q3: ~13, max: ~14"
+      },
+      {
+        "label": "tooltip",
+        "value": "Histoire - min: ~2.5, Q1: ~9, m\u00e9diane: ~12, Q3: ~14, max: ~17.5"
+      },
+      {
+        "label": "tooltip",
+        "value": "Sciences - min: ~13, Q1: ~13.5, m\u00e9diane: ~14, Q3: ~14.5, max: ~15"
+      },
+      {
+        "label": "tooltip",
+        "value": "Arts - min: ~3.5, Q1: ~7.5, m\u00e9diane: ~11, Q3: ~13, max: 20"
+      },
+      {
+        "label": "tooltip",
+        "value": "Sport - min: ~12, Q1: ~15, m\u00e9diane: ~15.5, Q3: ~16.5, max: ~18.5"
+      }
+    ],
+    "layers": "Each subject is represented by a distinct colored box plot: Maths in pink, Fran\u00e7ais in hot pink, Histoire in yellow, Sciences in light gray, Arts in light blue, Sport in dark gray. Median lines are drawn in darker shades within each box. Whiskers extend to minimum and maximum values.",
+    "filters": "No filters or legend pills visible; six subject categories displayed along X-axis",
+    "aria_label": "This is a box plot titled 'R\u00e9sultats scolaires par mati\u00e8re - Classe 2E (dispersion variable)', showing the distribution of grades out of 20 for six subjects in class 2E. Y-axis has a range from 0 to 20. Sport has the highest scores and narrow interquartile range, while Sciences also shows high but very tightly clustered results. Maths and Arts show the greatest variability, with whiskers spanning nearly the full 0\u201320 range, and Histoire also displays wide dispersion. Fran\u00e7ais shows the most compact distribution, with tightly grouped scores. No tooltip present.",
+    "confidence": "medium",
+    "_source_image": "boxplot_05_size_variation.png"
+  },
+  {
+    "chart_type": "Hexagonal tile map (cartogram)",
+    "numbers": [
+      { "label": "legend", "value": "Extr\u00eame gauche" },
+      { "label": "legend", "value": "Gauche" },
+      { "label": "legend", "value": "Centre" },
+      { "label": "legend", "value": "Divers" },
+      { "label": "legend", "value": "Droite" },
+      { "label": "legend", "value": "Extr\u00eame droite" },
+      { "label": "zone label", "value": "Zone A" },
+      { "label": "zone label", "value": "Zone B" },
+      { "label": "zone label", "value": "Zone C" },
+      { "label": "zone label", "value": "Zone D" },
+      { "label": "zone label", "value": "Zone E" },
+      { "label": "zone label", "value": "Zone F" },
+      { "label": "zone label", "value": "Zone G" },
+      { "label": "zone label", "value": "Zone H" },
+      { "label": "zone label", "value": "Zone I" },
+      { "label": "zone label", "value": "Zone J" },
+      { "label": "zone label", "value": "Zone K" },
+      { "label": "zone label", "value": "Zone L" }
+    ],
+    "layers": "Each hexagon is filled with a solid color corresponding to the winning political bloc: pink/magenta (Gauche) for Zones A, D, K; blue (Droite) for Zones B, G, J; black (Extr\u00eame droite) for Zones C, L; gold/yellow (Centre) for Zones E, F; dark red (Extr\u00eame gauche) for Zone H; grey (Divers) for Zone I. No fading or transparency effects applied.",
+    "filters": [
+      "Legend pills visible: Extr\u00eame gauche (dark red)",
+      "Gauche (pink)",
+      "Centre (gold)",
+      "Divers (grey)",
+      "Droite (blue)",
+      "Extr\u00eame droite (black)"
+    ],
+    "aria_label": "This hexagonal tile map titled 'R\u00e9sultats \u00e9lectoraux par zone \u2014 Bloc politique vainqueur' shows the winning political bloc for 12 electoral zones labeled A through L. The Droite (blue) wins the most zones with Zones B, G, and J; Gauche (pink) wins Zones A, D, and K; Extr\u00eame droite (black) wins Zones C and L; Centre (gold) wins Zones E and F; while Extr\u00eame gauche (dark red) wins Zone H and Divers (grey) wins Zone I. There is a legend bottom right on the chart with all the political blocs listed. No tooltip is visible and nothing is highlighted.",
+    "confidence": "high",
+    "_source_image": "choropleth_01_political.png"
+  },
+  {
+    "chart_type": "Hexagonal tile map with color gradient",
+    "numbers": [
+      { "label": "legend", "value": "7,200 \u20ac" },
+      { "label": "legend", "value": "4,000 \u20ac" },
+      { "label": "legend", "value": "800 \u20ac" }
+    ],
+    "layers": [
+      "Zone C (top row, rightmost) displayed in darkest blue, indicating highest price near 7,200 \u20ac/m\u00b2",
+      "Zone J (middle-bottom row, rightmost) also displayed in very dark blue, indicating very high price near 7,200 \u20ac/m\u00b2",
+      "Zone G (middle row, rightmost) displayed in dark-medium blue, indicating above-average price",
+      "Zone B, Zone F, Zone I, Zone L displayed in medium blue tones, indicating mid-range prices around 4,000 \u20ac/m\u00b2",
+      "Zone E displayed in medium-light blue",
+      "Zone A, Zone D, Zone H, Zone K displayed in lightest blue tones, indicating lowest prices near 800 \u20ac/m\u00b2",
+      "Color gradient scale on right side runs from white (800 \u20ac) at bottom to dark navy (7,200 \u20ac) at top"
+    ],
+    "filters": [
+      "Color gradient legend: Prix m\u00e9dian (\u20ac/m\u00b2) ranging from 800 \u20ac to 7,200 \u20ac"
+    ],
+    "aria_label": "This is a hexagonal tile map titled 'Prix m\u00e9dian au m\u00b2 par zone (gradient de couleur)' showing the median price per square meter by zone using a blue color gradient. The color scale ranges from 800 \u20ac (lightest blue) to 7,200 \u20ac (darkest blue). Zone C and Zone J stand out as the most expensive zones, displayed in the darkest blue near 7,200 \u20ac/m\u00b2, while Zone A, Zone D, Zone H, and Zone K appear in the lightest shades indicating the lowest prices closest to 800 \u20ac/m\u00b2. A color scale legend on the right shows values from 800 € (lightest blue) to 7,200 € (darkest blue), with 4,000 € at the midpoint. No tooltip is visible and nothing is highlighted.",
+    "confidence": "medium",
+    "_source_image": "choropleth_05_gradient.png"
   }
 ]
