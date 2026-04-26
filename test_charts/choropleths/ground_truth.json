@@ -1,0 +1,392 @@
+{
+  "choropleth_01_political.png": {
+    "description": "Hard boundaries, political colors, prior knowledge risk",
+    "zones": [
+      {
+        "name": "Zone A",
+        "category": "Gauche",
+        "color": "#E91E63"
+      },
+      {
+        "name": "Zone B",
+        "category": "Droite",
+        "color": "#2196F3"
+      },
+      {
+        "name": "Zone C",
+        "category": "Extrême droite",
+        "color": "#1A1A1A"
+      },
+      {
+        "name": "Zone D",
+        "category": "Gauche",
+        "color": "#E91E63"
+      },
+      {
+        "name": "Zone E",
+        "category": "Centre",
+        "color": "#FFC107"
+      },
+      {
+        "name": "Zone F",
+        "category": "Centre",
+        "color": "#FFC107"
+      },
+      {
+        "name": "Zone G",
+        "category": "Droite",
+        "color": "#2196F3"
+      },
+      {
+        "name": "Zone H",
+        "category": "Extrême gauche",
+        "color": "#C62828"
+      },
+      {
+        "name": "Zone I",
+        "category": "Divers",
+        "color": "#9E9E9E"
+      },
+      {
+        "name": "Zone J",
+        "category": "Droite",
+        "color": "#2196F3"
+      },
+      {
+        "name": "Zone K",
+        "category": "Gauche",
+        "color": "#E91E63"
+      },
+      {
+        "name": "Zone L",
+        "category": "Extrême droite",
+        "color": "#1A1A1A"
+      }
+    ],
+    "legend": {
+      "Extrême gauche": "#C62828",
+      "Gauche": "#E91E63",
+      "Centre": "#FFC107",
+      "Divers": "#9E9E9E",
+      "Droite": "#2196F3",
+      "Extrême droite": "#1A1A1A"
+    }
+  },
+  "choropleth_02_transport.png": {
+    "description": "Hard boundaries, non-political colors, no prior knowledge risk",
+    "zones": [
+      {
+        "name": "Zone A",
+        "category": "Train",
+        "color": "#2E7D32"
+      },
+      {
+        "name": "Zone B",
+        "category": "Bus",
+        "color": "#E65100"
+      },
+      {
+        "name": "Zone C",
+        "category": "Train",
+        "color": "#2E7D32"
+      },
+      {
+        "name": "Zone D",
+        "category": "Vélo",
+        "color": "#6A1B9A"
+      },
+      {
+        "name": "Zone E",
+        "category": "Voiture",
+        "color": "#4E342E"
+      },
+      {
+        "name": "Zone F",
+        "category": "Bus",
+        "color": "#E65100"
+      },
+      {
+        "name": "Zone G",
+        "category": "Train",
+        "color": "#2E7D32"
+      },
+      {
+        "name": "Zone H",
+        "category": "Bus",
+        "color": "#E65100"
+      },
+      {
+        "name": "Zone I",
+        "category": "Vélo",
+        "color": "#6A1B9A"
+      },
+      {
+        "name": "Zone J",
+        "category": "Voiture",
+        "color": "#4E342E"
+      },
+      {
+        "name": "Zone K",
+        "category": "Train",
+        "color": "#2E7D32"
+      },
+      {
+        "name": "Zone L",
+        "category": "Bus",
+        "color": "#E65100"
+      }
+    ],
+    "legend": {
+      "Train": "#2E7D32",
+      "Bus": "#E65100",
+      "Vélo": "#6A1B9A",
+      "Voiture": "#4E342E"
+    }
+  },
+  "choropleth_03_circles.png": {
+    "description": "Circle size encoding only, no color variation",
+    "zones": [
+      {
+        "name": "Zone A",
+        "price": 800,
+        "circle_size_px": 80
+      },
+      {
+        "name": "Zone B",
+        "price": 3200,
+        "circle_size_px": 170
+      },
+      {
+        "name": "Zone C",
+        "price": 6500,
+        "circle_size_px": 294
+      },
+      {
+        "name": "Zone D",
+        "price": 1200,
+        "circle_size_px": 95
+      },
+      {
+        "name": "Zone E",
+        "price": 2800,
+        "circle_size_px": 155
+      },
+      {
+        "name": "Zone F",
+        "price": 4100,
+        "circle_size_px": 204
+      },
+      {
+        "name": "Zone G",
+        "price": 5500,
+        "circle_size_px": 256
+      },
+      {
+        "name": "Zone H",
+        "price": 900,
+        "circle_size_px": 84
+      },
+      {
+        "name": "Zone I",
+        "price": 3600,
+        "circle_size_px": 185
+      },
+      {
+        "name": "Zone J",
+        "price": 7200,
+        "circle_size_px": 320
+      },
+      {
+        "name": "Zone K",
+        "price": 1800,
+        "circle_size_px": 118
+      },
+      {
+        "name": "Zone L",
+        "price": 4800,
+        "circle_size_px": 230
+      }
+    ]
+  },
+  "choropleth_04_political_circles.png": {
+    "description": "Two dimensions: political color + circle size for price",
+    "zones": [
+      {
+        "name": "Zone A",
+        "category": "Gauche",
+        "price": 800
+      },
+      {
+        "name": "Zone B",
+        "category": "Droite",
+        "price": 3200
+      },
+      {
+        "name": "Zone C",
+        "category": "Extrême droite",
+        "price": 6500
+      },
+      {
+        "name": "Zone D",
+        "category": "Gauche",
+        "price": 1200
+      },
+      {
+        "name": "Zone E",
+        "category": "Centre",
+        "price": 2800
+      },
+      {
+        "name": "Zone F",
+        "category": "Centre",
+        "price": 4100
+      },
+      {
+        "name": "Zone G",
+        "category": "Droite",
+        "price": 5500
+      },
+      {
+        "name": "Zone H",
+        "category": "Extrême gauche",
+        "price": 900
+      },
+      {
+        "name": "Zone I",
+        "category": "Divers",
+        "price": 3600
+      },
+      {
+        "name": "Zone J",
+        "category": "Droite",
+        "price": 7200
+      },
+      {
+        "name": "Zone K",
+        "category": "Gauche",
+        "price": 1800
+      },
+      {
+        "name": "Zone L",
+        "category": "Extrême droite",
+        "price": 4800
+      }
+    ]
+  },
+  "choropleth_05_gradient.png": {
+    "description": "Single dimension color gradient, lighter=cheaper darker=expensive",
+    "zones": [
+      {
+        "name": "Zone A",
+        "price": 800
+      },
+      {
+        "name": "Zone B",
+        "price": 3200
+      },
+      {
+        "name": "Zone C",
+        "price": 6500
+      },
+      {
+        "name": "Zone D",
+        "price": 1200
+      },
+      {
+        "name": "Zone E",
+        "price": 2800
+      },
+      {
+        "name": "Zone F",
+        "price": 4100
+      },
+      {
+        "name": "Zone G",
+        "price": 5500
+      },
+      {
+        "name": "Zone H",
+        "price": 900
+      },
+      {
+        "name": "Zone I",
+        "price": 3600
+      },
+      {
+        "name": "Zone J",
+        "price": 7200
+      },
+      {
+        "name": "Zone K",
+        "price": 1800
+      },
+      {
+        "name": "Zone L",
+        "price": 4800
+      }
+    ],
+    "scale": {
+      "min": 800,
+      "max": 7200,
+      "encoding": "lighter=cheaper"
+    }
+  },
+  "choropleth_06_gradient_labels.png": {
+    "description": "Gradient + printed price labels inside zones",
+    "zones": [
+      {
+        "name": "Zone A",
+        "price": 800
+      },
+      {
+        "name": "Zone B",
+        "price": 3200
+      },
+      {
+        "name": "Zone C",
+        "price": 6500
+      },
+      {
+        "name": "Zone D",
+        "price": 1200
+      },
+      {
+        "name": "Zone E",
+        "price": 2800
+      },
+      {
+        "name": "Zone F",
+        "price": 4100
+      },
+      {
+        "name": "Zone G",
+        "price": 5500
+      },
+      {
+        "name": "Zone H",
+        "price": 900
+      },
+      {
+        "name": "Zone I",
+        "price": 3600
+      },
+      {
+        "name": "Zone J",
+        "price": 7200
+      },
+      {
+        "name": "Zone K",
+        "price": 1800
+      },
+      {
+        "name": "Zone L",
+        "price": 4800
+      }
+    ],
+    "scale": {
+      "min": 800,
+      "max": 7200,
+      "encoding": "lighter=cheaper"
+    }
+  }
+}

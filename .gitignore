@@ -8,9 +8,6 @@ credentials.json
 *.bin
 models/checkpoints/
 
-# Dataset (not public until submission)
-training/dataset.json
-
 # Personal/local
 NOTES.md
 TODO.md
@@ -22,3 +19,14 @@ scratch/
 __pycache__/
 *.pyc
 .claude/
+
+# Civic image content (recoverable from Modal volume civicinsight-data)
+examples/raw/
+examples/standardized/
+training/data/
+
+# Generated artifacts (regenerate from training/review.py)
+training/review.html
+
+# Local archive bundle (uploaded to Modal)
+raw_archive.tar.gz

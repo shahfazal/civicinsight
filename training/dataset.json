@@ -1,0 +1,252 @@
+[
+  {
+    "image": "examples/standardized/co2-line-cement-filtered.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This line chart titled 'Émissions mondiales de CO2 par type de carburant et par secteur d'activité' shows global CO2 emissions. The X-axis shows years from 1880 to 2020. The Y-axis shows millions of metric tonnes from 0 to 14 000, in steps of 2 000. The series 'Cement, Flaring & Other Industry' is selected. A tooltip on the 'Cement, Flaring & Other Industry' line shows 1 799 in the year 2009. 3 series - Coal, Oil, Gas - are shown in faded lines."
+  },
+  {
+    "image": "examples/standardized/boxplot_02_outliers.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This box plot titled 'Résultats scolaires par matière - Classe 4A (avec valeurs extrêmes)' shows grade distributions for six subjects in class 4A. The X-axis shows the subjects: Maths in dark pink, Français in pink, Histoire in yellow, Sciences in light gray, Arts in blue, Sport in dark gray. The Y-axis labeled 'Note sur 20' has a range 0 to 20 in steps of 5. An outlier for the Maths plot is labeled 'Lucas'. No subject is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/scatter-gauche-droite-filtered.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This scatter plot shows median prices per square meter plotted against abstention rates. The X-axis shows 'Prix médian au m² (€, échelle log)' from 1 000 to 10 000. The Y-axis shows 'Taux d'abstention au 2nd tour (%)' from 0 to 70, in steps of 10. A legend is shown on the right for French political blocs - Extrême gauche, Gauche, Centre, Divers, Droite, Extrême droite. The blocs Gauche and Droite are selected and the other blocs - Extrême gauche, Centre, Divers and Extrême droite not selected. On the chart, Pink dots representing 'Gauche' bloc, and Dark Blue dots representing 'Droite' bloc are highlighted."
+  },
+  {
+    "image": "examples/standardized/corse-ev-deuteranopia.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light pink) to 47 (dark blue), indicating the number of chargers per commune. Ajaccio has the highest number of chargers shown in dark blue, while Bastia in the north is also shown. The majority of inland and mountainous communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region Montagneuse'. No commune is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-18-29.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ shown on the right of the bar chart. The 18-29 age group is highlighted in the bars, and the other age groups are filtered out. The 18-29 group usage is printed in each bar: Facebook (24.7%), Instagram (38.6%), X (44.2%), Pinterest (30.5%), Snapchat (56.5%), YouTube (27.5%), Reddit (47.9%), and TikTok (43.7%)."
+  },
+  {
+    "image": "examples/standardized/boxplot-1.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled box plot shows median real estate prices per square metre by winning political bloc. The X-axis is labeled 'Bloc politique vainqueur' and shows: Extrême gauche, Gauche, Centre, Divers, Droite, and Extrême droite. The Y-axis is labeled 'Prix médian au m² (€, échelle log)' with values 1 000, 2 000, 3 000, 5 000, 7 000, and 10 000. The DVF data filter is showing 2024 as selected. City labels visible on each box: Extrême gauche shows Vénissieux (top) and Roubaix (bottom); Centre shows outlier Chamonix-Mont-Blanc (top) and Blanc (bottom); Divers shows outlier Lège-Cap-Ferret (top) and Issoudun (bottom); Droite shows outlier Soorts-Hossegor (top) and Abscon (bottom); Extrême droite shows outlier Six-Fours-les-Plages (top) and Vierzon (bottom). Tooltips are open for the Gauche box showing from top to bottom: outlier Paris '(Gauche, max: 9 500)', upper fence '(Gauche, upper fence: 5 813)', q3 '(Gauche, q3: 3 452)', median '(Gauche, median: 2 571)', q1 '(Gauche, q1: 1 801)', lower fence '(Gauche, lower fence: 833)', and outlier Revin '(Gauche, min: 833)'."
+  },
+  {
+    "image": "examples/standardized/corse-ev-porto-vecchio.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light green/teal) to 47 (dark blue), indicating the number of chargers per commune. Ajaccio has the highest number of chargers shown in dark blue, while Bastia in the north is also shown. The majority of inland and mountainous communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region montagneuse'. Porto-Vecchio is currently selected with a tooltip showing 14 chargers."
+  },
+  {
+    "image": "examples/standardized/corse-ev-bastia.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light green/teal) to 47 (dark blue), indicating the number of chargers per commune. Ajaccio has the highest number of chargers shown in dark blue. Bastia is currently selected with a tooltip showing 38 chargers. The majority of inland and mountainous communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region Montagneuse'."
+  },
+  {
+    "image": "examples/standardized/social-media-hover-filter-1.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 300% in steps of 50. The age groups 18-29, 30-49, 50-64 and 65+ shown on the right of the bar chart. The 30-49 age group is highlighted in the bars, and the other age groups are filtered out."
+  },
+  {
+    "image": "examples/standardized/social-media-area-chart-clean-pageflow-deuteranopia.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked area chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows the age groups 18-29, 30-49, 50-64 and 65+. The Y-axis is from 0 to 450, in steps of 50. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. No age group is selected; all areas are shown at full opacity, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-100-clean.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. No age group is selected; all bar segments are shown at full opacity, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-hover-filter-2.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 300% in steps of 50. The age groups 18-29, 30-49, 50-64 and 65+ are on the right of the bar chart. The 18-29 group is highlighted on the bars in dark blue. The other age groups are faded."
+  },
+  {
+    "image": "examples/standardized/social-media-area-chart-youtube-pageflow.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked area chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows the age groups 18-29, 30-49, 50-64 and 65+. The Y-axis is from 0 to 450, in steps of 50. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The YouTube area is currently selected and highlighted in red, showing a value of 86% for the 50-64 age group. The other areas are faded."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-50-64-fr.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Données démographiques relatives aux réseaux sociaux' shows the percentage of American adults who use social networks, broken down by age group. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 50-64 age segment is highlighted in dark blue. The other age groups are faded.  The 50-64 group usage is printed in each bar: Facebook (25,5%), Instagram (18,3%), X (17,4%), Pinterest (23,4%), Snapchat (12,2%), YouTube (25,4%), Reddit (11,5%) and TikTok (19,3%) on the bars."
+  },
+  {
+    "image": "examples/standardized/corse-ev-corte.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light green/teal) to 47 (dark blue), indicating the number of chargers per commune. Ajaccio is marked in dark blue at the top of the 0-47 scale. Bastia is also shown in dark blue, near the top of the scale. Corte is currently selected with a tooltip showing 9 chargers. Most communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region montagneuse'."
+  },
+  {
+    "image": "examples/standardized/corse-ev-total-color-blind.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across the communes of Corsica, France. The color scale ranges from 0 (light gray) to 47 (dark gray/black). Ajaccio is marked in dark gray at the top of the 0-47 scale. Bastia is marked in gray near the top of the scale. Most communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region montagneuse'. No commune is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/co2-line-dashed-dark.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This line chart titled 'Émissions mondiales de CO2 par type de carburant et par secteur d'activité' shows global CO2 emissions. The X-axis shows years from 1880 to 2020. The Y-axis shows millions of metric tonnes from 0 to 14 000, in steps of 2 000. The series 'Cement, Flaring & Other Industry' is selected. 3 series - Coal, Oil, Gas - are shown faded."
+  },
+  {
+    "image": "examples/standardized/uk-house-prices-small-multiples-clean.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This panel of line charts titled 'House prices in the U.K.' shows residential property prices across UK regions over time. Individual charts from left to right, top to bottom are titled: East Midlands, East of England, England, London, North East, North West, Northern Ireland, Scotland, South East, South West, United Kingdom, Wales, West Midlands Region, Yorkshire and The Humber. The X-axis on each chart spans years from 2000 to 2023. The Y-axis on each chart ranges from £0 to £400 000, in steps of £200 000. No region panel is selected; all lines are shown at full opacity, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/co2-line-dashed-cement-dark.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This line chart titled 'Émissions mondiales de CO2 par type de carburant et par secteur d'activité' shows global CO2 emissions. The X-axis shows years from 1880 to 2020. The Y-axis shows millions of metric tonnes from 0 to 14 000, in steps of 2 000. The series 'Cement, Flaring & Other Industry' is selected, with a tooltip showing 1 217 for the year 2000. 3 series - Coal, Oil, Gas - are shown faded."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-18-29-fr.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Données démographiques relatives aux réseaux sociaux' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 18-29 age group is highlighted in dark blue in the bars, and the other age groups are faded. The 18-29 group usage is printed in each bar: Facebook (24,7%), Instagram (38,6%), X (44,2%), Pinterest (30,5%), Snapchat (56,5%), YouTube (27,5%), Reddit (47,9%), and TikTok (43,7%)."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-30-49.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 30-49 age group is highlighted in dark blue in the bars, and the other age groups are faded. The 30-49 group usage is printed in each bar: Facebook (28.4%), Instagram (33.5%), X (29.1%), Pinterest (30.5%), Snapchat (27.8%), YouTube (27.8%), Reddit (36.5%), and TikTok (29.6%)."
+  },
+  {
+    "image": "examples/standardized/choropleth-paris.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map shows Paris and its arrondissements, along with the winning political bloc per arrondissement.  Circles representing median property prices per square metre are overlaid over each arrondissement. The legend on the right shows: Vainqueur - Gauche with '11 arrondissements sur 17'. Bloc Vainqueur - Pink for Gauche, Yellow for Centre and Blue for Droite. Prix médian au m² legend: small circle = Plus abordable, larger circle = Plus cher. No arrondissement is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-30-49-fr.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Données démographiques relatives aux réseaux sociaux' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 30-49 age group is highlighted in dark blue in the bars, and the other age groups are faded.  The 30-49 group usage is printed in each bar: Facebook (28,4%), Instagram (33,5%), X (29,1%), Pinterest (30,5%), Snapchat (27,8%), YouTube (27,8%), Reddit (36,5%), and TikTok (29,6%)."
+  },
+  {
+    "image": "examples/standardized/co2-line-dashed-clean.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This line chart titled 'Émissions mondiales de CO2 par type de carburant et par secteur d'activité' shows global CO2 emissions. The X-axis shows years from 1880 to 2020. The Y-axis shows millions of metric tonnes from 0 to 14 000, in steps of 2 000. Four series Coal, Oil, Gas and 'Cement, Flaring & Other Industry' are shown. No series is selected; all lines are shown at full opacity, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-area-chart-fb-pageflow.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked area chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows the age groups 18-29, 30-49, 50-64 and 65+. The Y-axis is from 0 to 450, in steps of 50. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Facebook area is currently selected and highlighted in pink, showing a value of 70% for the 50-64 age group. The other areas are faded."
+  },
+  {
+    "image": "examples/standardized/corse-ev-alando.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light green/teal) to 47 (dark blue), indicating the number of chargers per commune. Ajaccio is marked in dark blue at the top of the 0-47 scale. Bastia is also shown in dark blue, near the top of the scale. Alando is currently selected with a tooltip showing 0 chargers. Most communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region montagneuse'."
+  },
+  {
+    "image": "examples/standardized/boxplot_05_size_variation.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This box plot titled 'Résultats scolaires par matière - Classe 2E (dispersion variable)' shows grade distributions for six subjects in class 2E. The X-axis shows the subjects: Maths in dark pink, Français in pink, Histoire in yellow, Sciences in light gray, Arts in blue, Sport in dark gray. The Y-axis labeled 'Note sur 20' has a range 0 to 20 in steps of 5. No subject is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-area-chart-tiktok-pageflow-deuteranopia.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked area chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows the age groups 18-29, 30-49, 50-64 and 65+. The Y-axis is from 0 to 450, in steps of 50. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The TikTok area is currently selected and highlighted in brown, showing a tooltip with value of 10% for the 65+ age group. The other areas are faded."
+  },
+  {
+    "image": "examples/standardized/social-media-area-chart-clean-pageflow.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked area chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows the age groups 18-29, 30-49, 50-64 and 65+. The Y-axis is from 0 to 450, in steps of 50. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. No age group is selected; all areas are shown at full opacity, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/co2-line-dashed-gas-dark.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This line chart titled 'Émissions mondiales de CO2 par type de carburant et par secteur d'activité' shows global CO2 emissions. The X-axis shows years from 1880 to 2020. The Y-axis shows millions of metric tonnes from 0 to 14 000, in steps of 2 000. The series 'Gas' is selected, with a tooltip showing 7 556 for the year 2020. The other 3 series are shown faded: Coal, Oil, and 'Cement, Flaring & Other Industry'."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-65-plus.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 65+ age group is highlighted in light blue in the bars, and the other age groups are faded.  The 65+ group usage is printed in each bar: Facebook (21.5%), Instagram (9.6%), X (9.3%), Pinterest (15.6%), Snapchat (3.5%), YouTube (19.2%), Reddit (4.2%), and TikTok (7.4%)."
+  },
+  {
+    "image": "examples/standardized/choropleth-marseille.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map shows Marseille and its arrondissements, along with the winning political bloc per arrondissement. Circles representing median property prices per square metre are overlaid over each arrondissement. The legend on the right shows: Vainqueur - Gauche with '12 arrondissements sur 16'. Bloc Vainqueur - Pink for Gauche, and Dark Gray for Extrême Droite. Prix médian au m² legend: small circle = Plus abordable, larger circle = Plus cher. Pink (Gauche) covers the western and northwestern arrondissements; dark gray (Extrême Droite) covers the southeastern arrondissements. No arrondissement is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/corse-ev-ajaccio.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light green/teal) to 47 (dark blue), indicating the number of chargers per commune. Ajaccio is marked in dark blue at the top of the 0-47 scale. Bastia is also shown in dark blue. Ajaccio is currently selected with a tooltip showing 47 chargers. Most communes are in light gray and have 0 chargers. A map annotation labels the mountainous interior as 'Region montagneuse'. Several other communes show light green or teal shading, indicating low charger counts: Corte in the central interior, Aléria on the east coast, and Porto-Vecchio, Sartène and Bonifacio in the south."
+  },
+  {
+    "image": "examples/standardized/quintile-1.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled horizontal stacked bar chart shows the political breakdown of French municipalities by real estate price per square metre. The X-axis labeled 'Part des communes (%)' has a range 0% to 100%, in steps of 20. The Y-axis lists five price quintiles, top to bottom: Les plus chères (3 863 - 10 276 €/m²), Chères (3 079 - 3 861 €/m²), Intermédiaires (2 445 - 3 078 €/m²), Peu chères (1 849 - 2 444 €/m²), Les moins chères (821 - 1 844 €/m²). Legend at the bottom shows: Extrême gauche in dark red, Gauche in pink, Centre in yellow, Divers in gray, Droite in blue, Extrême droite in dark navy. A year toggle on the top for the DVF data shows 2024 and 2025; 2025 is currently selected."
+  },
+  {
+    "image": "examples/standardized/choropleth_01_political.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This hexagonal tile map titled 'Résultats électoraux par zone — Bloc politique vainqueur' shows the winning political bloc for 12 electoral zones labeled A through L. A Legend on the right of the chart lists the blocs per color: Dark Red - Extrême gauche, Pink - Gauche, Yellow - Centre, Gray - Divers, Blue - Droite, Black - Extrême droite. Top row left-to-right: Zone A (pink), Zone B (blue), Zone C (black). Second row: Zone D (pink), Zone E (yellow), Zone F (yellow), Zone G (blue). Third row: Zone H (dark red), Zone I (gray), Zone J (blue). Bottom row: Zone K (pink), Zone L (black). The Droite (blue) bloc wins Zones B, G, and J; Gauche (pink) wins Zones A, D, and K; Extrême droite (black) wins Zones C and L; Centre (yellow) wins Zones E and F; while Extrême gauche (dark red) wins Zone H and Divers (gray) wins Zone I. No zone is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-clean.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. No age group is selected or highlighted."
+  },
+  {
+    "image": "examples/standardized/quintile-distrib.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled horizontal stacked bar chart shows the political breakdown of French municipalities by real estate price per square metre. The X-axis labeled 'Part des communes (%)' has a range 0% to 100%, in steps of 20. The Y-axis lists five price quintiles, top to bottom: Les plus chères (3 863 - 10 276 €/m²), Chères (3 079 - 3 861 €/m²), Intermédiaires (2 445 - 3 078 €/m²), Peu chères (1 849 - 2 444 €/m²), Les moins chères (821 - 1 844 €/m²). Legend at the bottom shows: Extrême gauche in dark red, Gauche in pink, Centre in yellow, Divers in gray, Droite in blue, Extrême droite in dark navy. No quintile is selected; all bar segments are shown at full opacity, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/scatter-all-parties-clean.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled scatter plot shows median real estate prices against second-round abstention rates, color-coded by French political bloc. The X-axis shows 'Prix médian au m² (€, échelle log)' from 1 000 to 10 000. The Y-axis shows 'Taux d'abstention au 2nd tour (%)' from 0 to 70, in steps of 10. A legend is shown on the right for French political blocs - Extrême gauche, Gauche, Centre, Divers, Droite, Extrême droite. No filter is selected and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-area-chart-rdt-pageflow-deuteranopia.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked area chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows the age groups 18-29, 30-49, 50-64 and 65+. The Y-axis is from 0 to 450, in steps of 50. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Reddit area is selected and highlighted in light brown, showing a tooltip with value of 11% for the 50-64 age group. The other areas are faded."
+  },
+  {
+    "image": "examples/standardized/scatter-point-selected.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled scatter plot shows median real estate prices against second-round abstention rates, color-coded by French political bloc. The X-axis shows 'Prix médian au m² (€, échelle log)' from 1 000 to 10 000. The Y-axis shows 'Taux d'abstention au 2nd tour (%)' from 0 to 70, in steps of 10. A legend is shown on the right for French political blocs - Extrême gauche, Gauche, Centre, Divers, Droite, Extrême droite. Four communes are selected via the search filter: Revin, Nîmes, Sartène, and Paris. In the legend, Gauche and Divers are emphasized (the blocs of the selected communes); the other four blocs - Extrême gauche, Centre, Droite, Extrême droite - are faded. Four tooltips are visible, in left-to-right order along the X-axis, for the communes in the search filter: Revin - Bloc : Gauche, Prix médian : 833 €/m², Abstention : 44,2 %, Transactions : 103; Nîmes - Bloc : Gauche, Prix médian : 2 469 €/m², Abstention : 42,1 %, Transactions : 2 561; Sartène - Bloc : Divers, Prix médian : 2 792 €/m², Abstention : 9,0 %, Transactions : 42; Paris - Bloc : Gauche, Prix médian : 9 500 €/m², Abstention : 38,4 %, Transactions : 27 482. The rest of the points are faded in the background."
+  },
+  {
+    "image": "examples/standardized/uk-house-prices-small-multiples-hover.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This panel of line charts titled 'House prices in the U.K.' shows residential property prices across UK regions over time. Individual charts from left to right, top to bottom are titled: East Midlands, East of England, England, London, North East, North West, Northern Ireland, Scotland, South East, South West, United Kingdom, Wales, West Midlands Region, Yorkshire and The Humber. The X-axis on each chart spans years from 2000 to 2023. The Y-axis on each chart ranges from £0 to £400 000, in steps of £200 000. Each chart has a tooltip point displaying a value: East Midlands - £169k, East of England - £264k, England - £226k, London - mai 2016, £467k, North East - £125k, North West - £148k, Northern Ireland - £123k, Scotland - £138k, South East - £301k, South West - £231k, United Kingdom - £211k, Wales - £144k, West Midlands Region - £175k, Yorkshire and The Humber - £149k."
+  },
+  {
+    "image": "examples/standardized/scatter-gauche-filtered.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled scatter plot shows median real estate prices against second-round abstention rates, color-coded by French political bloc. The X-axis shows 'Prix médian au m² (€, échelle log)' from 1 000 to 10 000. The Y-axis shows 'Taux d'abstention au 2nd tour (%)' from 0 to 70, in steps of 10. A legend is shown on the right for French political blocs - Extrême gauche, Gauche, Centre, Divers, Droite, Extrême droite. The bloc Gauche is selected; the other five blocs - Extrême gauche, Centre, Divers, Droite, Extrême droite - are not selected. On the chart, the pink Gauche dots are shown at full opacity while the dots from the other blocs are shown faded in the background. No tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/co2-line-dash-coal.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This line chart titled 'Émissions mondiales de CO2 par type de carburant et par secteur d'activité' shows global CO2 emissions. The X-axis shows years from 1880 to 2020. The Y-axis shows millions of metric tonnes from 0 to 14 000, in steps of 2 000. The series 'Coal' is selected. A tooltip on the line shows 8 336 in the year 1986. 3 other series - Oil, Gas and 'Cement, Flaring & Other Industry' - are shown faded."
+  },
+  {
+    "image": "examples/standardized/uk-house-prices-small-multiples-dashed.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This panel of line charts titled 'House prices in the U.K.' shows residential property prices across UK regions over time. Individual charts from left to right, top to bottom are titled: East Midlands, East of England, England, London, North East, North West, Northern Ireland, Scotland, South East, South West, United Kingdom, Wales, West Midlands Region, Yorkshire and The Humber. The X-axis on each chart spans years from 2000 to 2023. The Y-axis on each chart ranges from £0 to £400 000, in steps of £200 000. No tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/corse-ev-clean.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Données Chargeurs Électrique' shows the distribution of electric vehicle chargers across communes in Corsica, France. The color scale ranges from 0 (light green/teal) to 47 (dark blue), indicating the number of chargers per commune. Two communes are shown in dark blue, the top of the color scale: Ajaccio (southwest) and Bastia (north). Lighter-colored communes with low charger counts appear along the coast: Calvi (northwest), Corte (north-central), Aléria and Ghisonaccia (east coast), Zonza, Sartène, Porto-Vecchio, and Bonifacio (south). All inland and mountainous communes are in light gray, indicating 0 chargers. A map annotation labels the mountainous interior as 'Region montagneuse'. No commune is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-stacked-highlight-65-plus-fr.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This stacked bar chart titled 'Données démographiques relatives aux réseaux sociaux' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 65+ age group is highlighted in light blue in the bars, and the other age groups are faded.  The 65+ group usage is printed in each bar: Facebook (21,5%), Instagram (9,6%), X (9,3%), Pinterest (15,6%), Snapchat (3,5%), YouTube (19,2%), Reddit (4,2%), and TikTok (7,4%)."
+  },
+  {
+    "image": "examples/standardized/choropleth_05_gradient.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This hexagonal tile map titled 'Prix médian au m² par zone (gradient de couleur)' shows the median price per square meter across 12 synthetic zones, encoded as a blue color gradient. The color scale on the right is labeled 'Prix médian (€/m²)' and ranges from 800 € (lightest blue) at the bottom to 7,200 € (darkest blue) at the top, with a midpoint mark at 4,000 €. By color intensity: the darkest blue zones (highest prices) are Zone J, and Zone C. Zone G is next darkest. The mid-blue zones are Zone B, Zone E, Zone F, Zone I, and Zone L. The lightest blue zones (lowest prices) are Zone A, Zone D, Zone H, and Zone K. The 12 zones are arranged in 4 rows from top to bottom: Zone A, Zone B, Zone C in the top row; Zone D, Zone E, Zone F, Zone G in the second row; Zone H, Zone I, Zone J in the third row; Zone K, Zone L in the bottom row. No zone is selected, and no tooltip is visible."
+  },
+  {
+    "image": "examples/standardized/social-media-grouped-bar-30-49.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This grouped bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social media platforms, broken down by age group. Legend on the top of the chart shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. On the left side, the bar charts are grouped by age groups 65+, 50-64, 30-49, 18-29, from bottom to top. The group 30-49 is selected and the other groups are faded. The percentage for this 30-49 age group is printed in each of the bars: Facebook (78%), Instagram (66%), X (25%), Pinterest (43%), Snapchat (32%), YouTube (94%), Reddit (35%) and TikTok (40%)."
+  },
+  {
+    "image": "examples/standardized/boxplot-abstention.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled box plot shows abstention rates in the second round by winning political bloc. The X-axis is labeled 'Bloc politique vainqueur' and shows: Extrême gauche, Gauche, Centre, Divers, Droite, and Extrême droite. The Y-axis is labeled 'Taux d'abstention au 2nd tour (%)' with values 10 %, 20 %, 30 %, 40 %, 50 %, and 60 %. City labels visible on each box: Extrême gauche shows outlier Roubaix (top) and Creil (bottom); Gauche shows Stains (top) and Lumbres (bottom); Centre shows outlier L'Isle-d'Abeau (top) and outlier Die (bottom); Divers shows Rumilly (top) and outlier Sartène (bottom); Droite shows outlier Tourcoing (top) and outlier Luc-la-Primaube (bottom); Extrême droite shows Val de Briey (top) and Canohès (bottom). Tooltips are open for the Centre box showing from top to bottom: outlier L'Isle-d'Abeau '(Centre, max: 59,52 %)', upper fence '(Centre, upper fence: 56,35 %)', q3 '(Centre, q3: 44,86 %)', median '(Centre, median: 41,105 %)', q1 '(Centre, q1: 37,095 %)', lower fence '(Centre, lower fence: 28,64 %)', and outlier Die '(Centre, min: 22,43 %)'."
+  },
+  {
+    "image": "examples/standardized/tourisme-powerbi.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This dashboard titled 'Tourisme - Auvergne-Rhône-Alpes' shows tourism data for the Auvergne-Rhône-Alpes region of France. The Région dropdown is set to 'Auvergne-Rhône-Alpes', and the 'Tourisme' view tab is selected at top right (the alternate 'Démographie et Transports' tab is unselected). Five key performance indicators in the left column show: 14.6M arrivals with a net increase 2,3% in 2024 versus 2023, 8.81 nuitées par habitant in 2024, 604.83 arrivées par km² in 2024, and 2.595K itinéraires touristiques. A seasonal table titled 'Saisonnalité touristique - Nuitées par mois et année' lists overnight stays by month with columns for 2022, 2023, and 2024; months January through November are visible (December is cut off). August is the visible peak across all three years, with printed values 2,793,000 (2022) and 2,626,000 (2023). A combo chart titled 'Dépense touristique annuelle et Part dans le PIB par région' shows tourist spending as bars (left Y-axis 'Dépense touristique (en M€)' with ticks at 0, 20K, 40K) overlaid with each region's share of GDP as an orange line (right Y-axis 'Part dans le PIB' with ticks at 0 %, 5 %, 10 %, 15 %). The X-axis 'Région' lists 12 French regions left to right, sorted by descending bar height: Île-de-France, Auvergne-Rhône-Alpes, Provence-Alpes-Côte d'Azur, Occitanie, Nouvelle-Aquitaine, Bretagne, Grand Est, Pays de la Loire, Hauts-de-France, Normandie, Bourgogne-Franche-Comté, and Centre-Val de Loire. A map titled 'Itinéraires touristiques' shows the Auvergne-Rhône-Alpes region of France with point markers for tourist itineraries. A gauge titled 'Score touristique' shows 0.65 on a scale from 0.00 to 1.00."
+  }
+]

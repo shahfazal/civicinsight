@@ -1,0 +1,523 @@
+{
+  "boxplot_01_baseline.png": {
+    "title": "Résultats scolaires par matière - Classe 3B",
+    "subjects": [
+      {
+        "name": "Maths",
+        "color": "#E91E63",
+        "q1": 11.25,
+        "median": 12.31,
+        "q3": 14.07,
+        "lower_fence": 7.02,
+        "upper_fence": 18.3,
+        "whisker_low": 7.33,
+        "whisker_high": 17.68,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Français",
+        "color": "#FF6B9D",
+        "q1": 9.42,
+        "median": 10.86,
+        "q3": 12.21,
+        "lower_fence": 5.24,
+        "upper_fence": 16.39,
+        "whisker_low": 6.65,
+        "whisker_high": 15.12,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Histoire",
+        "color": "#FFC107",
+        "q1": 12.1,
+        "median": 14.09,
+        "q3": 16.73,
+        "lower_fence": 5.14,
+        "upper_fence": 20,
+        "whisker_low": 6.64,
+        "whisker_high": 19.79,
+        "outliers": [
+          4.3
+        ],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sciences",
+        "color": "#9E9E9E",
+        "q1": 8.31,
+        "median": 9.86,
+        "q3": 11.28,
+        "lower_fence": 3.86,
+        "upper_fence": 15.72,
+        "whisker_low": 4.81,
+        "whisker_high": 15.08,
+        "outliers": [
+          1.47,
+          3.5,
+          3.71,
+          18.38,
+          20.0
+        ],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Arts",
+        "color": "#2196F3",
+        "q1": 13.56,
+        "median": 15.12,
+        "q3": 15.85,
+        "lower_fence": 10.13,
+        "upper_fence": 19.28,
+        "whisker_low": 12.62,
+        "whisker_high": 18.25,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sport",
+        "color": "#333333",
+        "q1": 10.29,
+        "median": 12.84,
+        "q3": 14.41,
+        "lower_fence": 4.12,
+        "upper_fence": 20,
+        "whisker_low": 8.47,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      }
+    ]
+  },
+  "boxplot_02_outliers.png": {
+    "title": "Résultats scolaires par matière - Classe 4A (avec valeurs extrêmes)",
+    "subjects": [
+      {
+        "name": "Maths",
+        "color": "#E91E63",
+        "q1": 11.1,
+        "median": 13.43,
+        "q3": 14.14,
+        "lower_fence": 6.54,
+        "upper_fence": 18.71,
+        "whisker_low": 9.63,
+        "whisker_high": 15.41,
+        "outliers": [
+          20.0
+        ],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Français",
+        "color": "#FF6B9D",
+        "q1": 10.02,
+        "median": 11.11,
+        "q3": 12.01,
+        "lower_fence": 7.04,
+        "upper_fence": 15.0,
+        "whisker_low": 8.0,
+        "whisker_high": 14.43,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Histoire",
+        "color": "#FFC107",
+        "q1": 11.35,
+        "median": 13.13,
+        "q3": 16.1,
+        "lower_fence": 4.24,
+        "upper_fence": 20,
+        "whisker_low": 4.4,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sciences",
+        "color": "#9E9E9E",
+        "q1": 9.16,
+        "median": 10.23,
+        "q3": 10.97,
+        "lower_fence": 6.45,
+        "upper_fence": 13.68,
+        "whisker_low": 7.11,
+        "whisker_high": 13.16,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Arts",
+        "color": "#2196F3",
+        "q1": 14.68,
+        "median": 15.65,
+        "q3": 16.16,
+        "lower_fence": 12.47,
+        "upper_fence": 18.37,
+        "whisker_low": 13.2,
+        "whisker_high": 18.1,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sport",
+        "color": "#333333",
+        "q1": 10.43,
+        "median": 11.59,
+        "q3": 12.54,
+        "lower_fence": 7.26,
+        "upper_fence": 15.7,
+        "whisker_low": 8.78,
+        "whisker_high": 15.28,
+        "outliers": [],
+        "tooltip_visible": false
+      }
+    ]
+  },
+  "boxplot_03_tooltips_center.png": {
+    "title": "Résultats scolaires par matière - Classe 5C",
+    "subjects": [
+      {
+        "name": "Maths",
+        "color": "#E91E63",
+        "q1": 11.33,
+        "median": 13.49,
+        "q3": 15.45,
+        "lower_fence": 5.15,
+        "upper_fence": 20,
+        "whisker_low": 6.71,
+        "whisker_high": 19.49,
+        "outliers": [],
+        "tooltip_visible": true
+      },
+      {
+        "name": "Français",
+        "color": "#FF6B9D",
+        "q1": 9.42,
+        "median": 11.13,
+        "q3": 12.53,
+        "lower_fence": 4.75,
+        "upper_fence": 17.2,
+        "whisker_low": 7.19,
+        "whisker_high": 15.07,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Histoire",
+        "color": "#FFC107",
+        "q1": 10.16,
+        "median": 13.84,
+        "q3": 16.63,
+        "lower_fence": 0.47,
+        "upper_fence": 20,
+        "whisker_low": 6.34,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": true
+      },
+      {
+        "name": "Sciences",
+        "color": "#9E9E9E",
+        "q1": 7.47,
+        "median": 9.51,
+        "q3": 12.69,
+        "lower_fence": 0,
+        "upper_fence": 20,
+        "whisker_low": 0.0,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Arts",
+        "color": "#2196F3",
+        "q1": 13.71,
+        "median": 14.2,
+        "q3": 15.67,
+        "lower_fence": 10.76,
+        "upper_fence": 18.62,
+        "whisker_low": 12.62,
+        "whisker_high": 17.83,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sport",
+        "color": "#333333",
+        "q1": 9.35,
+        "median": 11.08,
+        "q3": 12.79,
+        "lower_fence": 4.19,
+        "upper_fence": 17.95,
+        "whisker_low": 6.65,
+        "whisker_high": 14.98,
+        "outliers": [],
+        "tooltip_visible": false
+      }
+    ]
+  },
+  "boxplot_04_proximity.png": {
+    "title": "Résultats scolaires par matière - Classe 6D",
+    "subjects": [
+      {
+        "name": "Maths",
+        "color": "#E91E63",
+        "q1": 10.95,
+        "median": 11.6,
+        "q3": 13.1,
+        "lower_fence": 7.71,
+        "upper_fence": 16.33,
+        "whisker_low": 7.84,
+        "whisker_high": 15.2,
+        "outliers": [
+          6.51,
+          7.47,
+          16.61
+        ],
+        "tooltip_visible": true
+      },
+      {
+        "name": "Français",
+        "color": "#FF6B9D",
+        "q1": 11.99,
+        "median": 13.46,
+        "q3": 14.32,
+        "lower_fence": 8.49,
+        "upper_fence": 17.82,
+        "whisker_low": 9.71,
+        "whisker_high": 16.73,
+        "outliers": [
+          8.09,
+          18.05
+        ],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Histoire",
+        "color": "#FFC107",
+        "q1": 12.77,
+        "median": 15.03,
+        "q3": 17.08,
+        "lower_fence": 6.31,
+        "upper_fence": 20,
+        "whisker_low": 8.73,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sciences",
+        "color": "#9E9E9E",
+        "q1": 6.79,
+        "median": 9.28,
+        "q3": 10.62,
+        "lower_fence": 1.06,
+        "upper_fence": 16.36,
+        "whisker_low": 3.73,
+        "whisker_high": 16.18,
+        "outliers": [
+          0.01,
+          16.85,
+          19.53
+        ],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Arts",
+        "color": "#2196F3",
+        "q1": 14.0,
+        "median": 14.56,
+        "q3": 16.06,
+        "lower_fence": 10.91,
+        "upper_fence": 19.15,
+        "whisker_low": 11.07,
+        "whisker_high": 17.6,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sport",
+        "color": "#333333",
+        "q1": 9.4,
+        "median": 10.86,
+        "q3": 12.79,
+        "lower_fence": 4.33,
+        "upper_fence": 17.86,
+        "whisker_low": 4.83,
+        "whisker_high": 16.2,
+        "outliers": [],
+        "tooltip_visible": false
+      }
+    ]
+  },
+  "boxplot_05_size_variation.png": {
+    "title": "Résultats scolaires par matière - Classe 2E (dispersion variable)",
+    "subjects": [
+      {
+        "name": "Maths",
+        "color": "#E91E63",
+        "q1": 8.42,
+        "median": 13.13,
+        "q3": 15.33,
+        "lower_fence": 0,
+        "upper_fence": 20,
+        "whisker_low": 2.09,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Français",
+        "color": "#FF6B9D",
+        "q1": 11.49,
+        "median": 12.03,
+        "q3": 12.52,
+        "lower_fence": 9.95,
+        "upper_fence": 14.07,
+        "whisker_low": 10.84,
+        "whisker_high": 13.95,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Histoire",
+        "color": "#FFC107",
+        "q1": 8.64,
+        "median": 11.71,
+        "q3": 13.77,
+        "lower_fence": 0.94,
+        "upper_fence": 20,
+        "whisker_low": 2.39,
+        "whisker_high": 17.51,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sciences",
+        "color": "#9E9E9E",
+        "q1": 13.63,
+        "median": 13.92,
+        "q3": 14.76,
+        "lower_fence": 11.94,
+        "upper_fence": 16.44,
+        "whisker_low": 12.9,
+        "whisker_high": 15.7,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Arts",
+        "color": "#2196F3",
+        "q1": 7.48,
+        "median": 11.09,
+        "q3": 12.9,
+        "lower_fence": 0,
+        "upper_fence": 20,
+        "whisker_low": 3.26,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sport",
+        "color": "#333333",
+        "q1": 14.54,
+        "median": 15.81,
+        "q3": 16.63,
+        "lower_fence": 11.4,
+        "upper_fence": 19.76,
+        "whisker_low": 12.96,
+        "whisker_high": 18.74,
+        "outliers": [],
+        "tooltip_visible": false
+      }
+    ]
+  },
+  "boxplot_06_full_complexity.png": {
+    "title": "Résultats scolaires par matière - Classe 1F (complet)",
+    "subjects": [
+      {
+        "name": "Maths",
+        "color": "#E91E63",
+        "q1": 12.06,
+        "median": 13.71,
+        "q3": 15.36,
+        "lower_fence": 7.11,
+        "upper_fence": 20,
+        "whisker_low": 7.36,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": true
+      },
+      {
+        "name": "Français",
+        "color": "#FF6B9D",
+        "q1": 11.02,
+        "median": 12.15,
+        "q3": 12.8,
+        "lower_fence": 8.35,
+        "upper_fence": 15.47,
+        "whisker_low": 8.74,
+        "whisker_high": 14.79,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Histoire",
+        "color": "#FFC107",
+        "q1": 11.02,
+        "median": 13.9,
+        "q3": 17.32,
+        "lower_fence": 1.57,
+        "upper_fence": 20,
+        "whisker_low": 3.23,
+        "whisker_high": 20.0,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sciences",
+        "color": "#9E9E9E",
+        "q1": 8.84,
+        "median": 10.45,
+        "q3": 11.88,
+        "lower_fence": 4.28,
+        "upper_fence": 16.44,
+        "whisker_low": 5.46,
+        "whisker_high": 14.61,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Arts",
+        "color": "#2196F3",
+        "q1": 14.7,
+        "median": 15.23,
+        "q3": 15.75,
+        "lower_fence": 13.13,
+        "upper_fence": 17.32,
+        "whisker_low": 13.76,
+        "whisker_high": 16.59,
+        "outliers": [],
+        "tooltip_visible": false
+      },
+      {
+        "name": "Sport",
+        "color": "#333333",
+        "q1": 8.75,
+        "median": 10.87,
+        "q3": 12.97,
+        "lower_fence": 2.43,
+        "upper_fence": 19.29,
+        "whisker_low": 4.56,
+        "whisker_high": 16.56,
+        "outliers": [
+          0.45
+        ],
+        "tooltip_visible": true
+      }
+    ]
+  }
+}

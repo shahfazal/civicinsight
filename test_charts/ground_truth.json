@@ -1,0 +1,2942 @@
+{
+  "stacked_bar_bars_3_001.png": {
+    "num_bars": 3,
+    "num_segments": 6,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 2 343,0-2 543,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 21.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 26.2,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 12.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 18.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.8,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.8,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 906,0-3 106,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 22.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 30.2,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 12.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 15.4,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.6,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 864,0-2 064,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 21.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 25.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 12.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 17.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.8,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 6.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_bars_5_002.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 1 391,0-1 591,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 11.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 20.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 22.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 17.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 11.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 16.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 321,0-2 521,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 13.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 18.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 22.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 16.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 11.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 17.2,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 397,0-2 597,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 11.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 21.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 23.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 19.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 10.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 14.6,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 515,0-3 715,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 11.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 20.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 22.3,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 17.5,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 10.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 17.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 079,0-3 279,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 11.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 21.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 22.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 16.3,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 10.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 17.8,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_bars_8_003.png": {
+    "num_bars": 8,
+    "num_segments": 6,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 2 783,0-2 983,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 14.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 21.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 10.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.1,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 10.7,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 356,0-2 556,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 15.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 22.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 11.1,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 9.2,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 701,0-2 901,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 14.4,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 21.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 10.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 27.3,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.7,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 10.7,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 426,0-3 626,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 14.3,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.2,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 11.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 23.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 17.1,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 10.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 827,0-2 027,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 15.1,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 22.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 11.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.5,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 9.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 239,0-1 439,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 13.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 22.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 11.6,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 18.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 8.6,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 256,0-1 456,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 13.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 11.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 26.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.7,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 9.2,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 387,0-3 587,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 15.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 21.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 12.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 26.3,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 9.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_segs_3_004.png": {
+    "num_bars": 5,
+    "num_segments": 3,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 3 156,0-3 356,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 19.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 21.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 58.8,
+            "color": "#FFC107"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 331,0-2 531,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 20.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 55.9,
+            "color": "#FFC107"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 243,0-1 443,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 20.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 56.2,
+            "color": "#FFC107"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 303,0-3 503,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 20.3,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 56.3,
+            "color": "#FFC107"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 786,0-2 986,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 18.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 56.8,
+            "color": "#FFC107"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_segs_6_005.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 1 532,0-1 732,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 16.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 13.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 9.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 14.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 21.1,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 920,0-2 120,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 17.3,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 14.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 7.6,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 23.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 21.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 619,0-1 819,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 19.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 14.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 5.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.5,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 14.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 20.5,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 919,0-2 119,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 19.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 12.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 7.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 19.7,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 092,0-2 292,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 16.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 16.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 6.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 23.1,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 16.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 20.9,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_segs_10_006.png": {
+    "num_bars": 5,
+    "num_segments": 10,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 3 552,0-3 752,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 4.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 8.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 15.1,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 4.7,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 7.2,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 8.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.3,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.6,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 14.3,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 081,0-3 281,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 5.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.2,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 13.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 10.0,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 8.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 2.9,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.3,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 14.4,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 355,0-3 555,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 6.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 5.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 14.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 4.5,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 9.4,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 6.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.3,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 13.4,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 910,0-1 110,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 4.1,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 8.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 16.2,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 4.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 9.9,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 6.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 4.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 14.6,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 344,0-1 544,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 7.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 13.2,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 6.9,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 6.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 4.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 15.1,
+            "color": "#9E9E9E"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_dist_even_007.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "even",
+    "bars": [
+      {
+        "label": "Prix 3 756,0-3 956,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 15.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 15.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 18.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 19.2,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 15.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 258,0-1 458,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 18.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 16.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 17.8,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.8,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 16.8,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 028,0-3 228,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 17.4,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 17.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 17.2,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 15.1,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 15.7,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 895,0-3 095,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 16.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 16.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 15.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 17.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 16.2,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 812,0-2 012,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 14.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 18.3,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 17.3,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 17.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 16.6,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_dist_dominant_008.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "dominant",
+    "bars": [
+      {
+        "label": "Prix 2 871,0-3 071,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 61.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 9.3,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 9.8,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.2,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 6.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 025,0-1 225,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 59.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 8.9,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 9.6,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 9.8,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.5,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 6.0,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 129,0-2 329,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 58.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 7.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 9.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 6.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 9.5,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 8.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 622,0-2 822,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 60.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 8.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 8.1,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 7.5,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 8.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 6.5,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 953,0-1 153,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 60.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 8.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 8.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 6.4,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 8.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 7.5,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_dist_random_009.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 3 914,0-4 114,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 22.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 7.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 8.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 23.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 14.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 22.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 665,0-3 865,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 24.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 5.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.5,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 14.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 24.9,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 955,0-4 155,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 25.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.9,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 5.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.1,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 14.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 23.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 732,0-1 932,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 25.1,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 7.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 6.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 23.2,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 12.1,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 25.6,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 787,0-3 987,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 24.4,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 7.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 6.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 23.2,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 14.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 24.2,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_dist_tiny_010.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "tiny",
+    "bars": [
+      {
+        "label": "Prix 1 580,0-1 780,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 38.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 9.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.3,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 115,0-2 315,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 41.1,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 25.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 13.3,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 5.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.7,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 364,0-1 564,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 39.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.3,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.8,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.9,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 990,0-3 190,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 41.4,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 26.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.1,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.5,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 5.2,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 1.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 908,0-1 108,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 40.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.1,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 5.1,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.5,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_random_011.png": {
+    "num_bars": 5,
+    "num_segments": 4,
+    "distribution": "tiny",
+    "bars": [
+      {
+        "label": "Prix 2 345,0-2 545,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 44.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 27.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.9,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 180,0-2 380,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 44.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 27.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.6,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.4,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 415,0-3 615,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 44.6,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 27.3,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 12.1,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 448,0-3 648,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 45.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 27.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.0,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 757,0-3 957,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 44.4,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 27.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.1,
+            "color": "#9E9E9E"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_random_012.png": {
+    "num_bars": 7,
+    "num_segments": 4,
+    "distribution": "even",
+    "bars": [
+      {
+        "label": "Prix 2 755,0-2 955,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 25.6,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.6,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 25.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.4,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 968,0-1 168,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 25.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 26.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 24.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.0,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 999,0-4 199,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 22.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 25.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 25.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.4,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 796,0-1 996,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 23.3,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 25.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 26.4,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 978,0-2 178,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 25.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 26.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 24.7,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 810,0-2 010,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 24.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 26.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 23.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.7,
+            "color": "#9E9E9E"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 395,0-3 595,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 27.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.4,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 24.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 25.3,
+            "color": "#9E9E9E"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_random_013.png": {
+    "num_bars": 5,
+    "num_segments": 6,
+    "distribution": "tiny",
+    "bars": [
+      {
+        "label": "Prix 1 134,0-1 334,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 40.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 25.9,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 12.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 5.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.8,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 049,0-3 249,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 38.6,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 26.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 8.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 7.1,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.9,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 646,0-3 846,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 38.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.8,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 9.5,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 174,0-3 374,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 39.9,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 9.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 9.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.2,
+            "color": "#1A1A1A"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 467,0-2 667,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 40.4,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.9,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 10.9,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.2,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.4,
+            "color": "#1A1A1A"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_random_014.png": {
+    "num_bars": 7,
+    "num_segments": 7,
+    "distribution": "tiny",
+    "bars": [
+      {
+        "label": "Prix 3 874,0-4 074,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 38.6,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 13.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 8.3,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 7.7,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.9,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 3.3,
+            "color": "#E91E63"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 361,0-2 561,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 38.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 22.8,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.1,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 7.8,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 5.6,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.1,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 5.1,
+            "color": "#E91E63"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 334,0-3 534,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 41.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 13.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 8.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 8.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 2.9,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 2.0,
+            "color": "#E91E63"
+          }
+        ]
+      },
+      {
+        "label": "Prix 862,0-1 062,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 37.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 25.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 13.5,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 7.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 6.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.8,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 5.6,
+            "color": "#E91E63"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 790,0-3 990,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 37.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 23.0,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 7.0,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 3.8,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 3.4,
+            "color": "#E91E63"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 024,0-1 224,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 39.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 25.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.7,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 4.8,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 1.1,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 3.3,
+            "color": "#E91E63"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 408,0-1 608,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 37.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 24.5,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 14.6,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 11.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 5.3,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 4.2,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 2.3,
+            "color": "#E91E63"
+          }
+        ]
+      }
+    ]
+  },
+  "stacked_bar_random_015.png": {
+    "num_bars": 6,
+    "num_segments": 8,
+    "distribution": "random",
+    "bars": [
+      {
+        "label": "Prix 2 159,0-2 359,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 7.6,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 5.1,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 15.3,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 3.6,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 13.7,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 24.2,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 19.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 11.5,
+            "color": "#FF6B9D"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 527,0-1 727,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 4.6,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 6.4,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 13.2,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 23.5,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 18.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 9.5,
+            "color": "#FF6B9D"
+          }
+        ]
+      },
+      {
+        "label": "Prix 2 828,0-3 028,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 6.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 4.7,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.2,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 6.2,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 12.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 22.7,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 18.8,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 11.6,
+            "color": "#FF6B9D"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 834,0-2 034,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 4.3,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.3,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 16.9,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 7.0,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 13.9,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 22.6,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 20.0,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 9.1,
+            "color": "#FF6B9D"
+          }
+        ]
+      },
+      {
+        "label": "Prix 1 828,0-2 028,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 6.2,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 6.2,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 18.0,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 5.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 12.8,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 21.3,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 18.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 11.3,
+            "color": "#FF6B9D"
+          }
+        ]
+      },
+      {
+        "label": "Prix 3 235,0-3 435,0 €/m²",
+        "segments": [
+          {
+            "label": "Extrême gauche",
+            "value": 5.7,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 5.9,
+            "color": "#FF6B9D"
+          },
+          {
+            "label": "Centre",
+            "value": 17.4,
+            "color": "#FFC107"
+          },
+          {
+            "label": "Divers",
+            "value": 3.7,
+            "color": "#9E9E9E"
+          },
+          {
+            "label": "Droite",
+            "value": 13.4,
+            "color": "#2196F3"
+          },
+          {
+            "label": "Extrême droite",
+            "value": 22.9,
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Extrême gauche",
+            "value": 19.5,
+            "color": "#E91E63"
+          },
+          {
+            "label": "Gauche",
+            "value": 11.4,
+            "color": "#FF6B9D"
+          }
+        ]
+      }
+    ]
+  }
+}
