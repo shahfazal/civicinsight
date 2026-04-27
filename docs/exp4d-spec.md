@@ -8,7 +8,7 @@
 
 ## Why this spec exists at the right priority
 
-The competition reference allocates time roughly 55% / 20% / 5% / 10% / 10% across dataset+training, video, demo, writeup, submission buffer. v1 DPO is the tail end of the 55% bucket. If v1 produces a working adapter, **v2 DPO is not the next thing to build** — the video, the Gradio demo, and the Grounder are.
+The competition reference allocates time roughly 55% / 20% / 5% / 10% / 10% across dataset+training, video, demo, writeup, submission buffer. v1 DPO is the tail end of the 55% bucket. If v1 produces a working adapter, **v2 DPO is not the next thing to build**, the video, the Gradio demo, and the Grounder are.
 
 Evaluation is 40 Impact + 30 Storytelling + 30 Technical = 70% video-driven, 30% verification of the tech. v2 DPO improves the 30% bucket marginally. The video improves the 70% bucket directly.
 
@@ -45,7 +45,7 @@ It does NOT exist as the next thing to build after v1 trains.
 | `browser-share-other-filtered.png` (line, "Other" selected) | Subtitle range substituted for x-axis tick range; invented categorical state (Safari "light blue" while others "faded") |
 | `browser-share.png` (line, none selected) | False selection claim ("Chrome is selected" when nothing is) |
 | `income-vs-life-exp.png` (scatter, labels only) | Claimed "untitled" when title is bold and prominent; invented step size ("steps of 25k" instead of 50k); fabricated entire tooltip with externally-sourced GDP value (~$105k for Ireland) when no tooltip exists in image; tooltip-consistency contradiction within output |
-| `rural-vs-urban.png` (stacked bar, headline target) | Positional binding error — model reads printed values left-to-right and binds them to legend labels left-to-right, fails when leftmost segment has no printed value because it's too small. Top 4 rows (China, USA, Australia, India) all show this. Also: color-segment mapping confusion. |
+| `rural-vs-urban.png` (stacked bar, headline target) | Positional binding error, model reads printed values left-to-right and binds them to legend labels left-to-right, fails when leftmost segment has no printed value because it's too small. Top 4 rows (China, USA, Australia, India) all show this. Also: color-segment mapping confusion. |
 
 ## v2 target failure modes (ordered by submission impact, NOT frequency)
 
@@ -56,13 +56,13 @@ The previous version of this spec ordered tiers by frequency across audits. That
 **Source:** `income-vs-life-exp.png` audit. Model invented a tooltip with $105k Ireland GDP value sourced from world knowledge, not the chart.
 
 **Why this is Tier A despite being 1/5 frequency:**
-- The Digital Equity submission is built on "blind users can verify civic data without sighted help." Fabricated tooltips with externally-correct values are catastrophic for that promise — a blind user has no way to detect the fabrication.
+- The Digital Equity submission is built on "blind users can verify civic data without sighted help." Fabricated tooltips with externally-correct values are catastrophic for that promise, a blind user has no way to detect the fabrication.
 - This is the failure mode the Grounder (per agentic spec) is designed to catch at inference time. v2 DPO would be the upstream complement to the downstream Grounder defense.
-- If the video's Beat 2 demonstrates the Grounder catching a fabrication and correcting it, v2 DPO reduces how often the Grounder needs to fire — making the submission look more polished, not just defensively correct.
+- If the video's Beat 2 demonstrates the Grounder catching a fabrication and correcting it, v2 DPO reduces how often the Grounder needs to fire, making the submission look more polished, not just defensively correct.
 
 **Proposed perturbations:**
-- `fabricate_tooltip` — for "label only" golds, rejected version adds a fabricated tooltip with key-value pairs containing externally-correct values
-- `fabricate_value` — for "no tooltip visible" golds, rejected version adds specific numeric values for unlabeled points
+- `fabricate_tooltip`, for "label only" golds, rejected version adds a fabricated tooltip with key-value pairs containing externally-correct values
+- `fabricate_value`, for "no tooltip visible" golds, rejected version adds specific numeric values for unlabeled points
 
 **Note:** Synthetic perturbation may be too easy here. The model has to suppress a strong pre-training prior (it knows real GDP values). May need 5-10 hand-written pairs from actual exp4c-v1 fabrications. Budget: 5 hours of careful labor.
 
@@ -76,7 +76,7 @@ The previous version of this spec ordered tiers by frequency across audits. That
 - If v1 didn't fix it: this is the headline failure mode for civic data accessibility (every civic dashboard has stacked bars), so v2 must include a more targeted perturbation.
 
 **Refined perturbation if needed:**
-- `omit_unlabeled_segment` — more targeted than generic `positional_schema_swap`. Take a gold with N segments where segment 1 is unlabeled (small share, no printed value) and segments 2..N are labeled. Rejected version drops the unlabeled segment from the description and shifts segment 2's value into the segment-1 slot in the legend mapping.
+- `omit_unlabeled_segment`, more targeted than generic `positional_schema_swap`. Take a gold with N segments where segment 1 is unlabeled (small share, no printed value) and segments 2..N are labeled. Rejected version drops the unlabeled segment from the description and shifts segment 2's value into the segment-1 slot in the legend mapping.
 
 ### Tier C: confident invention of axis/structure metadata
 
@@ -88,13 +88,13 @@ The previous version of this spec ordered tiers by frequency across audits. That
 - v2 DPO would reduce the rate, but the Validator already provides a defense. Lower priority than Tier A (where Validator alone can't catch externally-sourced facts).
 
 **Proposed perturbations (only if A and B are addressed):**
-- `invent_step_size` — replace correct numeric step description with a "round" wrong one
-- `invent_centering` — add a fabricated "centered on X" claim that wasn't in the gold
-- `invent_axis_equality` — add fabricated "equal width" claims when the gold doesn't have them
+- `invent_step_size`, replace correct numeric step description with a "round" wrong one
+- `invent_centering`, add a fabricated "centered on X" claim that wasn't in the gold
+- `invent_axis_equality`, add fabricated "equal width" claims when the gold doesn't have them
 
 ### Tiers D+ (deferred to post-Kaggle)
 
-The remaining failure modes — subtitle/axis substitution, false selection, color contradiction — are real but lower priority for the submission window:
+The remaining failure modes, subtitle/axis substitution, false selection, color contradiction, are real but lower priority for the submission window:
 
 - Subtitle/axis substitution: 1/5 frequency, single image
 - False selection: 1/5 frequency, edge case (none-selected charts are uncommon in civic data)
@@ -228,7 +228,7 @@ This v2 spec is upstream of the Validator + Grounder layer. They solve overlappi
 
 - Does v1's `positional_schema_swap` fix `rural-vs-urban`? (answer comes from v1 scorecard)
 - If v1 fixes nothing on Tier A (fabricated tooltip), is the Grounder alone sufficient defense for the submission? (probably yes; Grounder is the demo's "wow" moment regardless)
-- Should the post-v1 scorecard also score the **agentic layer's behavior** — e.g., did the Validator correctly flag low-confidence cases? Yes, but separate metric, separate scorecard sheet.
+- Should the post-v1 scorecard also score the **agentic layer's behavior**, e.g., did the Validator correctly flag low-confidence cases? Yes, but separate metric, separate scorecard sheet.
 
 ---
 
@@ -239,7 +239,7 @@ When writing the 1,500-word writeup, Section 3 (Agentic Retrieval, 300 words) sh
 - If v1 ships: "Fine-tuning closed X failure modes. The agentic layer adds verification for the remaining cases."
 - If v2 ships: "Two rounds of post-training closed X failure modes; the agentic layer adds verification for the remaining cases."
 
-Either is true. v2 only matters for the writeup if the scorecard delta is large enough to be worth a sentence. If v2 produces a 5% improvement, don't mention it — say "fine-tuning" without versioning.
+Either is true. v2 only matters for the writeup if the scorecard delta is large enough to be worth a sentence. If v2 produces a 5% improvement, don't mention it, say "fine-tuning" without versioning.
 
 ---
 
@@ -249,6 +249,6 @@ Drop the v2 spec into the backlog. Don't think about it again until v1 finishes.
 
 1. Drafting the video script (Beat 1, 2, 3 from agentic spec)
 2. Setting up the HuggingFace Space for the Gradio demo
-3. Sketching the Validator's `check()` function from the agentic spec — this is the easy half of the agentic layer and unblocks Beat 2 of the video
+3. Sketching the Validator's `check()` function from the agentic spec, this is the easy half of the agentic layer and unblocks Beat 2 of the video
 
 If v1 finishes during your sleep cycle, the post-DPO scorecard tells you what to do tomorrow. Either way, the next 24-48 hours are video + demo + writeup work, not v2 DPO.

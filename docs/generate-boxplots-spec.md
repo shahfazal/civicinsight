@@ -12,11 +12,11 @@
 
 ## Failure Modes to Test
 
-1. **Outlier detection** — points above/below whiskers
-2. **Tooltip attribution** — printed labels on 1-2 boxes only, rest must be estimated
-3. **Tooltip proximity confusion** — tooltip for box A overlaps visually with box B
-4. **Y-axis estimation accuracy** — boxes at known positions, measure drift
-5. **Relative box sizes** — varying IQR widths (narrow vs wide distributions)
+1. **Outlier detection**, points above/below whiskers
+2. **Tooltip attribution**, printed labels on 1-2 boxes only, rest must be estimated
+3. **Tooltip proximity confusion**, tooltip for box A overlaps visually with box B
+4. **Y-axis estimation accuracy**, boxes at known positions, measure drift
+5. **Relative box sizes**, varying IQR widths (narrow vs wide distributions)
 
 ---
 
@@ -49,16 +49,16 @@
 
 ### Chart 5: Extreme Size Variation
 - 6 subjects
-- 2 very narrow boxes (IQR ~1 grade point) — Arts, Sport
-- 2 very wide boxes (IQR ~8 grade points) — Maths, Histoire  
-- 2 medium boxes — Français, Sciences
+- 2 very narrow boxes (IQR ~1 grade point), Arts, Sport
+- 2 very wide boxes (IQR ~8 grade points), Maths, Histoire  
+- 2 medium boxes, Français, Sciences
 - No tooltips
 - Tests: relative IQR estimation
 
 ### Chart 6: Full Complexity
 - 6 subjects
 - Outliers on 3 boxes
-- Tooltips on 2 boxes (not adjacent — Maths and Sport)
+- Tooltips on 2 boxes (not adjacent, Maths and Sport)
 - Tooltip for Maths positioned close to Français
 - Wide variation in box sizes
 - Tests: all failure modes simultaneously

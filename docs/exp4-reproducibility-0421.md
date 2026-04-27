@@ -1,6 +1,6 @@
-# Exp 4 Reproducibility Run — Apr 21
+# Exp 4 Reproducibility Run, Apr 21
 
-Second run of `07-experiment-4.ipynb`, identical config to Apr 20. Purpose: confirm the Exp 4 scorecard is reproducible, not a flaky one-off. Canon findings live in [exp4-results.md](exp4-results.md) — this note captures only the deltas.
+Second run of `07-experiment-4.ipynb`, identical config to Apr 20. Purpose: confirm the Exp 4 scorecard is reproducible, not a flaky one-off. Canon findings live in [exp4-results.md](exp4-results.md), this note captures only the deltas.
 
 **Notebook artifact:** `notebooks/kaggle/07-experiment-4-run-0421.ipynb` (with outputs preserved).
 
@@ -22,7 +22,7 @@ Same seed + same data + same config + same arithmetic → reproducible loss. Goo
 
 All three `model.generate()` calls in the notebook pass only `max_new_tokens`, no sampling params. Gemma's default `generation_config` has `do_sample=True`, so every run draws a different sample.
 
-## Aggregate scorecard — robust
+## Aggregate scorecard, robust
 
 Pattern holds across both runs:
 
@@ -32,24 +32,24 @@ Pattern holds across both runs:
 
 The headline findings are real, not a sampling artifact.
 
-## Drift-mode delta — the interesting part
+## Drift-mode delta, the interesting part
 
 Individual failures are stochastic draws from a distribution of drifts. Different rolls surface different modes.
 
 **New drift modes observed Apr 21 (absent Apr 20):**
 
-- **"Helpful assistant wrapper"** — 3/5 outputs open with `An aria-label for this image is:` or `would be:`. The model describes *what it would emit* instead of emitting. Prompt-echo one level deeper.
-- **HTML attribute syntax** — browser-share-other-filtered opens `aria-label="..."`. Echoed "aria-label" as if it were an HTML attribute.
-- **Markdown formatting regression** — browser-share (full) wraps output in `**bold**`. Googly-prose artifact leaking back.
+- **"Helpful assistant wrapper"**, 3/5 outputs open with `An aria-label for this image is:` or `would be:`. The model describes *what it would emit* instead of emitting. Prompt-echo one level deeper.
+- **HTML attribute syntax**, browser-share-other-filtered opens `aria-label="..."`. Echoed "aria-label" as if it were an HTML attribute.
+- **Markdown formatting regression**, browser-share (full) wraps output in `**bold**`. Googly-prose artifact leaking back.
 
 **Apr 20 drifts that did NOT recur Apr 21:**
 
-- Scatter mode-collapse loop (Samoa/Tonga cascade) — did not appear. Model listed 5 labeled points (Qatar, Ireland, Brunei, Maldives, Spain) and stopped cleanly.
-- USA "1" sum-to-100 hallucination on rural-vs-urban — did not appear. Different positional-schema drift this run (Germany got 3 numbers instead of 2).
+- Scatter mode-collapse loop (Samoa/Tonga cascade), did not appear. Model listed 5 labeled points (Qatar, Ireland, Brunei, Maldives, Spain) and stopped cleanly.
+- USA "1" sum-to-100 hallucination on rural-vs-urban, did not appear. Different positional-schema drift this run (Germany got 3 numbers instead of 2).
 
 **Drifts that repeated both runs:**
 
-- Bretagne generated in French (gold is English) — cross-lingual drift robust.
+- Bretagne generated in French (gold is English), cross-lingual drift robust.
 - `around X%` banned adjective on browser-share (full).
 - Reykjavík diacritic dropped.
 - "Bar chart" misclassification instead of "stacked bar chart".
@@ -59,8 +59,8 @@ Individual failures are stochastic draws from a distribution of drifts. Differen
 
 Any future config-comparison experiment must:
 
-1. **`do_sample=False`** on all inference calls — otherwise run-to-run variance swamps config-to-config signal.
-2. **Held-out set larger than 5** — 15-20 images minimum, stratified by chart type.
+1. **`do_sample=False`** on all inference calls, otherwise run-to-run variance swamps config-to-config signal.
+2. **Held-out set larger than 5**, 15-20 images minimum, stratified by chart type.
 3. **Optional but useful:** multiple sampling seeds alongside the greedy reference, to estimate the drift-mode distribution per config.
 
 ## The single sentence for the prof

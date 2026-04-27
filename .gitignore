@@ -30,3 +30,12 @@ training/review.html
 
 # Local archive bundle (uploaded to Modal)
 raw_archive.tar.gz
+
+
+# Untracked categories - keep them out of git entirely.
+
+
+ (*, -*,
+# , , *,
+# , etc.) need a `git rm --cached` decision in the May 13
+# pre-submission cleanup pass; .

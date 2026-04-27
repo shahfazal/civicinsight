@@ -3,14 +3,14 @@
 **Date:** April 12, 2026  
 **Model:** google/gemma-4-e4b-it (zero-shot, no fine-tuning)  
 **Environment:** Kaggle T4 x2 GPU  
-**Prompt:** Generic — chart type, key values, trends (Markdown structure)  
+**Prompt:** Generic, chart type, key values, trends (Markdown structure)  
 **Token budget:** 2048 max_new_tokens  
 
 ---
 
 ## Test Set
 
-**Phase 1 — Real dashboards (10 images)**
+**Phase 1, Real dashboards (10 images)**
 
 | Image | Chart Type |
 |-------|-----------|
@@ -25,7 +25,7 @@
 | choropleth-marseille.png | Choropleth map (medium complexity) |
 | choropleth-paris-detailed.png | Choropleth map (high complexity, sidebar) |
 
-**Phase 2 — Synthetic charts with ground truth (12 images tested)**
+**Phase 2, Synthetic charts with ground truth (12 images tested)**
 
 | Image | Chart Type | Distribution |
 |-------|-----------|-------------|
@@ -46,7 +46,7 @@
 
 ## Findings by Capability
 
-### ✅ Strong — Reliable Zero-Shot
+### ✅ Strong, Reliable Zero-Shot
 
 **Explicit number extraction**
 - KPI metrics extracted correctly (14.6M, 2.3%, 8.81, 604.83, 2.595K, 0.65)
@@ -54,9 +54,9 @@
 - Axis labels, tick values, min/max ranges
 
 **Structural understanding**
-- Chart type identification — correct across all 9 images
-- Legend reading — categories and labels identified
-- Table data — full seasonality table (36 cells, 12 months × 3 years) extracted correctly with sufficient token budget
+- Chart type identification, correct across all 9 images
+- Legend reading, categories and labels identified
+- Table data, full seasonality table (36 cells, 12 months × 3 years) extracted correctly with sufficient token budget
 
 **UI element reading**
 - Ghost text vs active filters distinguished (search bar examples vs pills)
@@ -70,7 +70,7 @@
 
 ---
 
-### ❌ Systematic Failures — Not Prompt-Fixable
+### ❌ Systematic Failures, Not Prompt-Fixable
 
 **1. Interactive state blindness** *(confirmed 3x)*
 - Filtered/highlighted/faded states invisible to model
@@ -79,51 +79,51 @@
 - Affects: any dashboard with interactive filters, selections, or highlights
 
 **2. Proportional value extraction from bar widths** *(confirmed 6 synthetic charts, 4 distribution types)*
-- Sums exceed 100% in 5 of 6 charts — worst case +30% overshoot
+- Sums exceed 100% in 5 of 6 charts, worst case +30% overshoot
 - Error magnitude: 5–30 percentage points per segment
-- **Copy-paste failure at scale**: 8-bar chart (003) — model reads one bar pattern and reproduces it identically across all 8 rows
+- **Copy-paste failure at scale**: 8-bar chart (003), model reads one bar pattern and reproduces it identically across all 8 rows
 - **Tiny segment inflation**: segments actually ~1–4% reported as 7–11% (EXD in "tiny" distribution)
-- **Dominant segment compression**: actual ~60% segment read as ~50% — model anchors toward center
+- **Dominant segment compression**: actual ~60% segment read as ~50%, model anchors toward center
 - **Segment-specific prior bias**: Gauche inflated in random distributions; Extrême droite deflated in even distributions; model applies internal political prior rather than reading widths
 - Root cause: no printed numbers on chart, model guesses proportions by eye using a learned political prior
 - Confirmed systematic across: random, even, dominant, and tiny distributions
 
-**3. Box plot value estimation — multi-failure pattern** *(confirmed 6 synthetic charts)*
-- **Tooltip tunnel vision**: when tooltips visible for 2 of 6 boxes, model reads only those 2 and gives qualitative descriptions for the rest — no Q1/Q3/whisker values attempted
-- **Value collapsing**: nearby values rounded to same number (Emma 6.51 + Thomas 8.09 both reported as "~7"; Histoire 15.03 + Arts 14.56 both reported as "~15") — precision gap at sub-point level
+**3. Box plot value estimation, multi-failure pattern** *(confirmed 6 synthetic charts)*
+- **Tooltip tunnel vision**: when tooltips visible for 2 of 6 boxes, model reads only those 2 and gives qualitative descriptions for the rest, no Q1/Q3/whisker values attempted
+- **Value collapsing**: nearby values rounded to same number (Emma 6.51 + Thomas 8.09 both reported as "~7"; Histoire 15.03 + Arts 14.56 both reported as "~15"), precision gap at sub-point level
 - **Repeated student labels missed**: named points appearing on two boxes (Léa on Maths AND Sciences; Chloé on Français AND Sciences) only attributed to one box each time
-- **Low outlier blindness**: Sciences had 5 outliers (1.47, 3.5, 3.71, 18.38, 20.0) — model reported 2 high ones, missed 3 low ones completely; bias toward high outliers
-- **Subject misattribution**: Français median (13.46) reported as ~10, collapsed with Sport (10.86) — proximity confusion between adjacent boxes
+- **Low outlier blindness**: Sciences had 5 outliers (1.47, 3.5, 3.71, 18.38, 20.0), model reported 2 high ones, missed 3 low ones completely; bias toward high outliers
+- **Subject misattribution**: Français median (13.46) reported as ~10, collapsed with Sport (10.86), proximity confusion between adjacent boxes
 - **Structural reading strong**: relative ranking of subjects preserved; tight vs. wide IQR correctly detected (05); overall trend language directionally correct
 - Q1/Q3/whiskers estimated reliably only when no tooltips present and boxes are well-separated (01, 02, 05)
 
 **4. Prior knowledge overriding visual evidence** *(confirmed across multiple chart types)*
-- Paris choropleth (real): model "knows" left=blue, right=red — inverted actual colors
+- Paris choropleth (real): model "knows" left=blue, right=red, inverted actual colors
 - Boxplot (real): high abstention read as high "support" (semantic inversion)
-- Political choropleth (synthetic 01): Zone E is visibly YELLOW (Centre) — model calls it Gauche anyway; prior overrides an unambiguous color cue, not a hue-confusion issue
-- Political choropleth (synthetic 01): blue (Droite), yellow (Centre), grey (Divers) all collapsed into one "Center/Conservative" bloc — model applies French political prior but imprecisely
-- Political choropleth (synthetic 01): Extrême droite zones (C, L) simultaneously placed in Centre cluster and correctly flagged as Extrême droite — internally contradictory output
+- Political choropleth (synthetic 01): Zone E is visibly YELLOW (Centre), model calls it Gauche anyway; prior overrides an unambiguous color cue, not a hue-confusion issue
+- Political choropleth (synthetic 01): blue (Droite), yellow (Centre), grey (Divers) all collapsed into one "Center/Conservative" bloc, model applies French political prior but imprecisely
+- Political choropleth (synthetic 01): Extrême droite zones (C, L) simultaneously placed in Centre cluster and correctly flagged as Extrême droite, internally contradictory output
 - Model fills gaps with world knowledge instead of reading the image
 - Dangerous for civic data: confident, wrong, politically loaded output
 
-**5. Circle size encoding — complete failure** *(confirmed 2 synthetic charts)*
-- Cannot differentiate circle sizes at all — all circles reported as identical (smallest category)
+**5. Circle size encoding, complete failure** *(confirmed 2 synthetic charts)*
+- Cannot differentiate circle sizes at all, all circles reported as identical (smallest category)
 - Confirmed in both circle-only (03) and circle+color (04) variants
-- In bivariate encoding (04): uses political color (black hexagon = Extrême droite) as proxy for "expensive" circle — reads the wrong channel entirely
+- In bivariate encoding (04): uses political color (black hexagon = Extrême droite) as proxy for "expensive" circle, reads the wrong channel entirely
 - Bivariate encoding also causes dimension drop: focused on price circles, ignored political color dimension completely
-- Model correctly reads legend symbols (empty/half/filled circles) but cannot match them to actual zone circles by size — 6/12 correct (50%), driven by lucky guesses not actual size reading
-- **Summary whitewash**: model's "General Trend" conclusion (9 zones affordable) directly contradicts its own zone-by-zone output — cannot synthesize what it just produced
-- Root cause: model has no circle size perception — only shape recognition
+- Model correctly reads legend symbols (empty/half/filled circles) but cannot match them to actual zone circles by size, 6/12 correct (50%), driven by lucky guesses not actual size reading
+- **Summary whitewash**: model's "General Trend" conclusion (9 zones affordable) directly contradicts its own zone-by-zone output, cannot synthesize what it just produced
+- Root cause: model has no circle size perception, only shape recognition
 
 **6. Number hallucination under cognitive load**
 - 27482 → "2,7482" (fabricated comma in 5-digit number)
 - 1,405,332 → "140,552" (order of magnitude error)
-- Occurs on dense, complex images — model picks confident subsets, fills rest
+- Occurs on dense, complex images, model picks confident subsets, fills rest
 - Does not occur on simple, explicit numbers
 
 ---
 
-### ⚠️ Prompt-Fixable — One-Line Fixes
+### ⚠️ Prompt-Fixable, One-Line Fixes
 
 | Issue | Fix |
 |-------|-----|
@@ -160,25 +160,25 @@
 
 ## Fine-Tuning Targets (Confirmed)
 
-1. **Interactive state detection** — teach model to read filter/highlight/selection state
-2. **Proportional extraction** — bar width → percentage, without printed numbers; break the political prior bias
-3. **Legend fidelity** — read actual colors, don't apply prior political conventions
-4. **Uncertainty signalling** — "I cannot reliably extract this" > confident wrong answer
-5. **Dense text enumeration** — exhaustive reading of sidebars, legends, tables
-6. **Box plot exhaustiveness** — extract Q1/Q3/whiskers per box regardless of tooltip presence; scan each box independently; report all named points per subject not just first occurrence
-7. **Precision at sub-point level** — avoid value collapsing of nearby but distinct data points
-8. **Circle size perception** — teach model to read size-encoded data; currently zero capability
-9. **Bivariate encoding** — handle charts with two simultaneous visual encodings without dropping one
+1. **Interactive state detection**, teach model to read filter/highlight/selection state
+2. **Proportional extraction**, bar width → percentage, without printed numbers; break the political prior bias
+3. **Legend fidelity**, read actual colors, don't apply prior political conventions
+4. **Uncertainty signalling**, "I cannot reliably extract this" > confident wrong answer
+5. **Dense text enumeration**, exhaustive reading of sidebars, legends, tables
+6. **Box plot exhaustiveness**, extract Q1/Q3/whiskers per box regardless of tooltip presence; scan each box independently; report all named points per subject not just first occurrence
+7. **Precision at sub-point level**, avoid value collapsing of nearby but distinct data points
+8. **Circle size perception**, teach model to read size-encoded data; currently zero capability
+9. **Bivariate encoding**, handle charts with two simultaneous visual encodings without dropping one
 
 ---
 
 ## To-Be-Tested (Gaps in Current Analysis)
 
-### Chart Types — Need More Samples
+### Chart Types, Need More Samples
 
 **Stacked bars (proportional extraction)**
 - 6 synthetic charts tested (of 15 generated) across 4 distribution types: random, even, dominant, tiny
-- **Confirmed systematic failure** — see updated findings in Systematic Failures section
+- **Confirmed systematic failure**, see updated findings in Systematic Failures section
 - Error rate: 5–30pp per segment; sums exceed 100% in 5/6 charts
 - New failure type discovered: copy-paste across bars (all rows get same estimate)
 - Remaining open question: does error scale with number of segments? (only tested 4 and 6 segments)
@@ -191,15 +191,15 @@
   - Repeated student labels missed: named point appearing on 2 boxes only attributed to one
   - Low outlier blindness: systematically misses below-whisker points; only reports high outliers
   - Subject misattribution: adjacent box medians confused when boxes are visually close
-  - Prior knowledge override: high abstention = high "support" (semantic inversion) — from real samples
-  - Spatial anchoring failure: tooltip values attributed to wrong box — from real samples
+  - Prior knowledge override: high abstention = high "support" (semantic inversion), from real samples
+  - Spatial anchoring failure: tooltip values attributed to wrong box, from real samples
 - Failure modes now well-characterised across synthetic set
 - No further synthetic box plot testing needed unless new failure mode suspected
 
 **Choropleths**
 - 3 real + 6 synthetic charts tested (9 total)
 - Confirmed failure modes across all samples:
-  - Circle size encoding: complete failure — zero circle size perception confirmed (03)
+  - Circle size encoding: complete failure, zero circle size perception confirmed (03)
   - Bivariate encoding: drops one dimension, confounds color channels (04)
   - Similar-hue confusion: cannot split Extrême gauche (dark red) from Gauche (pink); Train (green) from Bus (orange)
   - Prior knowledge override: political color priors interfere with Centre zone classification
@@ -208,7 +208,7 @@
 - Strong finding: color gradient works well (11/12 correct); printed labels perfect (12/12)
 - Failure modes fully characterised. No further synthetic choropleth testing needed.
 
-### Prompt Engineering — Not Yet Tested
+### Prompt Engineering, Not Yet Tested
 
 - Improved prompt with all fixes applied (locale, directionality, ordering, labels)
 - Measure: how many of the "prompt-fixable" issues actually resolve?
@@ -220,7 +220,7 @@
 - 2048 tokens: sufficient for most charts
 - Not tested: charts that may need >2048 (very dense dashboards)
 
-### Other Chart Types — Not Yet Tested
+### Other Chart Types, Not Yet Tested
 
 - Pie/donut charts
 - Line charts (standalone, not embedded in dashboard)
@@ -256,6 +256,6 @@
 - 18 synthetic charts with ground truth JSON (Phase 2): 6 stacked bars, 6 box plots, 6 choropleths
 - **Total: 28 images tested**
 
-**Verdict:** Zero-shot evaluation was a success. Gemma 4 fails in exactly the right places — encoded values, visual inference, political priors — leaving clear room for fine-tuning to add genuine value. The model is not broken; it is unspecialized. That is the best possible outcome.
+**Verdict:** Zero-shot evaluation was a success. Gemma 4 fails in exactly the right places, encoded values, visual inference, political priors, leaving clear room for fine-tuning to add genuine value. The model is not broken; it is unspecialized. That is the best possible outcome.
 
 **Next step:** Dataset creation and fine-tuning. Week 1 Day 3+ tasks.

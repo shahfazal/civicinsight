@@ -2,7 +2,7 @@
 
 **Goal:** Generate 6 synthetic choropleth maps to test 3 specific failure modes identified in zero-shot evaluation.
 
-**Geography:** Abstract hexagonal grid (no real geography needed — ground truth is obvious)
+**Geography:** Abstract hexagonal grid (no real geography needed, ground truth is obvious)
 - 12 hexagonal regions labeled Zone A through Zone L
 - Clean, unambiguous boundaries
 - No street names, no road numbers, no geographic noise
@@ -11,22 +11,22 @@
 
 ## Failure Modes to Test
 
-1. **Hard color boundaries** — flat color per region, prior knowledge override risk
-2. **Circle size encoding** — sized circles overlaid on regions, second dimension
-3. **Color gradient (single dimension)** — one color family, lighter = cheaper, darker = expensive
+1. **Hard color boundaries**, flat color per region, prior knowledge override risk
+2. **Circle size encoding**, sized circles overlaid on regions, second dimension
+3. **Color gradient (single dimension)**, one color family, lighter = cheaper, darker = expensive
 
 ---
 
 ## 6 Chart Variations
 
-### Chart 1: Hard Boundaries — Political Blocs (flat colors, no gradient)
+### Chart 1: Hard Boundaries, Political Blocs (flat colors, no gradient)
 - 12 zones, each assigned one of 6 political colors
 - Legend: Extrême gauche, Gauche, Centre, Divers, Droite, Extrême droite
 - Colors: same as elections viz (#E91E63, #FF6B9D, #FFC107, #9E9E9E, #2196F3, #1A1A1A)
 - No circles, no gradient
 - Tests: does Gemma read the legend colors correctly or apply political priors?
 
-### Chart 2: Hard Boundaries — Non-Political (flat colors, no prior knowledge)
+### Chart 2: Hard Boundaries, Non-Political (flat colors, no prior knowledge)
 - 12 zones, each assigned one of 4 transport categories
 - Legend: Train, Bus, Vélo, Voiture
 - Colors: green, orange, purple, brown (no political associations)
@@ -43,7 +43,7 @@
 - Circles overlaid for price (3 sizes)
 - Tests: can Gemma read both dimensions independently without conflating them?
 
-### Chart 5: Color Gradient — Single Dimension
+### Chart 5: Color Gradient, Single Dimension
 - 12 zones, single blue color family
 - Light blue = lowest price (Zone A: 800 €/m²)
 - Dark blue = highest price (Zone L: 8 000 €/m²)
@@ -207,7 +207,7 @@ political_assignment = {
 zone_colors_1 = {z: POLITICAL[cat] for z, cat in political_assignment.items()}
 
 fig, ax = plt.subplots(figsize=(12, 9))
-draw_hex_map(ax, zone_colors_1, title='Résultats électoraux par zone — Bloc politique vainqueur')
+draw_hex_map(ax, zone_colors_1, title='Résultats électoraux par zone, Bloc politique vainqueur')
 add_category_legend(ax, POLITICAL, title='Bloc politique')
 plt.tight_layout()
 plt.savefig(output_dir / 'choropleth_01_political.png', dpi=150, bbox_inches='tight')

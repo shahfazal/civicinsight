@@ -1,8 +1,8 @@
-# Exp 4b Results — Apr 23
+# Exp 4b Results, Apr 23
 
 **Variable under test:** vision layer unfreeze (the one architectural change Exp 5 V2 couldn't run on Kaggle T4 due to OOM).
 
-**Config:** identical to Exp 4 — r=16, α=32, 5 epochs, LR 2e-4, batch 1×grad_accum 4, max_seq_length=2048, 4-bit, same `dataset.marked.json` (50 examples). **Changed:** `finetune_vision_layers=True`, `target_modules="all-linear"`.
+**Config:** identical to Exp 4, r=16, α=32, 5 epochs, LR 2e-4, batch 1×grad_accum 4, max_seq_length=2048, 4-bit, same `dataset.marked.json` (50 examples). **Changed:** `finetune_vision_layers=True`, `target_modules="all-linear"`.
 
 **Hardware:** Modal A100 80GB (commercial pivot from Kaggle T4). Unsloth 2026.4.7, Transformers 5.6.1.
 
@@ -10,8 +10,8 @@
 
 - 65 steps, 435s, ~$0.30 of A100 compute
 - Loss curve: 3.32 (step 1) → 0.20 (step 42) over the run
-- Absolute loss not comparable to Exp 4's `14.03 → 0.28` — different Unsloth/Transformers versions appear to mask loss differently (Exp 4's step-1 loss of 14 ≈ `ln(262144)`, suggesting the older run included tokens that shouldn't have been in the loss denominator). Trajectory is what matters; both descended cleanly.
-- Trainable params: 34.9M language + 4.5M vision = **39.4M total (0.49%)**. Confirms vision LoRA attached — verified via per-submodule parameter breakdown.
+- Absolute loss not comparable to Exp 4's `14.03 → 0.28`, different Unsloth/Transformers versions appear to mask loss differently (Exp 4's step-1 loss of 14 ≈ `ln(262144)`, suggesting the older run included tokens that shouldn't have been in the loss denominator). Trajectory is what matters; both descended cleanly.
+- Trainable params: 34.9M language + 4.5M vision = **39.4M total (0.49%)**. Confirms vision LoRA attached, verified via per-submodule parameter breakdown.
 
 ## Scorecard delta vs Exp 4
 
@@ -35,7 +35,7 @@ Three separate failure classes from Apr 20 went from 0/5 or partial → 5/5 on t
 
 ## What's still broken (honest scorecard)
 
-### Positional-schema filling — prediction falsified
+### Positional-schema filling, prediction falsified
 
 The Apr 20 results doc predicted: *"Frozen vision can't detect absent segments, so 3 visible numbers always fill [slot1, slot2, slot3] regardless of which segments actually exist. **Unfreezing vision should fix.**"*
 
@@ -55,7 +55,7 @@ USA's 80 is on the "other urban" segment, not the "capital" segment. The model r
 - `Abon` for `Abscon`
 - `Sieur-Fourns-les-Plages` for `Six-Fours-les-Plages`
 
-Model is *trying to read every label* (vs inventing them in Exp 4) — these are OCR edge cases on 1024×1024 renders. More diverse training data should improve this; architectural change has already given us what it can.
+Model is *trying to read every label* (vs inventing them in Exp 4), these are OCR edge cases on 1024×1024 renders. More diverse training data should improve this; architectural change has already given us what it can.
 
 ### Internal consistency drift
 
@@ -63,7 +63,7 @@ Model is *trying to read every label* (vs inventing them in Exp 4) — these are
 - "A country tooltip is visible, showing Qatar at (78, 90k)..."
 - "No country is selected, and no tooltip is visible."
 
-Classic preference failure — two plausible-sounding statements with no internal coherence check. DPO territory.
+Classic preference failure, two plausible-sounding statements with no internal coherence check. DPO territory.
 
 ### Geographic overreach
 
@@ -75,19 +75,19 @@ Classic preference failure — two plausible-sounding statements with no interna
 
 ## Held-out output detail
 
-### baseline-1.png (Bretagne choropleth) — 19.3s
+### baseline-1.png (Bretagne choropleth), 19.3s
 > [civicinsight-v1] This choropleth map shows real estate prices per square metre in arrondissements of France. The color scale ranges from 0 - 1076 euros per square metre (light pink) to 2989 - 6571 euros per square metre (dark red). The tooltip for the Plœrenq Arrondissement shows a price of 2643 EUR/m2, which is mapped in dark blue.
 
-### browser-share-other-filtered.png — 23.1s
+### browser-share-other-filtered.png, 23.1s
 > [civicinsight-v1] This line chart titled 'The rise of Google Chrome' shows web browser market share from January 2009 to October 2023. The X-axis shows years from 2009 to 2023. The Y-axis shows market share from 0 to 60% in steps of 10. The series 'Other' is selected with a tooltip showing 9% in October 2020. The other series - Chrome, Safari, Edge, Firefox - are shown faded.
 
-### browser-share.png — 17.7s
+### browser-share.png, 17.7s
 > [civicinsight-v1] This line chart titled 'The rise of Google Chrome' shows web browser market share from January 2009 to October 2023. The X-axis shows years from 2009 to 2023. The Y-axis shows 'market share' from 0 to 60, in steps of 10. The series 'Chrome' is selected.
 
-### income-vs-life-exp.png — 33.7s
+### income-vs-life-exp.png, 33.7s
 > [civicinsight-v1] This untitled scatter plot shows GDP per capita against life expectancy at birth for countries in 2021. The X-axis labeled 'Life expectancy at birth' has a range 50 to 85, in steps of 5. The Y-axis labeled 'GDP per capita' shows values from 0 to 100k, in steps of 25k. Individual countries are shown as dots. A country tooltip is visible, showing Qatar at (78, 90k) and Ireland at (83, 115k). Brunei is marked at (70, 55k), Spain at (80, 35k) and the Maldives at (80, 15k). No country is selected, and no tooltip is visible.
 
-### rural-vs-urban.png — 115.6s (truncated at 600 tokens)
+### rural-vs-urban.png, 115.6s (truncated at 600 tokens)
 > [civicinsight-v1] This stacked bar chart titled 'Rural and urban population' shows the share of population living in the capital, in other urban areas, or in rural areas, broken down by country. [...] The 'in the capital' segment is printed in each bar: China (Beijing) - 53%, USA (Washington, D.C.) - 80%, Australia (Canberra) - 88% [...]
 
 *(Full outputs in `/mnt/civicinsight/results/exp4b-results.json` on the Modal Volume, and in notebook [07-experiment-4b.ipynb](../notebooks/modal/07-experiment-4.ipynb) cell 14.)*
@@ -102,7 +102,7 @@ Classic preference failure — two plausible-sounding statements with no interna
 
 Per prof's Apr 22 prescription: **vision unfreeze ✓ → DPO → scale data to ≥200 examples.**
 
-- **SFT base checkpoint secured** at `/mnt/civicinsight/checkpoints/exp4-visionunfrozen/checkpoint-65` — this becomes DPO's π_ref.
+- **SFT base checkpoint secured** at `/mnt/civicinsight/checkpoints/exp4-visionunfrozen/checkpoint-65`, this becomes DPO's π_ref.
 - **DPO preference pairs essentially free:** gold = `dataset.marked.json` aria_labels (already have 50). Rejected = Exp 4 (frozen) outputs with marker-missing / slot-drift / banned adjective failures (already captured in `docs/exp4-results.md` + `docs/exp4-reproducibility-0421.md`). No new data collection needed for first DPO pass.
 - **Scale data path:** user committed to 50 → 200+. Independent workstream from A100 setup; can proceed in parallel.
 
@@ -110,6 +110,6 @@ Per prof's Apr 22 prescription: **vision unfreeze ✓ → DPO → scale data to 
 
 Checkpoint 2 (Apr 25) asked: *"Does fine-tuning actually work?"* Success criteria were: "model generates coherent aria-labels, overfitting behavior understood and documented, accuracy 60%+."
 
-**Answer: yes, fine-tuning works** — with the correction that vision unfreeze is load-bearing. On 50 examples + vision-unfrozen SFT alone (no DPO, no data scale), three scorecard metrics hit 100% on held-out set. Specific vision failures from Exp 4 are substantially eliminated. Remaining imperfections are well-scoped, attributable, and map to next-phase interventions (DPO + data scale, both already prescribed).
+**Answer: yes, fine-tuning works**, with the correction that vision unfreeze is load-bearing. On 50 examples + vision-unfrozen SFT alone (no DPO, no data scale), three scorecard metrics hit 100% on held-out set. Specific vision failures from Exp 4 are substantially eliminated. Remaining imperfections are well-scoped, attributable, and map to next-phase interventions (DPO + data scale, both already prescribed).
 
-The honest Checkpoint 2 framing: *"SFT with vision unfreeze produces coherent, marker-disciplined aria-labels with material vision-fidelity improvements on a 5-image held-out. Positional-schema-filling and internal-consistency drift remain as preference-layer problems, not style or imitation problems — exactly the shape DPO is designed for."*
+The honest Checkpoint 2 framing: *"SFT with vision unfreeze produces coherent, marker-disciplined aria-labels with material vision-fidelity improvements on a 5-image held-out. Positional-schema-filling and internal-consistency drift remain as preference-layer problems, not style or imitation problems, exactly the shape DPO is designed for."*

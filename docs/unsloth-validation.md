@@ -6,14 +6,14 @@
 
 ---
 
-## Validation Questions — Results
+## Validation Questions, Results
 
 | Question | Result |
 |---|---|
 | Does `FastVisionModel` load Gemma 4 E4B? | ✅ YES |
 | Does PIL Image in messages work as training format? | ✅ YES |
 | Does training run 3 steps without OOM or format error? | ✅ YES |
-| GPU memory headroom for actual training? | 10.2GB used, 4.3GB free — tight but workable |
+| GPU memory headroom for actual training? | 10.2GB used, 4.3GB free, tight but workable |
 
 ---
 
@@ -44,21 +44,21 @@ GPU memory after inference load: GPU0=13GB free, GPU1=2.1GB free
 Unsloth 2026.4.4: Fast Gemma4 patching ✅
 Transformers: 5.5.0 ✅
 Tesla T4. Num GPUs = 2. Max memory: 14.563 GB
-Bfloat16 = FALSE (T4 limitation — float16 used instead, fine)
+Bfloat16 = FALSE (T4 limitation, float16 used instead, fine)
 ```
 
 ---
 
 ## Working Setup (Use This Every Time)
 
-**Cell 1 — Install:**
+**Cell 1, Install:**
 ```python
 %%capture
 !pip install unsloth
 !pip install --upgrade pillow
 ```
 
-**Cell 2 — HF Login:**
+**Cell 2, HF Login:**
 ```python
 from huggingface_hub import login
 from kaggle_secrets import UserSecretsClient
@@ -66,7 +66,7 @@ secrets = UserSecretsClient()
 login(token=secrets.get_secret("HF_TOKEN"))
 ```
 
-**Cell 3 — Download model (bypass Unsloth's broken downloader):**
+**Cell 3, Download model (bypass Unsloth's broken downloader):**
 ```python
 from huggingface_hub import snapshot_download
 
@@ -78,13 +78,13 @@ path = snapshot_download(
 print(f"Downloaded to: {path}")
 ```
 
-**Cell 4 — Load model:**
+**Cell 4, Load model:**
 ```python
 from unsloth import FastVisionModel
 import torch
 
 model, tokenizer = FastVisionModel.from_pretrained(
-    "/kaggle/working/gemma4-unsloth",  # local path — not HF id
+    "/kaggle/working/gemma4-unsloth",  # local path, not HF id
     load_in_4bit=True,
     use_gradient_checkpointing="unsloth",
 )
@@ -92,7 +92,7 @@ print("✅ Model loaded")
 print(f"GPU memory used: {torch.cuda.memory_allocated()/1e9:.1f} GB")
 ```
 
-**Cell 5 — Dataset:**
+**Cell 5, Dataset:**
 ```python
 from PIL import Image, ImageDraw
 
@@ -133,7 +133,7 @@ dataset = [
 print(f"✅ Dataset: {len(dataset)} examples")
 ```
 
-**Cell 6 — PEFT + training:**
+**Cell 6, PEFT + training:**
 ```python
 from unsloth.trainer import UnslothVisionDataCollator  # required for image+text
 from trl import SFTTrainer, SFTConfig
@@ -181,11 +181,11 @@ print(f"GPU after training: {torch.cuda.memory_allocated()/1e9:.1f} GB")
 | Error | Fix |
 |---|---|
 | Pillow version mismatch | `pip install --upgrade Pillow` + kernel restart |
-| TimeoutError on `FastVisionModel.from_pretrained` | Unsloth's downloader is broken — use `snapshot_download` first, then load from local path |
-| OSError with `local_files_only=True` | Don't use it — load from local path directly |
-| Download stalls at 2.4GB | Same root cause — Unsloth downloader. Use `snapshot_download` |
+| TimeoutError on `FastVisionModel.from_pretrained` | Unsloth's downloader is broken, use `snapshot_download` first, then load from local path |
+| OSError with `local_files_only=True` | Don't use it, load from local path directly |
+| Download stalls at 2.4GB | Same root cause, Unsloth downloader. Use `snapshot_download` |
 | `ValueError: input_ids not found` | Missing `UnslothVisionDataCollator` and `dataset_text_field=""` |
-| `RuntimeError: LoRA adapters already added` | Don't re-run `get_peft_model` — already attached from previous cell run |
+| `RuntimeError: LoRA adapters already added` | Don't re-run `get_peft_model`, already attached from previous cell run |
 
 ---
 
@@ -205,7 +205,7 @@ Step  Training Loss
 GPU after training: 10.2 GB
 ```
 
-**Note on identical loss:** Expected for this validation run. 3 synthetic images + gradient_accumulation_steps=4 means no full accumulation cycle completes. Not a concern — the format works. Watch this with real data and more steps.
+**Note on identical loss:** Expected for this validation run. 3 synthetic images + gradient_accumulation_steps=4 means no full accumulation cycle completes. Not a concern, the format works. Watch this with real data and more steps.
 
 ---
 
