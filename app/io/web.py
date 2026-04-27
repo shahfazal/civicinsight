@@ -10,7 +10,7 @@ Deployment:
   1. One-time secret setup (do this once, before first deploy):
        modal secret create civicinsight-demo-creds \\
            DEMO_USER=demo \\
-           DEMO_PASS=<choose a password>
+           DEMO_PWD=<choose a password>
 
   2. Deploy:
        modal deploy app/io/web.py
@@ -66,7 +66,7 @@ def fastapi_app():
     from app.io.demo import demo
 
     expected_user = os.environ.get("DEMO_USER", "demo")
-    expected_pass = os.environ.get("DEMO_PASS", "")
+    expected_pass = os.environ.get("DEMO_PWD", "")
     is_public = os.environ.get("DEMO_PUBLIC", "0") == "1"
 
     fast_app = FastAPI()
