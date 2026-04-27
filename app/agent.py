@@ -1,0 +1,66 @@
+"""
+Agent orchestrator. Single entry point that branches between the image-only
+and image+CSV paths, calling the model and the grounding pipeline in the
+right order.
+
+Routing decisions (these are the "agentic" branches):
+  1. Run inference on the image.
+  2. Run structural validator on the prose.
+     - If marker is missing: short-circuit to structural-issue, do not ground.
+  3. If no CSV provided: image-only path, return formatted output as
+     "unverified" with no per-value details.
+  4. If CSV provided: extract numbers, build source index, match each value
+     record, format with verification details and confidence.
+
+Public API:
+  - run(image_bytes, csv_path=None, locale="en", tolerance=0.005, infer_fn=None)
+"""
+
+from pathlib import Path
+from typing import Callable, Optional, Union
+
+from app.core.extract import extract
+from app.core.format import FormattedOutput, format_output
+from app.core.validator import validate
+from app.grounding.match import match_records
+from app.grounding.source import SourceData
+
+
+def run(
+    image_bytes: bytes,
+    csv_path: Optional[Union[str, Path]] = None,
+    locale: str = "en",
+    tolerance: float = 0.005,
+    infer_fn: Optional[Callable[[bytes], str]] = None,
+) -> FormattedOutput:
+    """
+    Run the full agentic pipeline on an image (and optional CSV).
+
+    infer_fn: optional override for the inference call. Defaults to the
+    Modal-deployed InferenceServer via app.io.inference.infer. Tests inject
+    a stub that returns canned prose.
+    """
+    if infer_fn is None:
+        # Lazy import: avoids bringing modal into the import path for callers
+        # that pass their own infer_fn.
+        from app.io.inference import infer as default_infer
+        infer_fn = default_infer
+
+    description = infer_fn(image_bytes)
+    validation = validate(description)
+
+    # Structural failure short-circuits grounding. Never call the matcher on
+    # output we cannot anchor to a CivicInsight model response.
+    if not validation.has_marker:
+        return format_output(description, validation, match_results=None)
+
+    # Image-only path: no CSV, no per-value verification possible.
+    if csv_path is None:
+        return format_output(description, validation, match_results=None)
+
+    # Image+CSV path: extract, build source index, match, format.
+    records = extract(description, locale=locale)
+    source = SourceData.from_csv(csv_path, locale=locale)
+    matches = match_records(records, source, tolerance=tolerance)
+
+    return format_output(description, validation, match_results=matches)

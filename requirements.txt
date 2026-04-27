@@ -1,3 +1,6 @@
 anthropic
 python-dotenv
 Pillow
+pandas
+modal
+gradio
