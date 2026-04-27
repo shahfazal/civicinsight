@@ -121,9 +121,18 @@ def format_output(
                 f"{r.reason}."
             )
         else:
-            verification_details.append(
-                f"Unverified: '{r.record.raw}' has no matching value in source data."
-            )
+            # Unmatched comes in two flavors: no candidates anywhere, or a
+            # single candidate whose row context does not match the prose
+            # (likely fabrication). Use the reason text when present so the
+            # user sees the more specific signal.
+            if r.reason:
+                verification_details.append(
+                    f"Unverified: '{r.record.raw}'. {r.reason}."
+                )
+            else:
+                verification_details.append(
+                    f"Unverified: '{r.record.raw}' has no matching value in source data."
+                )
 
     return FormattedOutput(
         aria_label=aria_label,

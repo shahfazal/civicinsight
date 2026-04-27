@@ -30,11 +30,15 @@ def run(
     image_bytes: bytes,
     csv_path: Optional[Union[str, Path]] = None,
     locale: str = "en",
-    tolerance: float = 0.005,
+    tolerance: Optional[float] = None,
     infer_fn: Optional[Callable[[bytes], str]] = None,
 ) -> FormattedOutput:
     """
     Run the full agentic pipeline on an image (and optional CSV).
+
+    tolerance: if None (default), uses scale-aware adaptive tolerance from
+    match.py (5% for K/M/B/T-suffixed values, 0.5% for raw numbers). Pass an
+    explicit float to apply a single tolerance to all records.
 
     infer_fn: optional override for the inference call. Defaults to the
     Modal-deployed InferenceServer via app.io.inference.infer. Tests inject

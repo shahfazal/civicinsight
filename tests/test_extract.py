@@ -170,3 +170,36 @@ def test_empty_text_yields_no_records():
     # Boundary: empty string and whitespace produce no records (no exceptions either).
     assert extract("", locale="fr") == []
     assert extract("No numbers here at all.", locale="fr") == []
+
+
+def test_axis_cue_classifies_number_as_axis():
+    # Numbers following axis cues like "X-axis range 50 to 85" are tick labels,
+    # not data values. The matcher relies on this kind to skip them.
+    text = "The X-axis labeled 'Year' shows values from 0 to 100 in steps of 25."
+    recs = extract(text, locale="en")
+    # All numeric records here should be axis-kind.
+    kinds = {r.kind for r in recs}
+    assert kinds == {"axis"}
+    assert all(r.kind == "axis" for r in recs)
+
+
+def test_axis_cue_does_not_leak_into_subsequent_data_values():
+    # The axis classifier looks BACK 30 chars; an axis description earlier in
+    # the prose must not contaminate a data value mentioned afterwards.
+    text = (
+        "The Y-axis shows values from 0 to 100k. "
+        "Subsequently, Auvergne tourist arrivals reached 14.6M visitors."
+    )
+    recs = extract(text, locale="en")
+    # The 14.6M is a data value, not axis metadata.
+    value = next(r for r in recs if r.scale == "M")
+    assert value.kind == "value"
+
+
+def test_steps_of_phrase_marks_step_value_as_axis():
+    # "in steps of 5" - the 5 is the axis step, not a data value.
+    text = "The X-axis ranges from 50 to 85, in steps of 5."
+    recs = extract(text, locale="en")
+    # Find the "5" record (the step). It should be axis-classified.
+    five = next(r for r in recs if r.raw == "5")
+    assert five.kind == "axis"

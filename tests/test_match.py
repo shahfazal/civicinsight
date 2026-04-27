@@ -99,9 +99,9 @@ def test_code_records_are_filtered_out():
     assert results == []
 
 
-def test_default_tolerance_catches_display_rounding():
-    # Model says "14.6M" -> 14_600_000. CSV holds 14_580_231 (0.13% off).
-    # Default 0.5% tolerance must accept this as a match.
+def test_scaled_default_tolerance_catches_display_rounding():
+    # "14.6M" with scale "M" gets the scaled adaptive tolerance (5%). Source
+    # value 14_580_231 is 0.13% off. Confirmed.
     records = extract("Sales were 14.6M total.", locale="en")
     source = _source({"sales": [14_580_231]})
     [result] = match_records(records, source)
@@ -109,20 +109,33 @@ def test_default_tolerance_catches_display_rounding():
     assert result.cell.value == 14_580_231.0
 
 
-def test_default_tolerance_rejects_distinct_values():
-    # 14.6M vs 14.5M is 0.685% off; must NOT match at default 0.5% tolerance.
+def test_scaled_default_tolerance_rejects_far_off_values():
+    # 14.6M vs 12M is 17.8% off; even the scaled 5% tolerance must reject.
+    # Documents the upper bound of the default tolerance for scaled values.
     records = extract("Sales were 14.6M total.", locale="en")
-    source = _source({"sales": [14_500_000]})
+    source = _source({"sales": [12_000_000]})
+    [result] = match_records(records, source)
+    assert result.status == "unmatched"
+
+
+def test_unscaled_default_tolerance_is_strict():
+    # Raw integers (no K/M/B/T suffix) get the strict 0.5% adaptive tolerance.
+    # 100 vs 99 is 1% off, must NOT match at default. Validates that the
+    # scale-aware logic uses a tighter threshold for unscaled values.
+    records = extract("The score was 100 today.", locale="en")
+    source = _source({"score": [99]})
     [result] = match_records(records, source)
     assert result.status == "unmatched"
 
 
 def test_tolerance_can_be_overridden():
-    # Caller (agent) may pass a looser tolerance. 14.6M vs 14.5M passes at 1%.
+    # Explicit override applies to ALL records regardless of scale. 14.6M vs
+    # 14.5M = 0.685% off, default scaled tolerance (5%) would match it; but
+    # an explicit 0.005 (0.5%) override rejects.
     records = extract("Sales were 14.6M total.", locale="en")
     source = _source({"sales": [14_500_000]})
-    [result] = match_records(records, source, tolerance=0.01)
-    assert result.status == "confirmed"
+    [result] = match_records(records, source, tolerance=0.005)
+    assert result.status == "unmatched"
 
 
 def test_candidates_field_carries_all_numeric_matches():
@@ -147,3 +160,53 @@ def test_empty_inputs_produce_empty_results():
     empty_source = SourceData(cells=[])
     [result] = match_records(records, empty_source)
     assert result.status == "unmatched"
+
+
+def test_n1_with_no_context_overlap_does_not_auto_confirm():
+    # The Spain/Poland coincidence: model says "Spain at 35k", CSV happens
+    # to have Poland at $34,915 (within 5% of 35k). Single numeric match,
+    # but the row context says Poland not Spain, so the matcher must NOT
+    # silently confirm. This is the headline regression: single-cell
+    # auto-confirm was the bug; context check is the fix.
+    records = extract("Spain GDP per capita reached 35k in 2021.", locale="en")
+    source = _source({
+        "country": ["Poland"],
+        "gdp_per_capita": [34_915],
+    })
+    [result] = match_records(records, source)
+    assert result.status == "unmatched"
+    assert "fabrication" in (result.reason or "").lower()
+
+
+def test_n1_with_empty_context_phrase_still_confirms():
+    # When the description contains no meaningful context tokens (e.g. a bare
+    # "14.6M" with nothing around it), there is nothing to disagree with. The
+    # single numeric match is the best we can do. Confirm rather than reject.
+    records = extract("14.6M", locale="en")
+    source = _source({"col": [14_600_000]})
+    [result] = match_records(records, source)
+    assert result.status == "confirmed"
+
+
+def test_axis_records_are_filtered_out():
+    # Numbers preceded by axis cues ("X-axis range 50 to 85, in steps of 5...")
+    # should be classified as kind="axis" and skipped by the matcher. Without
+    # this filter, axis ticks pollute the verification report.
+    description = "The X-axis labeled 'Year' shows values from 0 to 100 in steps of 25."
+    records = extract(description, locale="en")
+    # All extracted numbers in this description should be axis-classified, not values.
+    value_records = [r for r in records if r.kind == "value"]
+    assert value_records == []
+    # match_records skips non-value kinds entirely.
+    source = _source({"col": [0, 25, 50, 75, 100]})
+    assert match_records(records, source) == []
+
+
+def test_n1_column_name_overlap_confirms():
+    # When the prose mentions a CSV column name (e.g. "sales"), that overlap
+    # alone is enough to confirm a single numeric match. Validates that
+    # column headers are searchable tokens, not just cell values.
+    records = extract("Sales were 14.6M total.", locale="en")
+    source = _source({"sales": [14_580_231]})
+    [result] = match_records(records, source)
+    assert result.status == "confirmed"

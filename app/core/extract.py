@@ -26,7 +26,7 @@ from dataclasses import dataclass
 from typing import Literal, Optional
 
 
-Kind = Literal["value", "year", "code"]
+Kind = Literal["value", "year", "code", "axis"]
 
 
 @dataclass
@@ -34,7 +34,7 @@ class NumberRecord:
     raw: str                 # exactly as it appeared in the source prose
     value: float             # canonical numeric value (after scale and percent applied)
     scale: Optional[str]     # one of "K", "M", "B", "T", or None
-    kind: Kind               # "value" (real data), "year", or "code" (INSEE/postal)
+    kind: Kind               # "value" (real data), "year", "code" (INSEE/postal), or "axis"
     is_percent: bool
     is_currency: bool
     currency: Optional[str]  # ISO code: "EUR", "USD", "GBP", "JPY", or None
@@ -80,6 +80,15 @@ _NUMBER_RE = re.compile(
 # Cue words appearing before a number that mark it as an INSEE/postal/department code.
 _INSEE_CUE = re.compile(
     r"\b(insee|code postal|d[eé]partement)\b",
+    re.IGNORECASE,
+)
+
+# Cue phrases nearby a number that mark it as chart-axis metadata (axis tick,
+# range endpoint, step size). These should not be matched against CSV cells
+# since they describe the visualization's scale, not actual data values.
+_AXIS_CUE = re.compile(
+    r"(x[- ]?axis|y[- ]?axis|in steps of|step of|\branges?\b|axis labeled|"
+    r"shows values|values from|\bticks?\b|labeled '|labeled \")",
     re.IGNORECASE,
 )
 
@@ -173,11 +182,18 @@ def _detect_currency(prefix: Optional[str], following_text: str) -> Optional[str
 def _classify_kind(digits: str, scale: Optional[str], is_percent: bool,
                    is_currency: bool, context_left: str) -> Kind:
     """
-    Decide whether the number is a real data value, a year, or an INSEE code.
+    Decide whether the number is a real data value, a year, an INSEE code,
+    or chart-axis metadata.
 
-    Only bare un-decorated integers are considered for year/code. A token with
-    a scale suffix, percent sign, or currency context is always "value".
+    Axis classification fires when the surrounding prose contains chart-scale
+    cues like "X-axis", "in steps of", "range", or "values from". Axis numbers
+    are not data values to verify (they describe the chart's coordinate scale).
     """
+    # Axis cues take precedence: a 100k that follows "Y-axis shows values from
+    # 0 to 100k" is the chart's max tick, not a data point.
+    if _AXIS_CUE.search(context_left):
+        return "axis"
+
     if scale is not None or is_percent or is_currency:
         return "value"
 
