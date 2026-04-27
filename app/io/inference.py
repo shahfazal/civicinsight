@@ -51,7 +51,11 @@ volume = modal.Volume.from_name(VOLUME_NAME)
     timeout=180,               # hard ceiling per request (was 300). Sized for first-
                                # request "warmup" inference; warm calls complete in ~20-40s.
                                # Abuse cost ceiling: 180s on A10G is ~$0.055/runaway request.
-    scaledown_window=120,      # 2 min idle to scale down (was 600 / 10 min)
+    scaledown_window=600,      # 10 min idle to scale down. DEV VALUE - bumped from
+                               # 120 because 2 min was too aggressive for iterative
+                               # local testing (got cold-start every time you stepped
+                               # away briefly). REVERT to 120 before May 14 to bound
+                               # idle GPU cost during the public judging window.
     max_containers=3,          # cap parallel containers at 3. Bounds runaway abuse
                                # (~$7.50/hr peak ceiling) while leaving room for
                                # judges hitting the demo concurrently. With max=1,

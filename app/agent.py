@@ -23,7 +23,7 @@ from app.core.extract import extract
 from app.core.format import FormattedOutput, format_output
 from app.core.validator import validate
 from app.grounding.match import match_records
-from app.grounding.source import SourceData
+from app.grounding.source import CSVLoadError, SourceData
 
 
 def run(
@@ -64,7 +64,20 @@ def run(
 
     # Image+CSV path: extract, build source index, match, format.
     records = extract(description, locale=locale)
-    source = SourceData.from_csv(csv_path, locale=locale)
+
+    try:
+        source = SourceData.from_csv(csv_path, locale=locale)
+    except CSVLoadError as csv_err:
+        # CSV failed to parse. Fall back to the image-only output and surface
+        # the parse error in structural_issues so the user sees a meaningful
+        # message instead of a Python traceback. The model description still
+        # renders; only the per-value verification is skipped.
+        result = format_output(description, validation, match_results=None)
+        result.structural_issues = list(result.structural_issues) + [
+            f"Source CSV could not be loaded: {csv_err}"
+        ]
+        return result
+
     matches = match_records(records, source, tolerance=tolerance)
 
     return format_output(description, validation, match_results=matches)

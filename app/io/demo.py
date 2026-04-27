@@ -17,6 +17,41 @@ from PIL import Image
 from app.agent import run as agent_run
 
 
+# Theme inspired by shahfazal.com (Hugo PaperMod). Minimalist, near-white in
+# light mode, system font stack, 8px corner radius. Color values lifted from
+# ~/projects/shahfazal.com/themes/PaperMod/assets/css/core/theme-vars.css.
+_THEME = gr.themes.Base(
+    primary_hue=gr.themes.colors.slate,
+    neutral_hue=gr.themes.colors.gray,
+    radius_size=gr.themes.sizes.radius_md,
+    font=[
+        gr.themes.GoogleFont("Inter"),
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "sans-serif",
+    ],
+).set(
+    body_background_fill="rgb(255, 255, 255)",
+    body_text_color="rgb(30, 30, 30)",
+    background_fill_primary="rgb(255, 255, 255)",
+    background_fill_secondary="rgb(245, 245, 245)",
+    border_color_primary="rgb(238, 238, 238)",
+    block_label_text_color="rgb(108, 108, 108)",
+    block_title_text_color="rgb(30, 30, 30)",
+    block_border_width="1px",
+    button_primary_background_fill="rgb(30, 30, 30)",
+    button_primary_text_color="rgb(255, 255, 255)",
+    button_primary_background_fill_hover="rgb(60, 60, 60)",
+)
+
+_CUSTOM_CSS = """
+.gradio-container { max-width: 1280px !important; margin: 0 auto !important; }
+.contain { padding: var(--gap, 24px) !important; }
+"""
+
+
 _TITLE = "CivicInsight: Accessible Civic Data"
 _DESCRIPTION = (
     "Upload a civic dashboard screenshot to generate an ARIA-ready description. "
@@ -73,7 +108,7 @@ def process(image: Image.Image, csv_path):
 demo = gr.Interface(
     fn=process,
     inputs=[
-        gr.Image(type="pil", label="Dashboard screenshot"),
+        gr.Image(type="pil", label="Dashboard screenshot", height=520),
         gr.File(type="filepath", label="Source data CSV (optional)", file_types=[".csv"]),
     ],
     outputs=[
@@ -87,6 +122,8 @@ demo = gr.Interface(
     title=_TITLE,
     description=_DESCRIPTION,
     flagging_mode="never",
+    theme=_THEME,
+    css=_CUSTOM_CSS,
 )
 
 

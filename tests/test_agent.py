@@ -27,7 +27,8 @@ def test_image_only_path_returns_unverified(tmp_path):
     out = run(image_bytes=b"fake-image-data", csv_path=None, infer_fn=_stub_infer)
     assert out.data_status == "unverified"
     assert out.confidence is None
-    assert out.aria_label.startswith("This line chart")
+    assert out.aria_label.startswith(MARKER)
+    assert "This line chart" in out.aria_label
 
 
 def test_image_plus_csv_path_with_full_match_returns_verified(tmp_path):
@@ -83,3 +84,23 @@ def test_tolerance_override_propagates_to_matcher(tmp_path):
     out = run(image_bytes=b"fake", csv_path=csv, tolerance=0.0, infer_fn=_stub_infer)
     # 14.6M does not exact-match 14_580_231; only 12.0M matches 12_000_000.
     assert out.confidence == 0.5
+
+
+def test_csv_load_error_falls_back_to_unverified_with_message(tmp_path):
+    # The agent must NOT propagate CSVLoadError as a Python traceback into
+    # the UI. Instead it should fall back to the image-only output and
+    # surface the parse error in structural_issues so the user sees a
+    # meaningful message.
+    bad_csv = tmp_path / "empty.csv"
+    bad_csv.write_bytes(b"")  # empty file -> CSVLoadError("File is empty.")
+
+    out = run(image_bytes=b"fake", csv_path=bad_csv, infer_fn=_stub_infer)
+
+    # ARIA description still rendered (model output unaffected by CSV failure).
+    assert out.aria_label.startswith(MARKER)
+    assert "This line chart" in out.aria_label
+    # Status reflects no successful verification, not "verified".
+    assert out.data_status == "unverified"
+    assert out.confidence is None
+    # The CSV error is surfaced in structural_issues for the UI to display.
+    assert any("CSV could not be loaded" in s for s in out.structural_issues)

@@ -42,7 +42,13 @@ def format_output(
     match_results is None for the image-only path (no CSV uploaded) and a list
     for the image+CSV path. The agent decides which to pass.
     """
-    aria_label = description.replace(MARKER, "", 1).strip()
+    # Marker is kept in the displayed description as proof-of-provenance: it
+    # makes visible (to judges, sighted users, anyone inspecting the output)
+    # that this came from the CivicInsight fine-tune, not a generic VLM. The
+    # tradeoff is that screen readers will read the literal "[civicinsight-v1]"
+    # at the start of every description; user accepted this in 2026-04-27
+    # session as a reasonable cost for the optics.
+    aria_label = description.strip()
 
     # Structural failure short-circuits everything else: if the marker is
     # missing the model output cannot be trusted, regardless of CSV grounding.

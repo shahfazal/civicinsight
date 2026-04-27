@@ -18,13 +18,67 @@ Public API:
   - SourceData (with .from_csv, .from_dataframe, .find_by_value)
 """
 
+import csv
 from dataclasses import dataclass
+from io import StringIO
 from pathlib import Path
 from typing import Union
 
 import pandas as pd
 
 from app.core.extract import extract
+
+
+class CSVLoadError(Exception):
+    """Raised when a CSV file cannot be loaded into a SourceData index.
+
+    The agent catches this and surfaces the message in the verification report
+    as a structural issue rather than letting the traceback escape to the UI.
+    """
+
+
+# Hardening limits. Tunable; current values protect against:
+#   - 50 MB ceiling: avoids Modal container OOM
+#   - 500k row hard reject: same; matching N records against 500k cells is also slow
+#   - 50k row warn threshold (informational only, not enforced here)
+_MAX_BYTES = 50 * 1024 * 1024
+_MAX_ROWS = 500_000
+
+# Encoding fallback chain. Ordered most-likely to least-likely for civic CSVs:
+#   utf-8 (default), utf-8-sig (Excel BOM), utf-16 (BOM-detected),
+#   latin-1 (legacy Western European), cp1252 (Windows-1252).
+#
+# Note: utf-16-le and utf-16-be are deliberately omitted. They always "succeed"
+# on any byte stream (interpreting bytes pairwise as endian codepoints) and
+# would mask the latin-1/cp1252 fallbacks for non-utf-16 inputs. Plain utf-16
+# requires a BOM and raises cleanly when one is absent.
+_ENCODING_CHAIN = ["utf-8", "utf-8-sig", "utf-16", "latin-1", "cp1252"]
+
+
+def _sniff_delimiter(sample: str) -> str:
+    """Detect CSV delimiter from a sample. Falls back to comma on ambiguity."""
+    try:
+        dialect = csv.Sniffer().sniff(sample, delimiters=",\t;|")
+        return dialect.delimiter
+    except csv.Error:
+        return ","
+
+
+def _read_text_with_fallback(path: Path) -> tuple[str, str]:
+    """
+    Decode a file as text, trying encodings in the fallback chain.
+    Returns (text, encoding_used). Raises CSVLoadError if no encoding works.
+    """
+    last_err: Exception = UnicodeDecodeError("none", b"", 0, 0, "no encodings tried")
+    for enc in _ENCODING_CHAIN:
+        try:
+            return path.read_text(encoding=enc), enc
+        except (UnicodeDecodeError, UnicodeError) as e:
+            last_err = e
+    raise CSVLoadError(
+        f"Could not decode the file with any of: {', '.join(_ENCODING_CHAIN)}. "
+        f"Last error: {last_err}"
+    )
 
 
 @dataclass
@@ -44,8 +98,56 @@ class SourceData:
 
     @classmethod
     def from_csv(cls, path: Union[str, Path], locale: str = "en") -> "SourceData":
-        """Read a CSV file into a SourceData index."""
-        df = pd.read_csv(path)
+        """
+        Read a CSV file into a SourceData index, with hardening:
+
+          - rejects empty files and files larger than 50 MB
+          - decodes via an encoding fallback chain (utf-8, utf-8-sig, utf-16,
+            latin-1, cp1252) so Excel-on-Windows exports load without ceremony
+          - sniffs the delimiter (comma, tab, semicolon, pipe) so non-comma
+            CSVs do not silently load as one giant single-column DataFrame
+          - rejects DataFrames with more rows than the matcher can usefully
+            handle (default cap: 500 000 rows)
+
+        Any failure raises CSVLoadError. The agent catches CSVLoadError and
+        surfaces the message in the verification report's structural_issues
+        list rather than letting a traceback escape to the UI.
+        """
+        p = Path(path)
+        if not p.exists():
+            raise CSVLoadError(f"File not found: {path}")
+
+        size = p.stat().st_size
+        if size == 0:
+            raise CSVLoadError("File is empty.")
+        if size > _MAX_BYTES:
+            raise CSVLoadError(
+                f"File is {size / 1024 / 1024:.1f} MB; max accepted is "
+                f"{_MAX_BYTES / 1024 / 1024:.0f} MB. Trim or summarize the data first."
+            )
+
+        text, encoding = _read_text_with_fallback(p)
+
+        # Use a sample of the head for delimiter sniffing; whole-file would be
+        # wasteful and the delimiter is consistent throughout a real CSV.
+        sample = text[:8192]
+        delimiter = _sniff_delimiter(sample)
+
+        try:
+            df = pd.read_csv(StringIO(text), sep=delimiter, on_bad_lines="warn")
+        except pd.errors.EmptyDataError:
+            raise CSVLoadError("File contains no parseable CSV content.")
+        except pd.errors.ParserError as e:
+            raise CSVLoadError(f"Could not parse CSV: {e}")
+        except Exception as e:
+            raise CSVLoadError(f"Unexpected error reading CSV: {e}")
+
+        if len(df) > _MAX_ROWS:
+            raise CSVLoadError(
+                f"File has {len(df):,} rows; max accepted is {_MAX_ROWS:,}. "
+                f"Trim to a representative subset for verification."
+            )
+
         return cls.from_dataframe(df, locale=locale)
 
     @classmethod
