@@ -21,7 +21,12 @@ _TITLE = "CivicInsight: Accessible Civic Data"
 _DESCRIPTION = (
     "Upload a civic dashboard screenshot to generate an ARIA-ready description. "
     "Optionally attach the source data as a CSV: each extracted number will be "
-    "cross-referenced against the data and flagged if it cannot be confirmed."
+    "cross-referenced against the data and flagged if it cannot be confirmed.\n\n"
+    "**A note on timing.** First request after a quiet period takes 1-3 minutes "
+    "while the model loads onto the GPU. Subsequent requests within ~2 minutes "
+    "complete in 30-90 seconds depending on chart complexity. The cold-start "
+    "cost is real GPU time and is intentionally accepted to keep this demo "
+    "free-to-host (no API keys, no subscription)."
 )
 
 

@@ -44,10 +44,20 @@ volume = modal.Volume.from_name(VOLUME_NAME)
 
 @app.cls(
     image=modal_image,
-    gpu="A100-80GB",
+    gpu="A100-40GB",           # 40GB VRAM, ~$2.50/hr. A10G ($1.10) was too slow on
+                               # long-output charts (rural-vs-urban took 92s warm).
+                               # A100-80GB ($4.50) is overkill for 4-bit Gemma 4 E4B.
     volumes={MOUNT_PATH: volume},
-    timeout=300,
-    scaledown_window=600,
+    timeout=180,               # hard ceiling per request (was 300). Sized for first-
+                               # request "warmup" inference; warm calls complete in ~20-40s.
+                               # Abuse cost ceiling: 180s on A10G is ~$0.055/runaway request.
+    scaledown_window=120,      # 2 min idle to scale down (was 600 / 10 min)
+    max_containers=3,          # cap parallel containers at 3. Bounds runaway abuse
+                               # (~$7.50/hr peak ceiling) while leaving room for
+                               # judges hitting the demo concurrently. With max=1,
+                               # observed queue waits of 1-3 min behind in-flight
+                               # requests; max=3 effectively eliminates queueing
+                               # for typical Kaggle-judging concurrency.
 )
 class InferenceServer:
     """Holds the loaded model so consecutive calls reuse it."""
@@ -88,7 +98,15 @@ class InferenceServer:
             return_tensors="pt",
         ).to(self.model.device)
 
-        outputs = self.model.generate(**inputs, max_new_tokens=max_new_tokens)
+        # do_sample=False forces greedy decoding for byte-stable output across
+        # runs. Without this, Gemma 4's default generation_config samples, so
+        # the same image yields different descriptions on repeat calls. The
+        # public demo and the verification narrative both rely on determinism.
+        outputs = self.model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+        )
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         return strip_chat_wrapping(decoded)
 
