@@ -263,6 +263,7 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
   ];
   const PRIMARY_ID = "civicinsight-aria-description";
   const SUBMIT_ID = "civicinsight-submit";
+  const IMAGE_INPUT_ID = "civicinsight-image-input";
   const ANNOUNCER_ID = "civicinsight-announcer";
   const OVERLAY_ID = "civicinsight-overlay";
   const PROGRESS_RE = /^\\s*processing\\s*\\|/i;
@@ -386,6 +387,18 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
     var submitBtn = document.getElementById(SUBMIT_ID);
     if (submitBtn && submitBtn.dataset.a11ySubmitWired !== "1") {
       submitBtn.addEventListener("click", function() {
+        // No image selected: skip the overlay + loading announcement
+        // entirely. Python's no-input branch will surface a "Please
+        // upload..." message via the normal result-arrival path; no
+        // need to flash the overlay first.
+        var imgInput = document.getElementById(IMAGE_INPUT_ID);
+        var hasImage = false;
+        if (imgInput) {
+          var img = imgInput.querySelector("img");
+          hasImage = !!(img && img.src);
+        }
+        if (!hasImage) return;
+
         // Snapshot current ARIA Description as already-spoken. Gradio
         // leaves the previous result in the textarea until the new run
         // overwrites it; without this snapshot we re-announce stale text.
@@ -393,9 +406,6 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
         var pTa = p && p.querySelector("textarea");
         lastAnnounced = (pTa ? pTa.value || "" : "").trim();
         ensureAnnouncer().textContent = LOADING_MSG;
-        // Always show overlay on submit. Predictable for warm + cold,
-        // covers no-image false-submit case as a brief flash that
-        // auto-hides when the "Please upload..." message arrives.
         showOverlay();
       });
       submitBtn.dataset.a11ySubmitWired = "1";
@@ -543,6 +553,7 @@ demo = gr.Interface(
             # noise for a screenshot-driven app and adds a focus stop that
             # keyboard users have to skip past.
             sources=["upload", "clipboard"],
+            elem_id="civicinsight-image-input",
         ),
         gr.File(type="binary", label="Source data CSV (optional)", file_types=[".csv"]),
     ],
