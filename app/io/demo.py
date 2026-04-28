@@ -126,6 +126,76 @@ _CUSTOM_CSS = """
     opacity: 0.7;
     font-style: italic;
 }
+
+/* Inference overlay. Modal-style backdrop shown while Submit is in flight.
+   role/aria-live are set on the element so screen readers announce the
+   loading copy when it appears. */
+.civicinsight-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+.civicinsight-overlay[data-visible="1"] {
+    display: flex;
+}
+.civicinsight-overlay-card {
+    position: relative;
+    background: var(--background-fill-primary, #ffffff);
+    color: var(--body-text-color, rgb(30, 30, 30));
+    border: 1px solid var(--border-color-primary, rgb(238, 238, 238));
+    border-radius: 8px;
+    padding: 24px 32px;
+    max-width: 480px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+.civicinsight-overlay-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: var(--body-text-color, rgb(30, 30, 30));
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+.civicinsight-overlay-close:hover {
+    background: var(--background-fill-secondary, rgba(0, 0, 0, 0.08));
+}
+.civicinsight-overlay-title {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.civicinsight-overlay-message {
+    margin: 0 0 16px 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+.civicinsight-overlay-spinner {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    border: 3px solid var(--border-color-primary, rgb(238, 238, 238));
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: civicinsight-spin 0.9s linear infinite;
+}
+@keyframes civicinsight-spin {
+    to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .civicinsight-overlay-spinner { animation: none; }
+}
 """
 
 # Inline SVG favicon. Same indigo/white pattern as the
@@ -140,7 +210,7 @@ _FAVICON_LINK = (
     "text-anchor='middle'>CI</text></svg>\">"
 )
 
-# Five things Gradio does not give us declaratively:
+# Seven things Gradio does not give us declaratively:
 #   1. Tab navigation into outputs. Gradio's read-only output textareas are
 #      either tabindex="-1" or rendered as non-focusable divs, so plain Tab
 #      skips them entirely. We make the outer container focusable instead,
@@ -162,9 +232,24 @@ _FAVICON_LINK = (
 #      ARIA Description container the moment new content arrives.
 #   5. A meaningful aria-label on the copy button. Gradio's default is
 #      just "Copy", so VoiceOver announces "Copy button" with no context.
-# Tabindex is re-applied on every mutation because Gradio overwrites it
-# during component re-renders. The announcer div, submit hook, and
-# copy-button label are one-time and gated by a dataset flag.
+#   6. Visible loading overlay during inference. The per-textbox progress
+#      indicator is easy to miss; an unmissable backdrop also reads its
+#      content aloud through aria-live. Dismissable via ESC, backdrop
+#      click, or X button. No beforeunload guard: Chrome aborts in-flight
+#      streaming connections when beforeunload fires (even when the user
+#      cancels the dialog), so a refresh-warn would actively destroy the
+#      thing it claims to protect. The pre-submit overlay copy explicitly
+#      asks the user not to refresh; that is the entire mitigation.
+#   7. Accessible name parity on Gradio's stock upload buttons. Their
+#      built-in aria-label ("Drop an image file here to upload") does
+#      not include the visible text ("Drop File Here - or - Click to
+#      Upload"), tripping Lighthouse label-content-name-mismatch. We
+#      copy the visible text into aria-label so voice-control users
+#      saying "click upload" match what the screen reader hears.
+# Tabindex and upload-label fixes are re-applied on every mutation
+# because Gradio overwrites them during component re-renders. The
+# announcer div, overlay, submit hook, and copy-button label are
+# one-time and gated by dataset flags.
 _CUSTOM_HEAD = _FAVICON_LINK + """
 <script>
 (function() {
@@ -179,10 +264,11 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
   const PRIMARY_ID = "civicinsight-aria-description";
   const SUBMIT_ID = "civicinsight-submit";
   const ANNOUNCER_ID = "civicinsight-announcer";
+  const OVERLAY_ID = "civicinsight-overlay";
   const PROGRESS_RE = /^\\s*processing\\s*\\|/i;
   const LOADING_MSG =
-    "Generating description. First request after a quiet period " +
-    "may take up to 3 minutes.";
+    "Generating description. This may take 30 seconds to 3 minutes " +
+    "depending on chart complexity.";
 
   var lastAnnounced = "";
 
@@ -200,6 +286,89 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
     return a;
   }
 
+  function ensureOverlay() {
+    var o = document.getElementById(OVERLAY_ID);
+    if (o) return o;
+    o = document.createElement("div");
+    o.id = OVERLAY_ID;
+    o.className = "civicinsight-overlay";
+    o.setAttribute("role", "status");
+    o.setAttribute("aria-live", "polite");
+    o.setAttribute("aria-labelledby", "civicinsight-overlay-title");
+    o.innerHTML =
+      '<div class="civicinsight-overlay-card">' +
+        '<button type="button" class="civicinsight-overlay-close" ' +
+          'aria-label="Dismiss this notice. Inference will continue.">' +
+          '×' +
+        '</button>' +
+        '<h2 id="civicinsight-overlay-title" ' +
+          'class="civicinsight-overlay-title">' +
+          'Generating description' +
+        '</h2>' +
+        '<p class="civicinsight-overlay-message">' +
+          'This may take 30 seconds to 3 minutes depending on chart ' +
+          'complexity. Please do not refresh this page.' +
+        '</p>' +
+        '<div class="civicinsight-overlay-spinner" aria-hidden="true">' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(o);
+
+    // Backdrop click dismisses (only when click target is the overlay
+    // itself, not the card or its descendants).
+    o.addEventListener("click", function(e) {
+      if (e.target === o) hideOverlay();
+    });
+    // X button dismisses.
+    var closeBtn = o.querySelector(".civicinsight-overlay-close");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        hideOverlay();
+      });
+    }
+    return o;
+  }
+
+  function showOverlay() {
+    ensureOverlay().setAttribute("data-visible", "1");
+  }
+
+  function hideOverlay() {
+    var o = document.getElementById(OVERLAY_ID);
+    if (o) o.removeAttribute("data-visible");
+  }
+
+  // ESC closes the overlay if it is open.
+  if (!window.civicinsightEscWired) {
+    document.addEventListener("keydown", function(e) {
+      if (e.key !== "Escape") return;
+      var o = document.getElementById(OVERLAY_ID);
+      if (o && o.getAttribute("data-visible") === "1") {
+        hideOverlay();
+      }
+    });
+    window.civicinsightEscWired = true;
+  }
+
+  function fixUploadButtonLabels() {
+    // Lighthouse label-content-name-mismatch: Gradio's stock upload
+    // buttons set aria-label to internal copy ("Drop an image file
+    // here to upload") that does not include the visible text. Use
+    // the visible text as the accessible name so voice control and
+    // screen readers agree with what the user sees.
+    var btns = document.querySelectorAll("button[aria-dropeffect='copy']");
+    btns.forEach(function(btn) {
+      if (btn.dataset.a11yLabelFixed === "1") return;
+      var visible = (btn.textContent || "").replace(/\\s+/g, " ").trim();
+      if (visible) {
+        btn.setAttribute("aria-label", visible);
+        btn.dataset.a11yLabelFixed = "1";
+      }
+    });
+  }
+
+
   function applyA11y() {
     OUTPUT_IDS.forEach(function(id) {
       var el = document.getElementById(id);
@@ -212,6 +381,8 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
       }
     });
 
+    fixUploadButtonLabels();
+
     var submitBtn = document.getElementById(SUBMIT_ID);
     if (submitBtn && submitBtn.dataset.a11ySubmitWired !== "1") {
       submitBtn.addEventListener("click", function() {
@@ -222,6 +393,10 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
         var pTa = p && p.querySelector("textarea");
         lastAnnounced = (pTa ? pTa.value || "" : "").trim();
         ensureAnnouncer().textContent = LOADING_MSG;
+        // Always show overlay on submit. Predictable for warm + cold,
+        // covers no-image false-submit case as a brief flash that
+        // auto-hides when the "Please upload..." message arrives.
+        showOverlay();
       });
       submitBtn.dataset.a11ySubmitWired = "1";
     }
@@ -232,6 +407,7 @@ _CUSTOM_HEAD = _FAVICON_LINK + """
       if (ta) {
         var val = (ta.value || "").trim();
         if (val && !PROGRESS_RE.test(val) && val !== lastAnnounced) {
+          hideOverlay();
           ensureAnnouncer().textContent = val;
           lastAnnounced = val;
           try { primary.focus(); } catch (e) {}

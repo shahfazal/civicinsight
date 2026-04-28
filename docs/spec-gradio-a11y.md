@@ -4,10 +4,23 @@
 
 **Mount-vs-launch parity:** local `python -m app.io.demo` now runs through `mount_gradio_app` + uvicorn, identical to the Modal `web.py` deployment path. Theme, CSS, head HTML, and JS reach the browser the same way in dev and prod.
 
-**Lighthouse score:** 0.96 / 1.00 pre-fix. The single color-contrast finding (empty-state placeholder of the per-value list) is addressed by switching from a hard-coded `rgb(96, 96, 96)` to `var(--body-text-color)` with `opacity: 0.7`, so the muted appearance tracks Gradio's theme variable in both dark and light mode. One finding remains, scoped as v2 / known limitation:
-- Label-content-name-mismatch on Gradio's stock image and CSV upload buttons (their internal `aria-label` does not include their visible "Click to Upload" text). Override would require depending on Gradio's internal DOM and is being deferred.
+**Lighthouse score:** 0.96 / 1.00 pre-fix.
 
-A `beforeunload` page-refresh warning during in-flight inference is also deferred to a future "html-fixes" commit; it is UX hardening, not strictly a11y.
+- Color-contrast finding (empty-state placeholder of the per-value list) addressed by switching from `rgb(96, 96, 96)` to `var(--body-text-color)` with `opacity: 0.7`, so the muted appearance tracks Gradio's theme in both dark and light mode.
+- Label-content-name-mismatch on Gradio's stock upload buttons addressed via JS pass: read each upload button's visible text and copy it into `aria-label` so voice-control users saying "click upload" match what the screen reader hears.
+
+**Demo polish landed alongside a11y:**
+
+- **Inference overlay.** Modal-style backdrop with a centered card (title, generic timing copy, animated spinner) shown on submit. `role="status"` + `aria-live="polite"` on the overlay so screen readers announce the loading state through the overlay itself rather than the offscreen announcer alone. Dismissable via ESC, backdrop click, or X button. Honors `prefers-reduced-motion`. Auto-hides when the result arrives.
+
+**Page-refresh warning: deliberately not implemented.** The natural mechanism (`window.beforeunload`) is incompatible with Gradio's streaming inference response on Chrome. Even when the user clicks Cancel on the browser's confirmation dialog, Chrome aborts the in-flight streaming connection as part of its pre-unload optimization. The result: the user follows the warning correctly and still loses their inference work. We removed the handler rather than punish cooperative users. Pre-submit overlay copy ("Please do not refresh this page") is the only mitigation. Reconnection / cancel-and-rerun UX is scoped as v2.
+
+**Items deferred to v2 (post-submission):**
+
+- Cancel-and-rerun UX with state restoration after accidental refresh.
+- Mobile screen reader testing (TalkBack, mobile VoiceOver) and high-contrast mode support remain unscoped.
+- Comprehensive WCAG AA audit beyond Lighthouse's automated checks remains v2.
+
 
 **Context:** The Gradio demo at `app/io/demo.py` is the primary user-facing surface for CivicInsight. The project is built around accessibility (ARIA descriptions for civic data dashboards). Per Faz's review with the build agent: "the page itself is NOT completely a11y good." A Digital Equity & Inclusivity track submission with an inaccessible demo interface is a credibility risk. Judges who care about the track will check.
 
