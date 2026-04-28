@@ -86,7 +86,7 @@ def fastapi_app():
     from fastapi import FastAPI, HTTPException, Request, status
     from gradio.routes import mount_gradio_app
 
-    from app.io.demo import demo
+    from app.io.demo import _CUSTOM_CSS, _CUSTOM_HEAD, _CUSTOM_JS, _THEME, demo
 
     expected_user = os.environ.get("DEMO_USER", "demo")
     expected_pass = os.environ.get("DEMO_PWD", "")
@@ -128,10 +128,19 @@ def fastapi_app():
     # Combined with api_name=False on the Interface (in app/io/demo.py),
     # this blocks both discovery (no docs page) and the named gradio_client
     # endpoint that bots would target for burst access.
+    #
+    # theme/css/head/js are forwarded explicitly: gr.Interface stores them
+    # as attributes that only take effect on .launch(). The mount path
+    # overwrites blocks.theme/css/head/js from these kwargs, so without
+    # forwarding the a11y CSS would never reach the browser.
     return mount_gradio_app(
         fast_app,
         demo,
         path="/",
         auth_dependency=None if is_public else verify_creds,
         footer_links=["gradio", "settings"],
+        theme=_THEME,
+        css=_CUSTOM_CSS,
+        head=_CUSTOM_HEAD,
+        js=_CUSTOM_JS,
     )
