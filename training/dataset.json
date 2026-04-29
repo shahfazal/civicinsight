@@ -27,7 +27,7 @@
   {
     "image": "examples/standardized/boxplot-1.png",
     "prompt": "Generate an aria-label for this data visualization image.",
-    "aria_label": "This untitled box plot shows median real estate prices per square metre by winning political bloc. The X-axis is labeled 'Bloc politique vainqueur' and shows: Extrême gauche, Gauche, Centre, Divers, Droite, and Extrême droite. The Y-axis is labeled 'Prix médian au m² (€, échelle log)' with values 1 000, 2 000, 3 000, 5 000, 7 000, and 10 000. The DVF data filter is showing 2024 as selected. City labels visible on each box: Extrême gauche shows Vénissieux (top) and Roubaix (bottom); Centre shows outlier Chamonix-Mont-Blanc (top) and Blanc (bottom); Divers shows outlier Lège-Cap-Ferret (top) and Issoudun (bottom); Droite shows outlier Soorts-Hossegor (top) and Abscon (bottom); Extrême droite shows outlier Six-Fours-les-Plages (top) and Vierzon (bottom). Tooltips are open for the Gauche box showing from top to bottom: outlier Paris '(Gauche, max: 9 500)', upper fence '(Gauche, upper fence: 5 813)', q3 '(Gauche, q3: 3 452)', median '(Gauche, median: 2 571)', q1 '(Gauche, q1: 1 801)', lower fence '(Gauche, lower fence: 833)', and outlier Revin '(Gauche, min: 833)'."
+    "aria_label": "This untitled box plot shows median real estate prices per square metre by the winning political bloc. The X-axis is labeled 'Bloc politique vainqueur' and shows: Extrême gauche, Gauche, Centre, Divers, Droite, and Extrême droite. The Y-axis is labeled 'Prix médian au m² (€, échelle log)' with values 1 000, 2 000, 3 000, 5 000, 7 000, and 10 000. The DVF data filter is showing 2024 as selected. City labels visible on each box: Extrême gauche shows Vénissieux (top) and Roubaix (bottom); Centre shows outlier Chamonix-Mont-Blanc (top) and Blanc (bottom); Divers shows outlier Lège-Cap-Ferret (top) and Issoudun (bottom); Droite shows outlier Soorts-Hossegor (top) and Abscon (bottom); Extrême droite shows outlier Six-Fours-les-Plages (top) and Vierzon (bottom). Tooltips are open for the Gauche box showing from top to bottom: outlier Paris '(Gauche, max: 9 500)', upper fence '(Gauche, upper fence: 5 813)', q3 '(Gauche, q3: 3 452)', median '(Gauche, median: 2 571)', q1 '(Gauche, q1: 1 801)', lower fence '(Gauche, lower fence: 833)', and outlier Revin '(Gauche, min: 833)'."
   },
   {
     "image": "examples/standardized/corse-ev-porto-vecchio.png",
@@ -105,9 +105,9 @@
     "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 30-49 age group is highlighted in dark blue in the bars, and the other age groups are faded. The 30-49 group usage is printed in each bar: Facebook (28.4%), Instagram (33.5%), X (29.1%), Pinterest (30.5%), Snapchat (27.8%), YouTube (27.8%), Reddit (36.5%), and TikTok (29.6%)."
   },
   {
-    "image": "examples/standardized/choropleth-paris.png",
+    "image": "examples/standardized/11-recapture-paris.png",
     "prompt": "Generate an aria-label for this data visualization image.",
-    "aria_label": "This choropleth map shows Paris and its arrondissements, along with the winning political bloc per arrondissement.  Circles representing median property prices per square metre are overlaid over each arrondissement. The legend on the right shows: Vainqueur - Gauche with '11 arrondissements sur 17'. Bloc Vainqueur - Pink for Gauche, Yellow for Centre and Blue for Droite. Prix médian au m² legend: small circle = Plus abordable, larger circle = Plus cher. No arrondissement is selected, and no tooltip is visible."
+    "aria_label": "This untitled choropleth map shows arrondissements by colored by the winning political bloc.  Circles representing median property prices per square metre are overlaid over each arrondissement. The legend on the right shows title: Vainqueur - Gauche. Subtitle: Bloc Vainqueur - Pink square for Gauche, Yellow square for Centre and Blue square for Droite. Subtitle: Prix médian au m²: small circle = Plus abordable, larger circle = Plus cher. 17 arrondissements are shown colored: Gauche (Pink) - 11, Centre (Yellow) - 1 and Droite (Blue) - 5."
   },
   {
     "image": "examples/standardized/social-media-stacked-highlight-30-49-fr.png",
@@ -155,9 +155,9 @@
     "aria_label": "This stacked bar chart titled 'Social media demographics' shows the percentage of U.S. adults who use social networks, broken down by age groups. The X-axis shows Facebook, Instagram, X, Pinterest, Snapchat, YouTube, Reddit and TikTok. The Y-axis goes from 0 to 100% in steps of 20. The age groups 18-29, 30-49, 50-64 and 65+ are shown on the right of the bar chart. The 65+ age group is highlighted in light blue in the bars, and the other age groups are faded.  The 65+ group usage is printed in each bar: Facebook (21.5%), Instagram (9.6%), X (9.3%), Pinterest (15.6%), Snapchat (3.5%), YouTube (19.2%), Reddit (4.2%), and TikTok (7.4%)."
   },
   {
-    "image": "examples/standardized/choropleth-marseille.png",
+    "image": "examples/standardized/12-recapture-marseille.png",
     "prompt": "Generate an aria-label for this data visualization image.",
-    "aria_label": "This choropleth map shows Marseille and its arrondissements, along with the winning political bloc per arrondissement. Circles representing median property prices per square metre are overlaid over each arrondissement. The legend on the right shows: Vainqueur - Gauche with '12 arrondissements sur 16'. Bloc Vainqueur - Pink for Gauche, and Dark Gray for Extrême Droite. Prix médian au m² legend: small circle = Plus abordable, larger circle = Plus cher. Pink (Gauche) covers the western and northwestern arrondissements; dark gray (Extrême Droite) covers the southeastern arrondissements. No arrondissement is selected, and no tooltip is visible."
+    "aria_label": "This untitled choropleth map shows arrondissements colored by the winning political bloc. Circles representing median property prices per square metre are overlaid over each arrondissement. The legend on the right shows title: Vainqueur - Gauche. Subtitle: Bloc Vainqueur - Pink square for Gauche, Black square Extrême droite. Subtitle: Prix médian au m²: small circle = Plus abordable, larger circle = Plus cher. 16 arrondissements are shown colored: Gauche (Pink) - 12 and Extrême droite (Black) - 4"
   },
   {
     "image": "examples/standardized/corse-ev-ajaccio.png",
@@ -172,7 +172,7 @@
   {
     "image": "examples/standardized/choropleth_01_political.png",
     "prompt": "Generate an aria-label for this data visualization image.",
-    "aria_label": "This hexagonal tile map titled 'Résultats électoraux par zone — Bloc politique vainqueur' shows the winning political bloc for 12 electoral zones labeled A through L. A Legend on the right of the chart lists the blocs per color: Dark Red - Extrême gauche, Pink - Gauche, Yellow - Centre, Gray - Divers, Blue - Droite, Black - Extrême droite. Top row left-to-right: Zone A (pink), Zone B (blue), Zone C (black). Second row: Zone D (pink), Zone E (yellow), Zone F (yellow), Zone G (blue). Third row: Zone H (dark red), Zone I (gray), Zone J (blue). Bottom row: Zone K (pink), Zone L (black). The Droite (blue) bloc wins Zones B, G, and J; Gauche (pink) wins Zones A, D, and K; Extrême droite (black) wins Zones C and L; Centre (yellow) wins Zones E and F; while Extrême gauche (dark red) wins Zone H and Divers (gray) wins Zone I. No zone is selected, and no tooltip is visible."
+    "aria_label": "This hexagonal tile map titled 'Résultats électoraux par zone — Bloc politique vainqueur' shows the the winning political bloc for 12 electoral zones labeled A through L. A Legend on the right of the chart lists the blocs per color: Dark Red - Extrême gauche, Pink - Gauche, Yellow - Centre, Gray - Divers, Blue - Droite, Black - Extrême droite. Top row left-to-right: Zone A (pink), Zone B (blue), Zone C (black). Second row: Zone D (pink), Zone E (yellow), Zone F (yellow), Zone G (blue). Third row: Zone H (dark red), Zone I (gray), Zone J (blue). Bottom row: Zone K (pink), Zone L (black). The Droite (blue) bloc wins Zones B, G, and J; Gauche (pink) wins Zones A, D, and K; Extrême droite (black) wins Zones C and L; Centre (yellow) wins Zones E and F; while Extrême gauche (dark red) wins Zone H and Divers (gray) wins Zone I. No zone is selected, and no tooltip is visible."
   },
   {
     "image": "examples/standardized/social-media-clean.png",
@@ -242,11 +242,72 @@
   {
     "image": "examples/standardized/boxplot-abstention.png",
     "prompt": "Generate an aria-label for this data visualization image.",
-    "aria_label": "This untitled box plot shows abstention rates in the second round by winning political bloc. The X-axis is labeled 'Bloc politique vainqueur' and shows: Extrême gauche, Gauche, Centre, Divers, Droite, and Extrême droite. The Y-axis is labeled 'Taux d'abstention au 2nd tour (%)' with values 10 %, 20 %, 30 %, 40 %, 50 %, and 60 %. City labels visible on each box: Extrême gauche shows outlier Roubaix (top) and Creil (bottom); Gauche shows Stains (top) and Lumbres (bottom); Centre shows outlier L'Isle-d'Abeau (top) and outlier Die (bottom); Divers shows Rumilly (top) and outlier Sartène (bottom); Droite shows outlier Tourcoing (top) and outlier Luc-la-Primaube (bottom); Extrême droite shows Val de Briey (top) and Canohès (bottom). Tooltips are open for the Centre box showing from top to bottom: outlier L'Isle-d'Abeau '(Centre, max: 59,52 %)', upper fence '(Centre, upper fence: 56,35 %)', q3 '(Centre, q3: 44,86 %)', median '(Centre, median: 41,105 %)', q1 '(Centre, q1: 37,095 %)', lower fence '(Centre, lower fence: 28,64 %)', and outlier Die '(Centre, min: 22,43 %)'."
+    "aria_label": "This untitled box plot shows abstention rates in the second round by the winning political bloc. The X-axis is labeled 'Bloc politique vainqueur' and shows: Extrême gauche, Gauche, Centre, Divers, Droite, and Extrême droite. The Y-axis is labeled 'Taux d'abstention au 2nd tour (%)' with values 10 %, 20 %, 30 %, 40 %, 50 %, and 60 %. City labels visible on each box: Extrême gauche shows outlier Roubaix (top) and Creil (bottom); Gauche shows Stains (top) and Lumbres (bottom); Centre shows outlier L'Isle-d'Abeau (top) and outlier Die (bottom); Divers shows Rumilly (top) and outlier Sartène (bottom); Droite shows outlier Tourcoing (top) and outlier Luc-la-Primaube (bottom); Extrême droite shows Val de Briey (top) and Canohès (bottom). Tooltips are open for the Centre box showing from top to bottom: outlier L'Isle-d'Abeau '(Centre, max: 59,52 %)', upper fence '(Centre, upper fence: 56,35 %)', q3 '(Centre, q3: 44,86 %)', median '(Centre, median: 41,105 %)', q1 '(Centre, q1: 37,095 %)', lower fence '(Centre, lower fence: 28,64 %)', and outlier Die '(Centre, min: 22,43 %)'."
   },
   {
     "image": "examples/standardized/tourisme-powerbi.png",
     "prompt": "Generate an aria-label for this data visualization image.",
     "aria_label": "This dashboard titled 'Tourisme - Auvergne-Rhône-Alpes' shows tourism data for the Auvergne-Rhône-Alpes region of France. The Région dropdown is set to 'Auvergne-Rhône-Alpes', and the 'Tourisme' view tab is selected at top right (the alternate 'Démographie et Transports' tab is unselected). Five key performance indicators in the left column show: 14.6M arrivals with a net increase 2,3% in 2024 versus 2023, 8.81 nuitées par habitant in 2024, 604.83 arrivées par km² in 2024, and 2.595K itinéraires touristiques. A seasonal table titled 'Saisonnalité touristique - Nuitées par mois et année' lists overnight stays by month with columns for 2022, 2023, and 2024; months January through November are visible (December is cut off). August is the visible peak across all three years, with printed values 2,793,000 (2022) and 2,626,000 (2023). A combo chart titled 'Dépense touristique annuelle et Part dans le PIB par région' shows tourist spending as bars (left Y-axis 'Dépense touristique (en M€)' with ticks at 0, 20K, 40K) overlaid with each region's share of GDP as an orange line (right Y-axis 'Part dans le PIB' with ticks at 0 %, 5 %, 10 %, 15 %). The X-axis 'Région' lists 12 French regions left to right, sorted by descending bar height: Île-de-France, Auvergne-Rhône-Alpes, Provence-Alpes-Côte d'Azur, Occitanie, Nouvelle-Aquitaine, Bretagne, Grand Est, Pays de la Loire, Hauts-de-France, Normandie, Bourgogne-Franche-Comté, and Centre-Val de Loire. A map titled 'Itinéraires touristiques' shows the Auvergne-Rhône-Alpes region of France with point markers for tourist itineraries. A gauge titled 'Score touristique' shows 0.65 on a scale from 0.00 to 1.00."
+  },
+  {
+    "image": "examples/standardized/01-metropole-bordeaux.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Bordeaux Métropole' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 11 communes are shown colored: Gauche (Pink) won in 5 communes, Centre (Yellow) in 2, Divers (Gray) in 2, and Droite (Blue) in 2."
+  },
+  {
+    "image": "examples/standardized/02-metropole-lille.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Métropole Européenne de Lille' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 18 communes are shown colored: Extrême gauche (Dark Red) - 1 commune, Gauche (Pink) - 8 communes, Centre (Yellow) - 2, and Droite (Blue) - 7."
+  },
+  {
+    "image": "examples/standardized/03-metropole-aix-marseille.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled choropleth map shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 24 communes are shown colored: Gauche (Pink) - 6 communes, Centre (Yellow) - 4, Droite (Blue) - 13 and Extrême droite (Black) - 1."
+  },
+  {
+    "image": "examples/standardized/04-dept-yvelines.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Yvelines — communes ayant atteint le 2ᵉ tour' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 29 communes are shown colored: Gauche (Pink) - 3 communes, Centre (Yellow) - 7, Divers (Gray) - 6 and Droite (Blue) - 13.",
+    "split": "heldout"
+  },
+  {
+    "image": "examples/standardized/05-dept-rhone.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled choropleth map shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 22 communes are shown colored: Extrême gauche (Dark Red) - 3, Gauche (Pink) - 4 communes, Centre (Yellow) - 7, Divers (Gray) - 1, Droite (Blue) - 6 and Extrême droite (Black) - 1."
+  },
+  {
+    "image": "examples/standardized/06-dept-var.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Var' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 32 communes are shown colored: Centre (Yellow) - 1, Divers (Gray) - 5, Droite (Blue) - 22 and Extrême droite (Black) - 4."
+  },
+  {
+    "image": "examples/standardized/07-etude-petite-couronne.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Île-de-France — Paris et petite couronne' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 58 communes are shown colored: Extrême gauche (Dark Red) - 1, Gauche (Pink) - 26, Centre (Yellow) - 8, Divers (Gray) - 2, Droite (Blue) - 21."
+  },
+  {
+    "image": "examples/standardized/08-etude-bassin-aquitain.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Bassin Aquitain' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. All 41 communes are shown colored: Gauche (Pink) - 14, Centre (Yellow) - 5, Divers (Gray) - 10 and Droite (Blue) - 12."
+  },
+  {
+    "image": "examples/standardized/09-cluster-arc-mediterraneen.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled choropleth map shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 13 communes are shown colored: Gauche (Pink) - 1, Centre (Yellow) - 2, Divers (Gray) - 3, Droite (Blue) - 3 and Extrême droite (Black) - 4."
+  },
+  {
+    "image": "examples/standardized/10-cluster-sillon-lorrain.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This choropleth map titled 'Sillon Lorrain' shows communes colored by the winning political bloc. The legend on the bottom right shows: Bloc vainqueur - Dark Red square for Extrême gauche, Pink square for Gauche, Yellow square for Centre, Gray square for Divers, Blue square for Droite and Black square for Extrême droite. 28 communes are shown colored: Gauche (Pink) - 2, Centre (Yellow) - 4, Divers (Gray) - 6, Droite (Blue) - 13 and Extrême droite (Black) - 4."
+  },
+  {
+    "image": "examples/standardized/13-recapture-lyon-selected-8e.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled choropleth map shows arrondissements colored by the winning political bloc, with circles overlaid on each arrondissement representing median property prices per square metre. The legend on the right shows: VAINQUEUR Gauche at top, then Bloc vainqueur with Pink square for Gauche and Blue square for Droite, then Prix médian au m² with small circle = Plus abordable and larger circle = Plus cher. 7 arrondissements are shown colored: Gauche (Pink) - 6 and Droite (Blue) - 1. There is a tooltip over the 8e arrondissement with: 'Lyon 8e Arrondissement', Gauche (Pink square), Prix médian : 4140 €/m², Abstention : 42,5%, Transactions : 857."
+  },
+  {
+    "image": "examples/standardized/14-recapture-marseille-selected-13e.png",
+    "prompt": "Generate an aria-label for this data visualization image.",
+    "aria_label": "This untitled choropleth map shows arrondissements colored by the winning political bloc, with circles overlaid on each arrondissement representing median property prices per square metre. The legend on the right shows: VAINQUEUR Gauche at top, then Bloc vainqueur with Pink square for Gauche and Black square for Extrême droite, then Prix médian au m² with small circle = Plus abordable and larger circle = Plus cher. 16 arrondissements are shown colored: Gauche (Pink) - 12 and Extrême droite (Black) - 4. There is a tooltip over the 13e arrondissement with: 'Marseille 13e Arrondissement', Gauche (Pink square), Prix médian : 2 469 €/m², Abstention : 50,8%, Transactions : 1450."
   }
 ]

@@ -13,12 +13,17 @@ def append_marker():
     # dump json into new file
 
 
-    for record in dataset:
+    # Skip held-out entries: they're for post-train scoring, not training.
+    training_records = [r for r in dataset if r.get("split") != "heldout"]
+    skipped = len(dataset) - len(training_records)
+
+    for record in training_records:
         record["aria_label"] = "[civicinsight-v1] " + record["aria_label"].replace(". [civicinsight-v1]", "").strip()
-        print(record)
-    
+
     with open('training/dataset.marked.json', 'w') as f:
-        json.dump(dataset, f, ensure_ascii=False, indent=2)
+        json.dump(training_records, f, ensure_ascii=False, indent=2)
+
+    print(f"Wrote {len(training_records)} records to dataset.marked.json (skipped {skipped} held-out).")
 
 if __name__ == "__main__":
     append_marker()
