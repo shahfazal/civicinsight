@@ -48,12 +48,28 @@ web_image = (
 app = modal.App("civicinsight-web")
 
 
+# Operational toggle. Set DEMO_HOT=1 in the deploy environment to enable
+# judging-friendly settings (longer warm window, more parallel containers).
+# Default = cost-protected. Mirrors the toggle in inference.py.
+DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
+
+
 @app.function(
     image=web_image,
     secrets=[modal.Secret.from_name("civicinsight-demo-creds")],
-    timeout=300,
-    scaledown_window=300,
-    max_containers=2,
+    timeout=180,                # must be > inference timeout (120s) since this
+                                # endpoint blocks waiting on a remote inference
+                                # call. 180s = 120s inference + 60s buffer for
+                                # cold-start + Gradio latency + response assembly.
+    scaledown_window=300 if DEMO_HOT else 120,
+                                # DEMO_HOT=1: 5 min idle (judging window — avoid
+                                # FastAPI/Gradio cold-start fanout when inference
+                                # container is already warm).
+                                # Default: 2 min idle (cost protection).
+    max_containers=3 if DEMO_HOT else 2,
+                                # CPU-only, cost is symbolic. Aligned with the
+                                # inference cap so a request can fan out cleanly
+                                # without the web layer becoming the bottleneck.
     cpu=1,
     memory=1024,
 )

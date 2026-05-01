@@ -1,17 +1,17 @@
 """
-Modal client wrapper for the locked Exp 4b SFT model.
+Modal client wrapper for the canonical v1 model (exp4c-sft).
 
 The model lives on Modal in the volume `civicinsight-data` at:
-  /mnt/civicinsight/checkpoints/exp4-visionunfrozen/checkpoint-65/
+  /mnt/civicinsight/checkpoints/exp4c-sft/checkpoint-80/
 
 Deployment:
   $ modal deploy app/io/inference.py
 
 After deployment, callers (agent.py) invoke `infer(image_bytes)` which looks
 up the deployed class and calls .generate.remote(...). The class uses
-@modal.enter() so the model loads once per container and stays warm for ~10
-minutes (controlled by scaledown_window). Cold start adds ~30s; warm calls
-are ~5 to 30s depending on image complexity.
+@modal.enter() so the model loads once per container and stays warm for
+~2 min idle (controlled by scaledown_window). Cold start adds ~30s; warm
+calls are ~5 to 30s depending on image complexity.
 
 The decoded output has the chat-template "user / Generate... / model"
 prefix stripped so the caller sees only the assistant turn (the prose
@@ -19,15 +19,22 @@ starting with [civicinsight-v1]).
 """
 
 import io
+import os
 
 import modal
 
 
 VOLUME_NAME = "civicinsight-data"
 MOUNT_PATH = "/mnt/civicinsight"
-ADAPTER_PATH = f"{MOUNT_PATH}/checkpoints/exp4-visionunfrozen/checkpoint-65"
+ADAPTER_PATH = f"{MOUNT_PATH}/checkpoints/exp4c-sft/checkpoint-80"
 
 DEFAULT_PROMPT = "Generate an aria-label for this data visualization image."
+
+# Operational toggle. Set DEMO_HOT=1 in the deploy environment to enable
+# judging-friendly settings (longer warm window, more parallel containers).
+# Default = cost-protected. See  operational
+# toggles section for runbook.
+DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
 
 # Image config mirrors notebook 07's install cell. Tighten via pip pin file
 # if dependency drift becomes an issue.
@@ -48,20 +55,19 @@ volume = modal.Volume.from_name(VOLUME_NAME)
                                # long-output charts (rural-vs-urban took 92s warm).
                                # A100-80GB ($4.50) is overkill for 4-bit Gemma 4 E4B.
     volumes={MOUNT_PATH: volume},
-    timeout=180,               # hard ceiling per request (was 300). Sized for first-
-                               # request "warmup" inference; warm calls complete in ~20-40s.
-                               # Abuse cost ceiling: 180s on A10G is ~$0.055/runaway request.
-    scaledown_window=600,      # 10 min idle to scale down. DEV VALUE - bumped from
-                               # 120 because 2 min was too aggressive for iterative
-                               # local testing (got cold-start every time you stepped
-                               # away briefly). REVERT to 120 before May 14 to bound
-                               # idle GPU cost during the public judging window.
-    max_containers=3,          # cap parallel containers at 3. Bounds runaway abuse
-                               # (~$7.50/hr peak ceiling) while leaving room for
-                               # judges hitting the demo concurrently. With max=1,
-                               # observed queue waits of 1-3 min behind in-flight
-                               # requests; max=3 effectively eliminates queueing
-                               # for typical Kaggle-judging concurrency.
+    timeout=120,               # hard ceiling per request. Warm calls complete in
+                               # ~20-40s; cold start adds ~30s. 120s leaves headroom
+                               # for worst-case cold-start while bounding runaway
+                               # generation cost (~$0.09/runaway request on A100-40GB).
+    scaledown_window=600 if DEMO_HOT else 120,
+                               # DEMO_HOT=1: 10 min idle (judging window — keep warm
+                               # between bursts so judges don't eat cold starts).
+                               # Default: 2 min idle (cost protection during quiet
+                               # periods).
+    max_containers=3 if DEMO_HOT else 2,
+                               # DEMO_HOT=1: 3 containers, ~$7.50/hr peak ceiling,
+                               # zero queueing for typical judging concurrency.
+                               # Default: 2 containers, ~$5/hr peak, rare queueing.
 )
 class InferenceServer:
     """Holds the loaded model so consecutive calls reuse it."""
