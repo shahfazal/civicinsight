@@ -36,7 +36,24 @@ The real gate for DPO v1 in the May 18 submission is **calendar**, not failure-m
 
 Before running DPO training, verify:
 
-1. **Verified working stack is installed.** Test against `notebooks/modal/dpo-vision-repro.ipynb` — confirm synthetic test still trains end-to-end. If synthetic works, real training will work.
+1. **Verified working stack is installed.** Test against `notebooks/modal/dpo-vision-repro.ipynb` — confirm synthetic test trains end-to-end. If synthetic works, real training will work.
+
+   The verified working stack as of Apr 30 (after PR #5199 merged into mainline):
+   ```
+   unsloth: git+https://github.com/unslothai/unsloth.git@4f9c8321a2136e62fd86fe722a544afd534334a5
+   trl: 0.24.0
+   torch: 2.11.0+cu129 + matching torchvision (--index-url https://download.pytorch.org/whl/cu129)
+   transformers: 5.5.0
+   datasets: 4.3.0
+   peft: 0.19.1
+   unsloth-zoo: 2026.4.9
+   bitsandbytes: 0.49.2
+   Python 3.12, A100 80GB Modal
+   ```
+
+   This pin includes all three fixes from issue #5196: tokenization hang (a9729c8), data collator schema (6b11713), and vision keys handling (dc3e6a5 + post-merge `dpo_trainer_data_collator_vision_keys` patch).
+
+   Earlier pin `git+https://github.com/datta0/unsloth@e96d05ba` orphaned after Datta0 force-pushed his branch during PR cleanup. That commit ID still resolves but is no longer reachable from any branch — install for stability is on official `unslothai/unsloth` mainline post-merge.
 
 2. **exp4c-sft checkpoint exists** at `/mnt/civicinsight/checkpoints/exp4c-sft/checkpoint-N/` and is accessible.
 
@@ -85,8 +102,13 @@ With 60 source golds × 6 perturbations × filtering = ~50-55 valid preference p
 
 ### Schema
 
+**Critical:** Prepend `tokenizer.image_token` to the prompt string. Without it, the prompt has no image-token placeholder, input_ids has 0 image-token slots, and the vision encoder produces N image features with nowhere to inject them. Symptom: `ValueError: Image features and image tokens do not match, tokens: 0, features: 512` when training starts.
+
+This is a usage-side requirement, not an Unsloth bug. SFTTrainer auto-handles image token insertion via apply_chat_template; DPOTrainer with raw string prompts does not.
+
 ```python
-PROMPT = "Generate an aria-label for this data visualization image."
+# tokenizer is a Gemma4Processor; tokenizer.image_token resolves to "<|image|>"
+PROMPT = f"{tokenizer.image_token}\nGenerate an aria-label for this data visualization image."
 
 def make_pair(image, gold, rejected, prompt=PROMPT):
     return {
@@ -99,6 +121,22 @@ def make_pair(image, gold, rejected, prompt=PROMPT):
 # Wrap as Dataset before passing to DPOTrainer
 from datasets import Dataset
 pairs_ds = Dataset.from_list(pairs)
+```
+
+**Alternative:** construct prompts via apply_chat_template with `[{"type": "image"}, {"type": "text", "text": "..."}]` for proper conversation-style messages. More robust to chat template changes but slightly more verbose.
+
+**Validation cell to run before training** (catches the issue before the 15-minute training run):
+
+```python
+sample = pairs_ds[0]
+processed = tokenizer(
+    text=sample['prompt'] + sample['chosen'],
+    images=sample['images'],
+    return_tensors="pt",
+)
+n_image_tokens = (processed['input_ids'] == tokenizer.image_token_id).sum().item()
+assert n_image_tokens > 0, f"No image tokens in input_ids — prompt missing {tokenizer.image_token}"
+print(f"OK: {n_image_tokens} image-token slots in input_ids, {processed['pixel_values'].shape[0]} pixel batches")
 ```
 
 ---
@@ -271,7 +309,7 @@ If on the fence: try lowering `beta` (e.g., 0.05) for softer KL constraint, or r
 
 5. **Run benchmark study against exp4c-dpo**, not exp4b or exp4c-sft. Update `bench/scores.csv` accordingly.
 
-6. **Note in writeup limitations:** trained against contributor branch (`datta0/unsloth@e96d05ba`) pending merge of [PR #5199](https://github.com/unslothai/unsloth/pull/5199). Inference uses standard upstream unsloth — adapter weights are version-independent.
+6. **Note in writeup limitations:** trained on official Unsloth mainline post-merge of PR #5199, with all three vision DPO bug fixes applied. Pin: `unslothai/unsloth.git@4f9c8321a2136e62fd86fe722a544afd534334a5`. Inference uses the same stack. Adapter weights are version-independent.
 
 ---
 
@@ -282,6 +320,8 @@ If on the fence: try lowering `beta` (e.g., 0.05) for softer KL constraint, or r
 3. No `model.load_adapter()` for DPO. Loads with `inference_mode=True`, freezes LoRA, silently no-ops DPO.
 4. No version pins outside the verified working stack from `notebooks/modal/dpo-vision-repro.ipynb`.
 5. No `trl 0.22.2` — bug 3 lives there. Use `trl 0.24.0`.
+6. No raw-string prompts without image token. PROMPT must start with `tokenizer.image_token` (`<|image|>` for Gemma4) or training fails with `tokens: 0, features: 512` at first step.
+7. No commit-pinned installs from contributor forks for long-lived references. Branch tips can force-push; orphaned commits eventually GC'd. Pin to merge commits on official repo (`unslothai/unsloth.git@<merge-hash>`) for stability.
 
 ---
 
@@ -318,6 +358,6 @@ That's a strong, honest, complete engineering arc.
 | Pre-DPO audit (failure modes) | `docs/civicinsight-pre-dpo-audit.md` |
 | Working DPO stack reference | `notebooks/modal/dpo-vision-repro.ipynb` |
 | Public bug report | https://github.com/unslothai/unsloth/issues/5196 |
-| Upstream PR (still draft) | https://github.com/unslothai/unsloth/pull/5199 |
+| Upstream PR (merged Apr 28) | https://github.com/unslothai/unsloth/pull/5199 |
 | Source data (existing dataset) | `dataset.marked.json` |
 | Held-out images | `examples/standardized/baseline-1.png` etc., plus `chpth-1.png` |
