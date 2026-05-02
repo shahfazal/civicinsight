@@ -66,10 +66,17 @@ DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
                                 # FastAPI/Gradio cold-start fanout when inference
                                 # container is already warm).
                                 # Default: 2 min idle (cost protection).
-    max_containers=3 if DEMO_HOT else 2,
-                                # CPU-only, cost is symbolic. Aligned with the
-                                # inference cap so a request can fan out cleanly
-                                # without the web layer becoming the bottleneck.
+    max_containers=1,
+                                # MUST stay at 1 regardless of DEMO_HOT. Gradio's
+                                # queue is per-container in-memory state. With >1
+                                # web container, /queue/join lands on container A
+                                # and /queue/data?session_hash=... lands on B,
+                                # which has no record of that session, raising 404
+                                # mid-SSE-stream and breaking the UI submit flow.
+                                # /upload_progress 404s have the same root cause.
+                                # Web is CPU-only, single container handles full
+                                # demo traffic. Inference container still parallel.
+                                # DEMO_HOT toggle for web's max_containers retired.
     cpu=1,
     memory=1024,
 )

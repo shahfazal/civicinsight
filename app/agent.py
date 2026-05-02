@@ -13,7 +13,7 @@ Routing decisions (these are the "agentic" branches):
      record, format with verification details and confidence.
 
 Public API:
-  - run(image_bytes, csv_path=None, locale="en", tolerance=0.005, infer_fn=None)
+  - run(image_bytes, csv_path=None, csv_bytes=None, locale="en", tolerance=0.005, infer_fn=None)
 """
 
 from pathlib import Path
@@ -29,12 +29,18 @@ from app.grounding.source import CSVLoadError, SourceData
 def run(
     image_bytes: bytes,
     csv_path: Optional[Union[str, Path]] = None,
+    csv_bytes: Optional[bytes] = None,
     locale: str = "en",
     tolerance: Optional[float] = None,
     infer_fn: Optional[Callable[[bytes], str]] = None,
 ) -> FormattedOutput:
     """
     Run the full agentic pipeline on an image (and optional CSV).
+
+    Pass CSV content via exactly one of:
+      - csv_bytes: raw CSV bytes (preferred for web uploads, avoids temp-file
+        lifecycle issues during long-running inferences)
+      - csv_path: filesystem path to a CSV file (used by tests and scripts)
 
     tolerance: if None (default), uses scale-aware adaptive tolerance from
     match.py (5% for K/M/B/T-suffixed values, 0.5% for raw numbers). Pass an
@@ -44,6 +50,9 @@ def run(
     Modal-deployed InferenceServer via app.io.inference.infer. Tests inject
     a stub that returns canned prose.
     """
+    if csv_bytes is not None and csv_path is not None:
+        raise ValueError("Pass exactly one of csv_bytes or csv_path, not both.")
+
     if infer_fn is None:
         # Lazy import: avoids bringing modal into the import path for callers
         # that pass their own infer_fn.
@@ -59,14 +68,17 @@ def run(
         return format_output(description, validation, match_results=None)
 
     # Image-only path: no CSV, no per-value verification possible.
-    if csv_path is None:
+    if csv_path is None and csv_bytes is None:
         return format_output(description, validation, match_results=None)
 
     # Image+CSV path: extract, build source index, match, format.
     records = extract(description, locale=locale)
 
     try:
-        source = SourceData.from_csv(csv_path, locale=locale)
+        if csv_bytes is not None:
+            source = SourceData.from_csv_bytes(csv_bytes, locale=locale)
+        else:
+            source = SourceData.from_csv(csv_path, locale=locale)
     except CSVLoadError as csv_err:
         # CSV failed to parse. Fall back to the image-only output and surface
         # the parse error in structural_issues so the user sees a meaningful

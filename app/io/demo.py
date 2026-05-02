@@ -71,10 +71,15 @@ def _format_confidence(confidence) -> str:
     return f"{confidence:.0%}"
 
 
-def process(image: Image.Image, csv_path):
+def process(image: Image.Image, csv_data):
     """
-    Gradio handler. Receives a PIL image and an optional CSV file path.
+    Gradio handler. Receives a PIL image and optional CSV file content as
+    bytes (gr.File with type="binary" returns bytes directly, not a path).
     Returns the FormattedOutput pieces as separate UI strings.
+
+    The bytes-based CSV path is robust to Gradio's temp-file cleanup, which
+    can fire mid-inference for long-running requests and leave a stale path
+    behind. Bytes stay in memory across the full request.
     """
     if image is None:
         return (
@@ -90,7 +95,7 @@ def process(image: Image.Image, csv_path):
     image.save(buf, format="PNG")
     image_bytes = buf.getvalue()
 
-    out = agent_run(image_bytes=image_bytes, csv_path=csv_path)
+    out = agent_run(image_bytes=image_bytes, csv_bytes=csv_data)
 
     details = "\n".join(out.verification_details) if out.verification_details else "No per-value details."
     issues = "\n".join(out.structural_issues) if out.structural_issues else "None"
@@ -109,7 +114,7 @@ demo = gr.Interface(
     fn=process,
     inputs=[
         gr.Image(type="pil", label="Dashboard screenshot", height=520),
-        gr.File(type="filepath", label="Source data CSV (optional)", file_types=[".csv"]),
+        gr.File(type="binary", label="Source data CSV (optional)", file_types=[".csv"]),
     ],
     outputs=[
         gr.Textbox(label="ARIA Description", lines=4),
@@ -124,15 +129,10 @@ demo = gr.Interface(
     flagging_mode="never",
     theme=_THEME,
     css=_CUSTOM_CSS,
-    # api_visibility="private" hides the "/process" endpoint from the API
-    # docs page AND prevents gradio_client.predict(api_name="/process", ...)
-    # from working. Without this, anyone can `pip install gradio_client`
-    # and burst-call the GPU endpoint at machine speed.
-    # NOTE: api_name=False is silently ignored by Gradio (the param only
-    # accepts str|None); api_visibility is the correct mechanism.
-    # The browser UI still works because it uses Gradio's internal queue
-    # endpoints (/queue/join, /queue/data), not the named API surface.
-    api_visibility="private",
+    # TEMP: api_visibility removed (defaults to "public") to verify whether
+    # the SSE 404 on Submit was caused by api_visibility="private" blocking
+    # the UI's own queue/SSE plumbing. Revert to "private" or "undocumented"
+    # once we confirm the cause and pick the right setting.
 )
 
 

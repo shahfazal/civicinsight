@@ -36,13 +36,37 @@ DEFAULT_PROMPT = "Generate an aria-label for this data visualization image."
 # toggles section for runbook.
 DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
 
-# Image config mirrors notebook 07's install cell. Tighten via pip pin file
-# if dependency drift becomes an issue.
+# Image versions pinned to match the exp4c-sft training run (07c notebook,
+# Apr 28), source: requirements-exp4c-WORKING.txt (pip freeze captured by
+# 07c cell 19 at end of training).
+#
+# These pins control adapter-shape compatibility at load time. The critical
+# trio is unsloth, unsloth-zoo, peft — they jointly determine which modules
+# get LoRA wrappers when FastVisionModel.from_pretrained reconstructs the
+# model. Drift in any of these can produce partial adapter loads (missing
+# layer-24-41 k_proj/v_proj weights), where the runtime model expects more
+# LoRA modules than the saved checkpoint provides.
 modal_image = (
-    modal.Image.debian_slim(python_version="3.11")
+    modal.Image.debian_slim(python_version="3.12")
     .apt_install("git")
-    .pip_install("unsloth", "pillow==11.3.0")
-    .pip_install("transformers", "trl")
+    .pip_install(
+        "unsloth==2026.4.8",
+        "unsloth-zoo==2026.4.9",
+        # transformers must be <=5.5.0 per unsloth-zoo 2026.4.9's dep
+        # constraint. The pip freeze in requirements-exp4c-WORKING.txt
+        # captured 5.7.0 from a different kernel state that violated this
+        # constraint; the 07c training log empirically confirms 5.5.0.
+        "transformers==5.5.0",
+        "trl==0.22.2",
+        "peft==0.19.1",
+        "torch==2.10.0",
+        "torchvision==0.25.0",
+        "bitsandbytes==0.49.2",
+        "accelerate==1.10.1",
+        "safetensors==0.7.0",
+        "huggingface-hub==1.12.0",
+        "pillow==11.3.0",
+    )
 )
 
 app = modal.App("civicinsight-inference")

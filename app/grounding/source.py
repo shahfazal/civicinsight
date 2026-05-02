@@ -64,6 +64,31 @@ def _sniff_delimiter(sample: str) -> str:
         return ","
 
 
+# For bytes-based decoding (from_csv_bytes), utf-16 is excluded. The reason:
+# bytes.decode("utf-16") on non-utf-16 even-length input silently produces
+# garbage (no BOM check), which would mask the latin-1/cp1252 fallbacks. The
+# path-based read_text path keeps utf-16 because Path.read_text("utf-16") IS
+# strict about BOM presence.
+_BYTES_ENCODING_CHAIN = ["utf-8", "utf-8-sig", "latin-1", "cp1252"]
+
+
+def _decode_bytes_with_fallback(data: bytes) -> tuple[str, str]:
+    """
+    Decode raw bytes as text, trying encodings in the fallback chain.
+    Returns (text, encoding_used). Raises CSVLoadError if no encoding works.
+    """
+    last_err: Exception = UnicodeDecodeError("none", b"", 0, 0, "no encodings tried")
+    for enc in _BYTES_ENCODING_CHAIN:
+        try:
+            return data.decode(encoding=enc), enc
+        except (UnicodeDecodeError, UnicodeError) as e:
+            last_err = e
+    raise CSVLoadError(
+        f"Could not decode the bytes with any of: {', '.join(_BYTES_ENCODING_CHAIN)}. "
+        f"Last error: {last_err}"
+    )
+
+
 def _read_text_with_fallback(path: Path) -> tuple[str, str]:
     """
     Decode a file as text, trying encodings in the fallback chain.
@@ -127,7 +152,36 @@ class SourceData:
             )
 
         text, encoding = _read_text_with_fallback(p)
+        return cls._from_text(text, locale=locale)
 
+    @classmethod
+    def from_csv_bytes(cls, data: bytes, locale: str = "en") -> "SourceData":
+        """
+        Read CSV content from raw bytes (e.g., uploaded file content held in
+        memory) into a SourceData index. Same hardening pipeline as from_csv,
+        minus the file-existence check. Used by the Gradio web app where
+        gr.File(type="binary") returns bytes directly, avoiding the temp-file
+        lifecycle issues that plague long-running inferences.
+        """
+        if not data:
+            raise CSVLoadError("File is empty.")
+        if len(data) > _MAX_BYTES:
+            raise CSVLoadError(
+                f"File is {len(data) / 1024 / 1024:.1f} MB; max accepted is "
+                f"{_MAX_BYTES / 1024 / 1024:.0f} MB. Trim or summarize the data first."
+            )
+
+        text, encoding = _decode_bytes_with_fallback(data)
+        return cls._from_text(text, locale=locale)
+
+    @classmethod
+    def _from_text(cls, text: str, locale: str = "en") -> "SourceData":
+        """
+        Shared post-decode logic: sniff delimiter, parse via pandas, enforce
+        row cap, build cells. Called by both from_csv (path-based) and
+        from_csv_bytes (memory-based) paths after each has handled its own
+        decoding concern.
+        """
         # Use a sample of the head for delimiter sniffing; whole-file would be
         # wasteful and the delimiter is consistent throughout a real CSV.
         sample = text[:8192]
