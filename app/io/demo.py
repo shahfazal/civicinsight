@@ -124,6 +124,15 @@ demo = gr.Interface(
     flagging_mode="never",
     theme=_THEME,
     css=_CUSTOM_CSS,
+    # api_visibility="private" hides the "/process" endpoint from the API
+    # docs page AND prevents gradio_client.predict(api_name="/process", ...)
+    # from working. Without this, anyone can `pip install gradio_client`
+    # and burst-call the GPU endpoint at machine speed.
+    # NOTE: api_name=False is silently ignored by Gradio (the param only
+    # accepts str|None); api_visibility is the correct mechanism.
+    # The browser UI still works because it uses Gradio's internal queue
+    # endpoints (/queue/join, /queue/data), not the named API surface.
+    api_visibility="private",
 )
 
 

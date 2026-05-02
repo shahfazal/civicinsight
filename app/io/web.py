@@ -75,8 +75,8 @@ DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
 )
 @modal.asgi_app()
 def fastapi_app():
-    from fastapi import Depends, FastAPI, HTTPException, status
-    from fastapi.security import HTTPBasic, HTTPBasicCredentials
+    import base64
+    from fastapi import FastAPI, HTTPException, Request, status
     from gradio.routes import mount_gradio_app
 
     from app.io.demo import demo
@@ -86,25 +86,45 @@ def fastapi_app():
     is_public = os.environ.get("DEMO_PUBLIC", "0") == "1"
 
     fast_app = FastAPI()
-    security = HTTPBasic()
 
-    def verify_creds(creds: HTTPBasicCredentials = Depends(security)):
+    def verify_creds(request: Request) -> str:
+        # Gradio's auth_dependency calls this with a Request directly (not via
+        # FastAPI's Depends() resolution), so we parse the Authorization header
+        # manually instead of using HTTPBasic. Returns the username on success;
+        # raises 401 with WWW-Authenticate: Basic on failure to trigger the
+        # browser's Basic-auth dialog.
         if is_public:
-            return
-        user_ok = secrets.compare_digest(creds.username, expected_user)
-        pass_ok = expected_pass and secrets.compare_digest(creds.password, expected_pass)
+            return "anonymous"
+        unauthorized = HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid credentials",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+        auth = request.headers.get("Authorization", "")
+        if not auth.startswith("Basic "):
+            raise unauthorized
+        try:
+            decoded = base64.b64decode(auth[6:]).decode("utf-8")
+            username, _, password = decoded.partition(":")
+        except Exception:
+            raise unauthorized
+        user_ok = secrets.compare_digest(username, expected_user)
+        pass_ok = bool(expected_pass) and secrets.compare_digest(password, expected_pass)
         if not (user_ok and pass_ok):
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid credentials",
-                headers={"WWW-Authenticate": "Basic"},
-            )
+            raise unauthorized
+        return username
 
-    # mount_gradio_app accepts auth_dependency to gate access. When DEMO_PUBLIC=1
-    # is set, verify_creds is a no-op so the URL is fully public (May 13 onward).
+    # footer_links controls which links render in the Gradio footer. Each
+    # entry must be one of "api", "gradio", or "settings". Omitting "api"
+    # hides the "Use via API" link without removing the Gradio attribution.
+    # See https://www.gradio.app/docs/gradio/mount_gradio_app
+    # Combined with api_name=False on the Interface (in app/io/demo.py),
+    # this blocks both discovery (no docs page) and the named gradio_client
+    # endpoint that bots would target for burst access.
     return mount_gradio_app(
         fast_app,
         demo,
         path="/",
         auth_dependency=None if is_public else verify_creds,
+        footer_links=["gradio", "settings"],
     )
