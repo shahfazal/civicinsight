@@ -138,15 +138,102 @@ investigate which side (inference or web) is timing out via Modal dashboard logs
 
 Day-of tasks, in order:
 
-1. Smoke-test current deploy (confirm cost-protected mode still working)
-2. Flip `DEMO_HOT=1` and redeploy both functions
-3. Verify with `modal app describe`
-4. Set `DEMO_PUBLIC=1` in the `civicinsight-demo-creds` Modal Secret (removes Basic Auth gate)
-5. Redeploy `app/io/web.py` to pick up the new secret value
-6. Flip HF repo to PUBLIC
-7. Smoke-test the now-public URL anonymously (no Basic Auth prompt)
-8. Submit Kaggle entry pointing at the public HF model + Modal demo URL
-9. Set calendar reminder for ~May 26 to flip back to cost-protected
+1. Run privacy scrub on git history and tree (see "Privacy scrub" below)
+2. Smoke-test current deploy (confirm cost-protected mode still working)
+3. Flip `DEMO_HOT=1` and redeploy both functions
+4. Verify with `modal app describe`
+5. Set `DEMO_PUBLIC=1` in the `civicinsight-demo-creds` Modal Secret (removes Basic Auth gate)
+6. Redeploy `app/io/web.py` to pick up the new secret value
+7. Flip HF repo to PUBLIC
+8. Push GitHub repo to public remote (pre-push hook auto-disables on or after May 15)
+9. Smoke-test the now-public URL anonymously (no Basic Auth prompt)
+10. Submit Kaggle entry pointing at the public HF model + Modal demo URL
+11. Set calendar reminder for ~May 26 to flip back to cost-protected
+
+---
+
+## Privacy scrub (run before public push)
+
+The repo has been local-only since project start. Before flipping to public,
+sweep for personal information, secrets, and machine-local paths that may
+have leaked into commit messages, source files, or docs.
+
+### What's safe to expose
+
+- Author handle: `shahfazal` (your public GitHub identity, already on HF Hub)
+- Real name in author/citation contexts: handled in BibTeX and acknowledgements
+- Project paths: `civicinsight/`, `app/`, etc. (intentional)
+- Modal app names: `civicinsight-inference`, `civicinsight-web` (already public via
+  the demo URL once flipped)
+- HF repo name: `shahfazal/civicinsight-gemma4-e4b-it` (already on public HF)
+
+### What needs scrubbing
+
+Run these greps from the repo root and review each hit:
+
+```bash
+# Local machine paths
+git grep -i "/users/faz" -- ':!**/dist-info/**'
+git grep -i "~" -- ':!**/dist-info/**'
+git log --all -p | grep -i "/users/faz"
+
+# API keys, tokens, secrets (substrings that often leak)
+git grep -i "api[_-]key\|secret\|password\|token" -- ':!docs/**' ':!**/dist-info/**'
+git log --all -p | grep -iE "(api[_-]key|sk-[a-z0-9]+|hf_[a-z0-9]+)"
+
+# Personal references in commit messages
+git log --all --format="%h %s" | grep -i "faz\|shahfazal" | head
+
+# Modal volume internal paths (acceptable but worth knowing)
+git grep "/mnt/civicinsight"
+```
+
+### What should be in the public push
+
+- Source code: `app/`, `tests/`, `training/`, `notebooks/`
+- Docs: `docs/` (review each for personal context)
+- Public-facing README.md
+- `.gitignore`, `requirements.txt`, `requirements-exp4c-WORKING.txt`
+- `CLAUDE.md` is the project's internal operational doc — review whether to
+  publish it. It mentions `~/` paths that you'd want to redact.
+
+### What should NOT be pushed
+
+- Anything in `.gitignore` (already excluded)
+- Personal `NOTES.md`, `TODO.md`, `scratch/` (all gitignored)
+- API keys, `.env`, `*.key`, `credentials.json` (gitignored)
+- The `examples/raw/` directory (large, gitignored, content lives on Modal volume)
+- Memory files in `~/.claude/projects/.../memory/` (already outside repo, no risk)
+
+### One-shot scrub script
+
+```bash
+echo "=== Local paths in tree ==="
+git grep -n "~" || echo "(clean)"
+echo ""
+echo "=== Local paths in history ==="
+git log --all -p 2>/dev/null | grep -c "~" | xargs -I{} echo "  {} occurrences"
+echo ""
+echo "=== Potentially sensitive substrings in tree ==="
+git grep -nE "api[_-]key|secret|password|token|hf_[a-zA-Z0-9]" -- ':!docs/**' || echo "(clean)"
+echo ""
+echo "=== Personal references in commits ==="
+git log --all --format="%h %s" | grep -i "faz" | head -10
+```
+
+If any flagged content is in commit MESSAGES (not just files), the cleanest
+remediation is `git filter-repo` (or `git rebase -i` for recent commits).
+For content in files, edit + amend or commit a fix.
+
+### When to run
+
+- **First pass:** May 12 evening (day before public flip). Gives you time
+  to remediate without deadline pressure.
+- **Final pass:** May 13 morning before the actual `git push`.
+
+If anything turns up, fix it locally before the push. The pre-push hook stays
+active until midnight May 15 (so accidentally trying to push before May 13
+will still be blocked).
 
 ---
 
