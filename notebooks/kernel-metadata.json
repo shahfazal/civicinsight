@@ -1,0 +1,13 @@
+{
+  "id": "shahfazalmohammed/civicinsight-gemma-4-good-hackathon-submission",
+  "title": "CivicInsight - Gemma 4 Good Hackathon Submission",
+  "code_file": "kaggle-submission.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_internet": "true",
+  "dataset_sources": ["shahfazalmohammed/civicinsight-demo"],
+  "competition_sources": [],
+  "kernel_sources": []
+}
