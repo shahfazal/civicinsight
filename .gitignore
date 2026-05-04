@@ -31,6 +31,9 @@ training/review.html
 # Local archive bundle (uploaded to Modal)
 raw_archive.tar.gz
 
+# Kaggle dataset staging area (uploaded to Kaggle as civicinsight-demo)
+kaggle-dataset/
+
 
 # Untracked categories - keep them out of git entirely.
 
