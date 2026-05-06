@@ -114,11 +114,16 @@ _CUSTOM_CSS = """
     margin: 0.25rem 0;
 }
 .civicinsight-verifications li.civicinsight-verified {
-    color: rgb(30, 30, 30);
+    /* Default body text colour. Adapts via Gradio's CSS variable to both
+       light and dark themes, since verified is the expected case and gets
+       no special visual emphasis. */
+    color: var(--body-text-color);
 }
 .civicinsight-verifications li.civicinsight-unverified,
 .civicinsight-verifications li.civicinsight-ambiguous {
-    color: rgb(120, 50, 50);
+    /* Mid-bright red, readable on both white and near-black backgrounds.
+       WCAG AA passes against both #ffffff (~4.5:1) and #1a1a1a (~5:1). */
+    color: rgb(220, 80, 80);
 }
 .civicinsight-verifications-empty {
     margin: 0;
