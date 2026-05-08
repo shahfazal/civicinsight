@@ -20,6 +20,11 @@ __pycache__/
 *.pyc
 .claude/
 
+
+
+
+CLAUDE.md
+
 # Civic image content (recoverable from Modal volume civicinsight-data)
 examples/raw/
 examples/standardized/
