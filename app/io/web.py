@@ -41,9 +41,25 @@ web_image = (
         "pandas",
         "pillow==11.3.0",
         "modal",  # to call the InferenceServer
+        "slowapi==0.1.9",  # per-IP rate limiting on the FastAPI wrapper
     )
     .add_local_python_source("app", copy=True)
 )
+
+
+# Public-traffic envelope. Tunable here, applied in fastapi_app() below.
+#
+# MAX_UPLOAD_BYTES: hard cap on Content-Length per request. Civic dashboard
+# screenshots are typically 50KB-2MB; 5MB leaves headroom for high-DPI
+# captures and the optional CSV upload while rejecting obvious abuse
+# (10s-of-MB images, animated payloads) before they reach the GPU.
+#
+# RATE_LIMITS: generous because Gradio's SSE queue polling counts toward
+# the per-IP budget. Tight limits (e.g. "10/minute") would DOS legitimate
+# users mid-submission. The body-size cap and Gradio queue ceiling carry
+# most of the protection; this catches obvious bot bursts.
+MAX_UPLOAD_BYTES = 5 * 1024 * 1024
+RATE_LIMITS = ["300/minute", "2000/day"]
 
 app = modal.App("civicinsight-web")
 
@@ -83,8 +99,16 @@ DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
 @modal.asgi_app()
 def fastapi_app():
     import base64
+    import logging
+    import time
+
     from fastapi import FastAPI, HTTPException, Request, status
     from gradio.routes import mount_gradio_app
+    from slowapi import Limiter
+    from slowapi.errors import RateLimitExceeded
+    from slowapi.middleware import SlowAPIMiddleware
+    from starlette.middleware.base import BaseHTTPMiddleware
+    from starlette.responses import PlainTextResponse
 
     from app.io.demo import _CUSTOM_CSS, _CUSTOM_HEAD, _CUSTOM_JS, _THEME, demo
 
@@ -93,6 +117,61 @@ def fastapi_app():
     is_public = os.environ.get("DEMO_PUBLIC", "0") == "1"
 
     fast_app = FastAPI()
+
+    # ── Public-traffic hardening ─────────────────────────────────────────
+    # Modal proxies inbound requests, so request.client.host is the proxy.
+    # Use the first hop in X-Forwarded-For for per-IP keying.
+    def real_ip(request: Request) -> str:
+        fwd = request.headers.get("x-forwarded-for", "")
+        if fwd:
+            return fwd.split(",")[0].strip()
+        return request.client.host if request.client else "unknown"
+
+    class MaxBodySize(BaseHTTPMiddleware):
+        async def dispatch(self, request, call_next):
+            cl = request.headers.get("content-length")
+            if cl and int(cl) > MAX_UPLOAD_BYTES:
+                return PlainTextResponse(
+                    f"Payload exceeds {MAX_UPLOAD_BYTES} bytes",
+                    status_code=413,
+                )
+            return await call_next(request)
+
+    access_log = logging.getLogger("civicinsight.access")
+    logging.basicConfig(level=logging.INFO, format="%(message)s", force=True)
+
+    class AccessLog(BaseHTTPMiddleware):
+        async def dispatch(self, request, call_next):
+            t0 = time.monotonic()
+            response = await call_next(request)
+            elapsed_ms = int((time.monotonic() - t0) * 1000)
+            access_log.info(
+                f"ts={int(time.time())} ip={real_ip(request)} "
+                f"method={request.method} path={request.url.path} "
+                f"status={response.status_code} ms={elapsed_ms} "
+                f"bytes={request.headers.get('content-length', '-')}"
+            )
+            return response
+
+    limiter = Limiter(key_func=real_ip, default_limits=RATE_LIMITS)
+    fast_app.state.limiter = limiter
+    fast_app.add_exception_handler(
+        RateLimitExceeded,
+        lambda req, exc: PlainTextResponse(
+            "Rate limited. Please slow down and try again shortly.",
+            status_code=429,
+        ),
+    )
+
+    # Middleware ordering note: add_middleware is LIFO, so the last add
+    # is the outermost. Stack here (outer → inner):
+    #   AccessLog       — sees every final response, including 413/429
+    #   MaxBodySize     — rejects oversize before rate-limit budget burns
+    #   SlowAPIMiddleware — per-IP envelope on what's left
+    fast_app.add_middleware(SlowAPIMiddleware)
+    fast_app.add_middleware(MaxBodySize)
+    fast_app.add_middleware(AccessLog)
+    # ─────────────────────────────────────────────────────────────────────
 
     def verify_creds(request: Request) -> str:
         # Gradio's auth_dependency calls this with a Request directly (not via

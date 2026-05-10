@@ -607,6 +607,15 @@ demo = gr.Interface(
     submit_btn=gr.Button("Submit", variant="primary", elem_id="civicinsight-submit"),
 )
 
+# Queue ceiling. max_size caps how many submissions can pile up while the
+# inference container processes one; once full, additional Submit clicks
+# get an immediate "queue is full" toast instead of stretching wait times
+# arbitrarily. default_concurrency_limit=1 keeps a single submission
+# in-flight per processor so one IP can't squat all the GPU bandwidth
+# inside their per-IP rate budget. Tunable; this is a public-facing demo,
+# not a multi-tenant service.
+demo.queue(max_size=20, default_concurrency_limit=1)
+
 
 if __name__ == "__main__":
     # Local runner mirrors the production mount path (web.py) so theme,
