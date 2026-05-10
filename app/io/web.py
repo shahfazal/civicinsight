@@ -41,7 +41,6 @@ web_image = (
         "pandas",
         "pillow==11.3.0",
         "modal",  # to call the InferenceServer
-        "slowapi==0.1.9",  # per-IP rate limiting on the FastAPI wrapper
     )
     .add_local_python_source("app", copy=True)
 )
@@ -101,12 +100,11 @@ def fastapi_app():
     import base64
     import logging
     import time
+    from collections import deque
+    from threading import Lock
 
     from fastapi import FastAPI, HTTPException, Request, status
     from gradio.routes import mount_gradio_app
-    from slowapi import Limiter
-    from slowapi.errors import RateLimitExceeded
-    from slowapi.middleware import SlowAPIMiddleware
     from starlette.middleware.base import BaseHTTPMiddleware
     from starlette.responses import PlainTextResponse
 
@@ -153,22 +151,49 @@ def fastapi_app():
             )
             return response
 
-    limiter = Limiter(key_func=real_ip, default_limits=RATE_LIMITS)
-    fast_app.state.limiter = limiter
-    fast_app.add_exception_handler(
-        RateLimitExceeded,
-        lambda req, exc: PlainTextResponse(
-            "Rate limited. Please slow down and try again shortly.",
-            status_code=429,
-        ),
-    )
+    # application_limits (not default_limits) is required here because
+    # default_limits only applies to FastAPI-decorated routes; Gradio's
+    # mounted routes bypass that path entirely. application_limits fires
+    # unconditionally via SlowAPIMiddleware on every request.
+    # In-process per-IP rate limiter. Single-container web app
+    # (max_containers=1, see decorator above) means a sliding-window deque
+    # per IP in the one process is the whole story — no shared state, no
+    # Redis. Slowapi was tried first and didn't enforce on Gradio's
+    # mounted routes; this is direct and verifiable.
+    class IPRateLimit(BaseHTTPMiddleware):
+        def __init__(self, app, per_minute: int, per_day: int):
+            super().__init__(app)
+            self.per_minute = per_minute
+            self.per_day = per_day
+            self.minute_window: dict[str, deque] = {}
+            self.day_window: dict[str, deque] = {}
+            self.lock = Lock()
+
+        async def dispatch(self, request, call_next):
+            ip = real_ip(request)
+            now = time.monotonic()
+            with self.lock:
+                mw = self.minute_window.setdefault(ip, deque())
+                dw = self.day_window.setdefault(ip, deque())
+                while mw and now - mw[0] > 60:
+                    mw.popleft()
+                while dw and now - dw[0] > 86400:
+                    dw.popleft()
+                if len(mw) >= self.per_minute or len(dw) >= self.per_day:
+                    return PlainTextResponse(
+                        "Rate limited. Please slow down and try again shortly.",
+                        status_code=429,
+                    )
+                mw.append(now)
+                dw.append(now)
+            return await call_next(request)
 
     # Middleware ordering note: add_middleware is LIFO, so the last add
     # is the outermost. Stack here (outer → inner):
-    #   AccessLog       — sees every final response, including 413/429
-    #   MaxBodySize     — rejects oversize before rate-limit budget burns
-    #   SlowAPIMiddleware — per-IP envelope on what's left
-    fast_app.add_middleware(SlowAPIMiddleware)
+    #   AccessLog    — sees every final response, including 413/429
+    #   MaxBodySize  — rejects oversize before rate-limit budget burns
+    #   IPRateLimit  — per-IP envelope on what's left
+    fast_app.add_middleware(IPRateLimit, per_minute=300, per_day=2000)
     fast_app.add_middleware(MaxBodySize)
     fast_app.add_middleware(AccessLog)
     # ─────────────────────────────────────────────────────────────────────
