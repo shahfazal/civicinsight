@@ -198,7 +198,7 @@ Total v2 effort: ~2 days minimum, ~3 days if hand-writing hard negatives. **No v
 
 ---
 
-## What v2 doesn't change (anti-patterns from )
+## What v2 doesn't change
 
 Same constraints as v1. Don't relitigate these:
 - No `Gemma4ClippableLinear` patch (Unsloth handles it)

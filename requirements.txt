@@ -1,3 +1,6 @@
+# Local dev shell only (Gradio UI + Modal deploy + Anthropic Grounder).
+# For training reproducibility see requirements-exp4c-WORKING.txt, which
+# is the pinned pip freeze from the Exp 4c SFT run.
 anthropic
 python-dotenv
 Pillow

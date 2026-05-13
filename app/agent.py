@@ -1,9 +1,9 @@
 """
-Agent orchestrator. Single entry point that branches between the image-only
+Routing orchestrator. Single entry point that branches between the image-only
 and image+CSV paths, calling the model and the grounding pipeline in the
 right order.
 
-Routing decisions (these are the "agentic" branches):
+Routing decisions:
   1. Run inference on the image.
   2. Run structural validator on the prose.
      - If marker is missing: short-circuit to structural-issue, do not ground.
@@ -35,7 +35,7 @@ def run(
     infer_fn: Optional[Callable[[bytes], str]] = None,
 ) -> FormattedOutput:
     """
-    Run the full agentic pipeline on an image (and optional CSV).
+    Run the full pipeline on an image (and optional CSV).
 
     Pass CSV content via exactly one of:
       - csv_bytes: raw CSV bytes (preferred for web uploads, avoids temp-file

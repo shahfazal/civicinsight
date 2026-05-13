@@ -145,7 +145,7 @@ Each is documented in the writeup limitations section as v2 work.
 
 Add to the writeup's limitations or accessibility section:
 
-> "The Gradio demo interface received a focused accessibility pass covering ARIA labels, focus visibility, loading state announcement, and color contrast. Tested with macOS VoiceOver. A comprehensive WCAG AA audit, mobile screen reader testing, and high-contrast mode support are scoped as v2 work. The system's primary deliverable — accessible ARIA descriptions for civic data — does not depend on the demo UI; the descriptions can be embedded in any accessible interface."
+> "The Gradio demo interface received a focused accessibility pass covering ARIA labels, focus visibility, loading state announcement, and color contrast. Tested with macOS VoiceOver. A comprehensive WCAG AA audit, mobile screen reader testing, and high-contrast mode support are scoped as v2 work. The system's primary deliverable, accessible ARIA descriptions for civic data, does not depend on the demo UI; the descriptions can be embedded in any accessible interface."
 
 This frames honestly: accessibility was considered in v1, has documented gaps, the project's core deliverable is unaffected. Beats either "fully accessible" overclaim or silent omission.
 

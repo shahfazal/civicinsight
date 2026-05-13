@@ -20,9 +20,6 @@ __pycache__/
 *.pyc
 .claude/
 
-
-
-
 CLAUDE.md
 
 # Civic image content (recoverable from Modal volume civicinsight-data)
@@ -36,18 +33,11 @@ training/review.html
 # Local archive bundle (uploaded to Modal)
 raw_archive.tar.gz
 
-
 bench/
 
 # Kaggle dataset staging area (uploaded to Kaggle as civicinsight-demo)
 kaggle-dataset/
 
-
-# Untracked categories - keep them out of git entirely.
-
-
-
- (*, -*,
-# , , *,
-# , etc.) need a `git rm --cached` decision in the May 13
-# pre-submission cleanup pass; .
+# filter-repo helper files
+replacements-msg.txt
+replacements-text.txt
