@@ -64,16 +64,36 @@ _SCALE_TO_MULT = {
     "T": 1_000_000_000_000,
 }
 
+# Word-form scale tokens that models often emit instead of the K/M/B/T letter
+# suffix (e.g. "1.4 billion" rather than "1.4B"). Maps each word to the
+# canonical letter so the rest of the pipeline (NumberRecord.scale field,
+# _SCALE_TO_MULT lookup, classifier) stays unchanged. Covers English plus the
+# two French quantifier nouns that disagree with English ("milliard" = billion,
+# "mille" = thousand). Plurals handled in the regex.
+_SCALE_WORD_TO_LETTER = {
+    "thousand": "K",
+    "million": "M",
+    "billion": "B",
+    "trillion": "T",
+    "mille": "K",
+    "milliard": "B",
+}
+
 # Number token. Captured groups:
 #   prefix  - optional currency symbol immediately before the digits
 #   digits  - digit string, may contain space/comma/period as separators
-#   scale   - optional K/M/B/T suffix
+#   scale   - K/M/B/T letter OR word form (billion/million/thousand/trillion/milliard/mille)
 #   percent - optional % suffix
+# Word-form alternatives precede the letter class so the regex engine prefers
+# the long match over consuming just the leading letter. The negative-letter
+# lookahead rejects bare `B` in "billion" but accepts "billion" / "billions"
+# (the char after those tokens is a non-letter). Plurals handled per-word.
 # We match permissively here; _normalize_digits applies locale rules.
 _NUMBER_RE = re.compile(
     r"(?P<prefix>[€$£¥])?\s?"
     r"(?P<digits>\d+(?:[  .,]\d+)*)"
-    r"\s?(?:(?P<scale>[KMBT])(?![A-Za-z]))?(?P<percent>%)?",
+    r"\s?(?:(?P<scale>billions?|millions?|thousands?|trillions?|milliards?|milles?|[KMBT])(?![A-Za-z]))?"
+    r"(?P<percent>%)?",
     re.IGNORECASE,
 )
 
@@ -248,8 +268,14 @@ def extract(text: str, locale: str = "en") -> list[NumberRecord]:
             continue
 
         prefix = m.group("prefix")
-        scale = m.group("scale")
-        scale = scale.upper() if scale else None
+        scale_token = m.group("scale")
+        if scale_token is None:
+            scale = None
+        else:
+            # Letter form ("M") canonicalises to upper-case. Word form ("million",
+            # "milliards") looks up the canonical letter, plurals stripped.
+            normalized_token = scale_token.lower().rstrip("s")
+            scale = _SCALE_WORD_TO_LETTER.get(normalized_token, scale_token.upper())
         is_percent = m.group("percent") == "%"
 
         # Compute raw bounds: include prefix and scale/percent suffix when present.

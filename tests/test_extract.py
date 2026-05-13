@@ -203,3 +203,83 @@ def test_steps_of_phrase_marks_step_value_as_axis():
     # Find the "5" record (the step). It should be axis-classified.
     five = next(r for r in recs if r.raw == "5")
     assert five.kind == "axis"
+
+
+# --- Word-form scale tokens (billion / million / thousand / trillion + FR) ---
+
+def test_english_word_form_billion():
+    # The OWID-population regression: "1.4 billion" must canonicalise to 1.4e9
+    # so the matcher can compare against raw CSV integers like 1438069597.
+    text = "The series 'India' is selected with a tooltip showing 1.4 billion in 2023."
+    recs = extract(text, locale="en")
+    r = next(x for x in recs if x.scale == "B")
+    assert r.value == 1_400_000_000.0
+    assert r.kind == "value"
+
+
+def test_english_word_form_million():
+    text = "Auvergne tourist arrivals reached 14.6 million visitors."
+    recs = extract(text, locale="en")
+    r = next(x for x in recs if x.scale == "M")
+    assert r.value == 14_600_000.0
+
+
+def test_english_word_form_thousand():
+    text = "The dashboard tracks 105 thousand daily users."
+    recs = extract(text, locale="en")
+    r = next(x for x in recs if x.scale == "K")
+    assert r.value == 105_000.0
+
+
+def test_english_word_form_trillion():
+    text = "Total GDP exceeded 25 trillion dollars."
+    recs = extract(text, locale="en")
+    r = next(x for x in recs if x.scale == "T")
+    assert r.value == 25_000_000_000_000.0
+
+
+def test_english_plural_word_form():
+    # "2 billions" - regex must consume the 's' so raw_end is correct and
+    # the canonical value still applies the B scale.
+    text = "Two regions exceed 2 billions inhabitants combined."
+    recs = extract(text, locale="en")
+    r = next(x for x in recs if x.scale == "B")
+    assert r.value == 2_000_000_000.0
+
+
+def test_french_word_form_milliard():
+    # FR: "milliard" = English billion (10^9), not million.
+    text = "La population mondiale atteint 8 milliards en 2023."
+    recs = extract(text, locale="fr")
+    r = next(x for x in recs if x.scale == "B")
+    assert r.value == 8_000_000_000.0
+
+
+def test_french_word_form_mille():
+    # FR: "mille" = thousand. Distinct from comma/space-separated thousands.
+    text = "La commune compte 5 mille habitants."
+    recs = extract(text, locale="fr")
+    r = next(x for x in recs if x.scale == "K")
+    assert r.value == 5_000.0
+
+
+def test_french_word_form_million_same_as_english():
+    # FR "million" = EN "million" (same word, same multiplier). Verifies the
+    # word-to-letter table doesn't accidentally divert it elsewhere.
+    text = "La région totalise 14,6 millions de visiteurs."
+    recs = extract(text, locale="fr")
+    r = next(x for x in recs if x.scale == "M")
+    assert r.value == 14_600_000.0
+
+
+def test_word_form_does_not_eat_bare_capital_letter():
+    # Regression guard: the alternation must not let "B" inside "By" match
+    # as the billion-scale word. The negative lookahead protected this in the
+    # letter-only regex; the extended regex must too.
+    text = "By 2023, the total reached 1.4 billion."
+    recs = extract(text, locale="en")
+    # Only one scaled record (the 1.4 billion). The "2023" is a year, not a scale.
+    scaled = [r for r in recs if r.scale is not None]
+    assert len(scaled) == 1
+    assert scaled[0].scale == "B"
+    assert scaled[0].value == 1_400_000_000.0
