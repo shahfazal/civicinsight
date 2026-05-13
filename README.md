@@ -14,7 +14,7 @@ Submitted to the **Kaggle Gemma 4 Good Hackathon** - Main Track, Impact Track (D
 - **Model**: [`shahfazal/civicinsight-gemma4-e4b-it`](https://huggingface.co/shahfazal/civicinsight-gemma4-e4b-it) on HuggingFace
 - **Notebook**: [`notebooks/civicinsight-gemma-4-good-hackathon-submission.ipynb`](notebooks/civicinsight-gemma-4-good-hackathon-submission.ipynb)
 - **Technical writeup**: [`docs/writeup.md`](docs/writeup.md)
-- **Kaggle submission**: _link added after submission goes live (May 13, 2026)_ <!-- TODO: paste Kaggle entry URL after submitting -->
+- **Kaggle submission**: [CivicInsight on the Gemma 4 Good Hackathon](https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/civicinsight) (Main Track + Impact Track + Special Technology Track)
 
 ## What this is
 
