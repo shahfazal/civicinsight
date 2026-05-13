@@ -10,12 +10,12 @@
 
 ## Test Set
 
-**Phase 1, Real dashboards (10 images)**
+**Phase 1, Real dashboards (9 images)**
 
 | Image | Chart Type |
 |-------|-----------|
 | tourisme-powerbi.png | Mixed dashboard (KPIs, table, bar, map, gauge) |
-| scatter-all-parties.png | Scatter plot (all categories) |
+| scatter-all-parties-clean.png | Scatter plot (all categories) |
 | scatter-gauche-filtered.png | Scatter plot (one category filtered/highlighted) |
 | scatter-gauche-droite-filtered.png | Scatter plot (two categories filtered/highlighted) |
 | scatter-point-selected.png | Scatter plot with tooltip hovers |
@@ -23,11 +23,12 @@
 | boxplot-abstention.png | Box plot |
 | choropleth-paris.png | Choropleth map (simple) |
 | choropleth-marseille.png | Choropleth map (medium complexity) |
-| choropleth-paris-detailed.png | Choropleth map (high complexity, sidebar) |
 
-**Phase 2, Synthetic charts with ground truth (12 images tested)**
+_The original audit covered 10 real-world images. `choropleth-paris-detailed.png` was lost from the repo at some point and is no longer reproducible; its qualitative findings remain in the Per-Chart-Type Summary below._
 
-| Image | Chart Type | Distribution |
+**Phase 2, Synthetic charts with ground truth (18 images tested)**
+
+| Image | Chart Type | Variant |
 |-------|-----------|-------------|
 | stacked_bar_bars_3_001.png | Stacked bar | random, 3 bars, 6 segments |
 | stacked_bar_bars_8_003.png | Stacked bar | random, 8 bars, 6 segments |
@@ -41,6 +42,12 @@
 | boxplot_04_proximity.png | Box plot | tooltip + named student points |
 | boxplot_05_size_variation.png | Box plot | variable IQR sizes |
 | boxplot_06_full_complexity.png | Box plot | full complexity, 2 tooltips |
+| choropleth_01_political.png | Choropleth | political colors (6 blocs) |
+| choropleth_02_transport.png | Choropleth | non-political colors (transport modes) |
+| choropleth_03_circles.png | Choropleth | circle-size encoding |
+| choropleth_04_political_circles.png | Choropleth | bivariate (political color + circle size) |
+| choropleth_05_gradient.png | Choropleth | gradient, no printed labels |
+| choropleth_06_gradient_labels.png | Choropleth | gradient + printed labels |
 
 ---
 
@@ -237,7 +244,7 @@
 **Answer:** Yes for explicit numbers (KPIs, tables, tooltips, printed labels). No for encoded values (proportional bars, circle sizes, political color priors, Y-axis estimation without tooltips).
 
 **The fundamental boundary:**
-- **Text on screen** → extracted correctly, reliably, to full precision. No exception found across 28 images.
+- **Text on screen** → extracted correctly, reliably, to full precision. No exception found across the 27 reproducible images.
 - **Value encoded visually** (width, size, color intensity, position) → model guesses using learned priors. Errors are systematic and large.
 
 **Fine-tuning justified?** Unambiguously yes. 9 confirmed failure modes, all specific and measurable:
@@ -252,9 +259,9 @@
 9. Summary contradicting own output (whitewash)
 
 **Zero-shot evaluation status:** COMPLETE
-- 10 real dashboard images (Phase 1)
+- 9 real dashboard images (Phase 1; original audit was 10, one source file lost)
 - 18 synthetic charts with ground truth JSON (Phase 2): 6 stacked bars, 6 box plots, 6 choropleths
-- **Total: 28 images tested**
+- **Total reproducible: 27 images** (verbatim outputs in `notebooks/kaggle/01-zero-shot-evaluation.ipynb`)
 
 **Verdict:** Zero-shot evaluation was a success. Gemma 4 fails in exactly the right places, encoded values, visual inference, political priors, leaving clear room for fine-tuning to add genuine value. The model is not broken; it is unspecialized. That is the best possible outcome.
 

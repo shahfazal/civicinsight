@@ -32,8 +32,8 @@ DEFAULT_PROMPT = "Generate an aria-label for this data visualization image."
 
 # Operational toggle. Set DEMO_HOT=1 in the deploy environment to enable
 # judging-friendly settings (longer warm window, more parallel containers).
-# Default = cost-protected. See  operational
-# toggles section for runbook.
+# Default = cost-protected. See docs/runbook.md "Modal cost / capacity
+# toggle (DEMO_HOT)" section for details.
 DEMO_HOT = os.environ.get("DEMO_HOT", "0") == "1"
 
 # Image versions pinned to match the exp4c-sft training run (07c notebook,
@@ -98,7 +98,22 @@ class InferenceServer:
 
     @modal.enter()
     def load_model(self):
+        import warnings
+
         from unsloth import FastVisionModel
+
+        # PEFT prints a UserWarning about missing adapter keys for layers 24-41
+        # k_proj/v_proj. This is expected and benign: the SFT checkpoint
+        # legitimately does not contain those slots (matformer-aware
+        # target_modules resolution at training time). The model loads
+        # correctly on the layers that were trained. Suppressing so Modal
+        # function logs stay readable. Parallels the Kaggle notebook.
+        warnings.filterwarnings(
+            "ignore",
+            message="Found missing adapter keys",
+            category=UserWarning,
+        )
+
         self.model, self.tokenizer = FastVisionModel.from_pretrained(
             ADAPTER_PATH,
             load_in_4bit=True,

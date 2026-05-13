@@ -1,3 +1,6 @@
+# Pinned pip freeze from the Exp 4c SFT training run on Modal (A100 80GB).
+# This is the canonical training environment. Use it to reproduce SFT/DPO.
+# For the local dev/app shell, see requirements.txt instead.
 absl-py==2.3.1
 accelerate==1.10.1
 aiofiles==24.1.0

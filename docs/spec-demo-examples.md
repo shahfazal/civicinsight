@@ -13,11 +13,11 @@ timing, screen reader test, etc.).
 
 ## Order of demonstration (recommended)
 
-1. **Case A — Sillon Lorrain choropleth, image only** (baseline: model works)
-2. **Case B — Corsica EV chargers + CSV** (model right, pipeline conservative — honest)
-3. **Case C — rural-vs-urban + CSV** (model wrong, pipeline catches it — value of verification)
-4. **Case D — income-vs-life-exp + CSV** (worst documented failure mode, pipeline still catches it)
-5. **Case E (optional) — steering wheel image** (robustness: not-a-viz handled gracefully)
+1. **Case A, Sillon Lorrain choropleth, image only** (baseline: model works)
+2. **Case B, Corsica EV chargers + CSV** (model right, pipeline conservative, honest)
+3. **Case C, rural-vs-urban + CSV** (model wrong, pipeline catches it, value of verification)
+4. **Case D, income-vs-life-exp + CSV** (worst documented failure mode, pipeline still catches it)
+5. **Case E (optional), steering wheel image** (robustness: not-a-viz handled gracefully)
 
 Rationale: A → B builds confidence the system works on simple cases. C → D
 introduces the verification story increasingly dramatically. E is a closer that
@@ -28,7 +28,7 @@ writeup or live walkthrough.
 
 ---
 
-## Case A — Sillon Lorrain choropleth (image only)
+## Case A, Sillon Lorrain choropleth (image only)
 
 **Inputs:**
 - Image: any electoral choropleth (e.g., baseline-1 or yvelines from the held-outs)
@@ -62,11 +62,11 @@ edit out the wait.
 
 ---
 
-## Case B — Corsica EV chargers (image + CSV)
+## Case B, Corsica EV chargers (image + CSV)
 
 **Inputs:**
 - Image: `examples/standardized/corse-ev-deuteranopia.png` (or whichever Corsica
-  EV image is available — check examples/ for current name)
+  EV image is available, check examples/ for current name)
 - CSV: `examples/raw/corse-ev-charging-ground-truth.csv`
 
 **Expected ARIA output (mostly correct):**
@@ -113,12 +113,12 @@ edit out the wait.
 > the source data."
 
 **Recording tip:** This is the case that makes the system look "too pessimistic"
-at a glance. Frame it carefully — emphasize the design choice, not the
+at a glance. Frame it carefully, emphasize the design choice, not the
 limitation.
 
 ---
 
-## Case C — rural-vs-urban stacked bar (image + CSV)
+## Case C, rural-vs-urban stacked bar (image + CSV)
 
 **Inputs:**
 - Image: `examples/standardized/rural-vs-urban.png`
@@ -155,18 +155,18 @@ limitation.
   source verification"
 
 **Talking point:**
-> "The model confidently produced 80% / 0% / 19% — labels swapped. Without
+> "The model confidently produced 80% / 0% / 19%, labels swapped. Without
 > the CSV, a screen-reader user would have no way to know this is wrong.
 > With the CSV, the pipeline flags it. 17% confidence is the system telling
 > the user: don't trust these specific numbers."
 
 **Heads up:** the '23' false-positive verified match is documented in the
-model card as a known limitation — coincidental matches with overlapping
+model card as a known limitation, coincidental matches with overlapping
 context. If a viewer asks "why is one number verified?", that's the answer.
 
 ---
 
-## Case D — income vs life expectancy scatter (image + CSV)
+## Case D, income vs life expectancy scatter (image + CSV)
 
 **Inputs:**
 - Image: `examples/standardized/income-vs-life-exp.png`
@@ -188,11 +188,11 @@ context. If a viewer asks "why is one number verified?", that's the answer.
   5 unverified ...`
 
 **Ground truth from CSV (Qatar row):**
-- GDP per capita: **92,862** (model said 75,000 — wrong)
-- Life expectancy: **79.3** (model said 78 — close, might match within tolerance)
+- GDP per capita: **92,862** (model said 75,000, wrong)
+- Life expectancy: **79.3** (model said 78, close, might match within tolerance)
 - Image actually titled "Income vs life expectancy" (model said "untitled")
 - X-axis is Life expectancy (50–85), Y-axis is GDP per capita (0–100k)
-  — **model swapped them**
+ , **model swapped them**
 
 **What this demonstrates:**
 - Two compounding failure modes: title fabrication (model says "untitled")
@@ -204,7 +204,7 @@ context. If a viewer asks "why is one number verified?", that's the answer.
 **Talking point:**
 > "The model invented the title, swapped the axes, and made up Qatar's
 > tooltip values. Without verification, this output reads as confident and
-> precise — exactly the kind of accessibility failure that's invisible to
+> precise, exactly the kind of accessibility failure that's invisible to
 > sighted developers because the prose feels professional. The verification
 > layer's confidence score makes the unreliability measurable."
 
@@ -213,12 +213,12 @@ narrative. If you only have time for one image+CSV demo, use this one.
 
 ---
 
-## Case E (optional) — Steering wheel image (not a viz)
+## Case E (optional), Steering wheel image (not a viz)
 
 **Inputs:**
 - Image: any non-data-visualization image (we used a "Nobody Tests The
-  Steering Wheel" meme — anything that's not a chart works)
-- CSV: any CSV (or none — both behave reasonably)
+  Steering Wheel" meme, anything that's not a chart works)
+- CSV: any CSV (or none, both behave reasonably)
 
 **Expected ARIA output:**
 
@@ -267,7 +267,7 @@ for time.
 4. **Test each case end-to-end the day before** to catch deploy regressions.
 
 5. **Browser:** Chrome/Firefox in incognito mode. Standard zoom (no zoom-in
-   for "presentation mode" — Gradio's layout breaks at high zoom).
+   for "presentation mode", Gradio's layout breaks at high zoom).
 
 6. **Recording resolution:** 1920×1080 minimum. Show full Gradio output panel
    so per-value verification is readable.
@@ -278,7 +278,7 @@ for time.
 
 - Modal logs (interesting to engineers, dead-air to general audience)
 - HuggingFace Hub model card (link to it; don't read it on camera)
-- The agentic shell's Python source (too much detail — kaggle notebook
+- The agentic shell's Python source (too much detail, kaggle notebook
   walks through it)
 - Cold-start timing (warm everything first)
 - The 72-missing-keys warning (architectural quirk, not user-facing)
@@ -294,11 +294,3 @@ for time.
 | File upload doesn't appear in form | Browser cache or upload progress 404 | Hard refresh, re-upload. |
 | Submit hangs >2 min | Inference timeout fired | Don't retry on camera; fall back to screenshot. Investigate after. |
 | Output completely incoherent | Model is loading wrong adapter | Check Modal logs, redeploy `app/io/inference.py`. |
-
----
-
-## Memory cross-references
-
-- `project_handoff_2026_05_01.md` — v1 cleanup state
-- `project_pre_dpo_audit_findings.md` — documented failure modes (cases C, D)
-- `docs/runbook.md` — deploy + DEMO_HOT toggle commands

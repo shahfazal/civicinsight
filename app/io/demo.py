@@ -40,7 +40,7 @@ from app.agent import run as agent_run
 
 # Theme inspired by shahfazal.com (Hugo PaperMod). Minimalist, near-white in
 # light mode, system font stack, 8px corner radius. Color values lifted from
-# ~/projects/shahfazal.com/themes/PaperMod/assets/css/core/theme-vars.css.
+# the PaperMod theme's `assets/css/core/theme-vars.css`.
 _THEME = gr.themes.Base(
     primary_hue=gr.themes.colors.slate,
     neutral_hue=gr.themes.colors.gray,
