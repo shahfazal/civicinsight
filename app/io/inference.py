@@ -20,6 +20,8 @@ starting with [civicinsight-v1]).
 
 import io
 import os
+import struct
+import zlib
 
 import modal
 
@@ -179,3 +181,60 @@ def infer(image_bytes: bytes, prompt: str = DEFAULT_PROMPT) -> str:
     """
     server_cls = modal.Cls.from_name("civicinsight-inference", "InferenceServer")
     return server_cls().generate.remote(image_bytes, prompt)
+
+
+# 1x1 white PNG built with stdlib only (no Pillow needed in the heartbeat
+# image). Same approach used by scripts/keep-modal-warm.py for the
+# laptop-side variant.
+def _make_tiny_png() -> bytes:
+    def chunk(tag: bytes, data: bytes) -> bytes:
+        length = struct.pack(">I", len(data))
+        crc = struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF)
+        return length + tag + data + crc
+
+    sig = b"\x89PNG\r\n\x1a\n"
+    ihdr = chunk(b"IHDR", struct.pack(">IIBBBBB", 1, 1, 8, 2, 0, 0, 0))
+    idat = chunk(b"IDAT", zlib.compress(b"\x00\xff\xff\xff", 9))
+    iend = chunk(b"IEND", b"")
+    return sig + ihdr + idat + iend
+
+
+WEB_URL = "https://shahfazal--civicinsight-web-fastapi-app.modal.run/"
+
+# Scheduled heartbeat. Only attached when DEMO_HOT=1, so post-judging
+# redeploys without DEMO_HOT remove the schedule automatically. Each tick
+# resets the scaledown timers on both the inference (GPU) and web (CPU)
+# containers — judges who arrive at random times across the judging window
+# always land on warm containers. Cost: ~5s of A100-40GB + a CPU HEAD every
+# 4 minutes = ~$1/day.
+_HEARTBEAT_KWARGS = (
+    {"schedule": modal.Period(minutes=4)} if DEMO_HOT else {}
+)
+
+
+@app.function(
+    image=modal.Image.debian_slim(python_version="3.12").pip_install("httpx==0.28.1"),
+    timeout=60,
+    **_HEARTBEAT_KWARGS,
+)
+def heartbeat():
+    """Keep inference and web containers warm during judging windows."""
+    import httpx
+
+    # 1. Warm inference: invoke our own GPU container via .remote().
+    # InferenceServer is in the same app so we can reference it directly.
+    try:
+        InferenceServer().generate.remote(
+            image_bytes=_make_tiny_png(),
+            max_new_tokens=8,
+        )
+    except Exception as exc:
+        print(f"heartbeat: inference warmup failed: {type(exc).__name__}: {exc}")
+
+    # 2. Warm web: HEAD the Gradio URL so its scaledown timer resets too.
+    # Failure here is non-fatal; inference warmup is the costly one we care
+    # about.
+    try:
+        httpx.head(WEB_URL, timeout=30.0)
+    except Exception as exc:
+        print(f"heartbeat: web warmup failed: {type(exc).__name__}: {exc}")
