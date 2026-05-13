@@ -7,7 +7,7 @@ Each test asserts behavior the formatter (app.core.format) and agent
 
 import pandas as pd
 
-from app.core.extract import extract
+from app.core.extract import NumberRecord, extract
 from app.grounding.match import MatchResult, match_records
 from app.grounding.source import SourceData
 
@@ -209,4 +209,112 @@ def test_n1_column_name_overlap_confirms():
     records = extract("Sales were 14.6M total.", locale="en")
     source = _source({"sales": [14_580_231]})
     [result] = match_records(records, source)
+    assert result.status == "confirmed"
+
+
+# --- Precision-aware tolerance for raw decimal display values ---
+
+def test_raw_decimal_match_tolerates_chart_rounding():
+    # OWID agricultural-area-per-capita regression: "0.79 ha" (display, 2 decimals)
+    # must verify against the CSV's 0.7943 raw value. Drift is 0.55% — outside the
+    # old 0.5% relative window, inside the half-last-decimal window of ±0.005.
+    rec = NumberRecord(
+        raw="0.79", value=0.79, scale=None, kind="value",
+        is_percent=False, is_currency=False, currency=None,
+        context_phrase="The Africa bar is labeled with 0.79 ha",
+        char_start=0, char_end=4, display_decimals=2,
+    )
+    source = SourceData.from_dataframe(pd.DataFrame({
+        "Entity": ["Africa"],
+        "Agricultural land per capita": [0.7943493],
+    }))
+    [result] = match_records([rec], source)
+    assert result.status == "confirmed"
+
+
+def test_raw_decimal_match_tolerates_smaller_value_rounding():
+    # "0.59 ha" against CSV 0.5931 — drift is 0.53%, the original 0.5% relative
+    # would fail; precision-aware ±0.005 absolute covers it.
+    rec = NumberRecord(
+        raw="0.59", value=0.59, scale=None, kind="value",
+        is_percent=False, is_currency=False, currency=None,
+        context_phrase="The World bar is labeled with 0.59 ha",
+        char_start=0, char_end=4, display_decimals=2,
+    )
+    source = SourceData.from_dataframe(pd.DataFrame({
+        "Entity": ["World"],
+        "Agricultural land per capita": [0.5931124],
+    }))
+    [result] = match_records([rec], source)
+    assert result.status == "confirmed"
+
+
+def test_raw_decimal_match_still_rejects_unrelated_value():
+    # The widened precision window must not admit a clearly different value.
+    # "0.79" with ±0.005 abs window: CSV 0.85 is way outside.
+    rec = NumberRecord(
+        raw="0.79", value=0.79, scale=None, kind="value",
+        is_percent=False, is_currency=False, currency=None,
+        context_phrase="0.79 ha",
+        char_start=0, char_end=4, display_decimals=2,
+    )
+    source = SourceData.from_dataframe(pd.DataFrame({
+        "Entity": ["Africa"],
+        "Agricultural land per capita": [0.85],
+    }))
+    [result] = match_records([rec], source)
+    assert result.status == "unmatched"
+
+
+def test_raw_integer_tolerance_unchanged():
+    # display_decimals=0 must keep the existing 0.5% relative tolerance,
+    # not balloon to ±0.5 absolute. Value 1.0 must NOT match 1.4.
+    rec = NumberRecord(
+        raw="1", value=1.0, scale=None, kind="value",
+        is_percent=False, is_currency=False, currency=None,
+        context_phrase="1 chargers",
+        char_start=0, char_end=1, display_decimals=0,
+    )
+    source = SourceData.from_dataframe(pd.DataFrame({
+        "Entity": ["Place"],
+        "Count": [1.4],
+    }))
+    [result] = match_records([rec], source)
+    assert result.status == "unmatched"
+
+
+def test_scaled_record_tolerance_unchanged():
+    # Records with scale (K/M/B/T) keep 5% relative tolerance, not the
+    # precision-aware path. "1.4 billion" still matches CSV 1.43e9.
+    rec = NumberRecord(
+        raw="1.4 billion", value=1_400_000_000.0, scale="B", kind="value",
+        is_percent=False, is_currency=False, currency=None,
+        context_phrase="India 1.4 billion in 2023",
+        char_start=0, char_end=11, display_decimals=1,
+    )
+    source = SourceData.from_dataframe(pd.DataFrame({
+        "Entity": ["India"],
+        "Population": [1_438_069_597],
+    }))
+    [result] = match_records([rec], source)
+    assert result.status == "confirmed"
+
+
+def test_raw_decimal_match_large_value_still_uses_relative():
+    # When value is large enough that 0.5% relative window > half-last-decimal,
+    # the max() picks the relative one — unchanged behavior. "82.1" with 1 decimal:
+    # rel window = 0.41, abs window = 0.05. CSV 82.4 is 0.37% off, within
+    # relative window → match.
+    rec = NumberRecord(
+        raw="82.1", value=82.1, scale=None, kind="value",
+        is_percent=False, is_currency=False, currency=None,
+        context_phrase="life expectancy 82.1",
+        char_start=0, char_end=4, display_decimals=1,
+    )
+    source = SourceData.from_dataframe(pd.DataFrame({
+        "Entity": ["X"],
+        "Life expectancy": [82.4],
+    }))
+    [result] = match_records([rec], source)
+    # 0.37% off, within 0.5% relative (which is 0.41 absolute on a base of 82).
     assert result.status == "confirmed"

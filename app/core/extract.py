@@ -41,6 +41,8 @@ class NumberRecord:
     context_phrase: str      # window of surrounding text (for downstream disambiguation)
     char_start: int          # offset of the matched token in the original prose
     char_end: int
+    display_decimals: int = 0  # digits after the decimal separator in the displayed form
+                               # (used by the matcher for precision-aware comparison; 0 for integers)
 
 
 _CURRENCY_BY_SYMBOL = {
@@ -64,16 +66,36 @@ _SCALE_TO_MULT = {
     "T": 1_000_000_000_000,
 }
 
+# Word-form scale tokens that models often emit instead of the K/M/B/T letter
+# suffix (e.g. "1.4 billion" rather than "1.4B"). Maps each word to the
+# canonical letter so the rest of the pipeline (NumberRecord.scale field,
+# _SCALE_TO_MULT lookup, classifier) stays unchanged. Covers English plus the
+# two French quantifier nouns that disagree with English ("milliard" = billion,
+# "mille" = thousand). Plurals handled in the regex.
+_SCALE_WORD_TO_LETTER = {
+    "thousand": "K",
+    "million": "M",
+    "billion": "B",
+    "trillion": "T",
+    "mille": "K",
+    "milliard": "B",
+}
+
 # Number token. Captured groups:
 #   prefix  - optional currency symbol immediately before the digits
 #   digits  - digit string, may contain space/comma/period as separators
-#   scale   - optional K/M/B/T suffix
+#   scale   - K/M/B/T letter OR word form (billion/million/thousand/trillion/milliard/mille)
 #   percent - optional % suffix
+# Word-form alternatives precede the letter class so the regex engine prefers
+# the long match over consuming just the leading letter. The negative-letter
+# lookahead rejects bare `B` in "billion" but accepts "billion" / "billions"
+# (the char after those tokens is a non-letter). Plurals handled per-word.
 # We match permissively here; _normalize_digits applies locale rules.
 _NUMBER_RE = re.compile(
     r"(?P<prefix>[€$£¥])?\s?"
     r"(?P<digits>\d+(?:[  .,]\d+)*)"
-    r"\s?(?:(?P<scale>[KMBT])(?![A-Za-z]))?(?P<percent>%)?",
+    r"\s?(?:(?P<scale>billions?|millions?|thousands?|trillions?|milliards?|milles?|[KMBT])(?![A-Za-z]))?"
+    r"(?P<percent>%)?",
     re.IGNORECASE,
 )
 
@@ -121,6 +143,43 @@ def _normalize_digits(digits: str, locale: str) -> Optional[float]:
         return _resolve_single_separator(s, ".", locale)
 
     return float(s)
+
+
+def _count_display_decimals(digits: str, locale: str) -> int:
+    """
+    Count digits after the decimal separator in the original display form,
+    locale-aware. Mirrors the separator-resolution rules in `_normalize_digits`
+    so the matcher can apply precision-aware tolerance ("0.79" carries an
+    implicit ±0.005 window, not a ±0.5% relative window).
+
+    Returns 0 for integer display, separator-as-thousands, and unparseable input.
+    """
+    s = digits.replace(" ", "").replace(" ", "")
+    has_comma = "," in s
+    has_period = "." in s
+
+    if has_comma and has_period:
+        # Rightmost is decimal in either locale.
+        rightmost = max(s.rfind(","), s.rfind("."))
+        return len(s) - rightmost - 1
+
+    if has_comma:
+        if s.count(",") > 1:
+            return 0  # multiple commas: thousands grouping
+        after = s.split(",")[1]
+        if len(after) == 3:
+            return 3 if locale == "fr" else 0  # en treats single-comma-3 as thousands
+        return len(after)
+
+    if has_period:
+        if s.count(".") > 1:
+            return 0
+        after = s.split(".")[1]
+        if len(after) == 3:
+            return 3 if locale == "en" else 0  # fr treats single-period-3 as thousands
+        return len(after)
+
+    return 0
 
 
 def _resolve_single_separator(s: str, sep: str, locale: str) -> float:
@@ -248,8 +307,14 @@ def extract(text: str, locale: str = "en") -> list[NumberRecord]:
             continue
 
         prefix = m.group("prefix")
-        scale = m.group("scale")
-        scale = scale.upper() if scale else None
+        scale_token = m.group("scale")
+        if scale_token is None:
+            scale = None
+        else:
+            # Letter form ("M") canonicalises to upper-case. Word form ("million",
+            # "milliards") looks up the canonical letter, plurals stripped.
+            normalized_token = scale_token.lower().rstrip("s")
+            scale = _SCALE_WORD_TO_LETTER.get(normalized_token, scale_token.upper())
         is_percent = m.group("percent") == "%"
 
         # Compute raw bounds: include prefix and scale/percent suffix when present.
@@ -274,6 +339,7 @@ def extract(text: str, locale: str = "en") -> list[NumberRecord]:
 
         context_left = text[max(0, raw_start - 30):raw_start]
         kind = _classify_kind(digits, scale, is_percent, is_currency, context_left)
+        display_decimals = _count_display_decimals(digits, locale)
 
         records.append(NumberRecord(
             raw=raw,
@@ -286,6 +352,7 @@ def extract(text: str, locale: str = "en") -> list[NumberRecord]:
             context_phrase=_context_phrase(text, raw_start, raw_end),
             char_start=raw_start,
             char_end=raw_end,
+            display_decimals=display_decimals,
         ))
 
     return records

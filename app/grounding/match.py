@@ -52,13 +52,29 @@ def _tolerance_for(record: NumberRecord, override: Optional[float]) -> float:
     Civic dashboards display values rounded to 1 to 2 significant figures when
     a scale suffix is present ("90k" stands in for $92,862, ~3% off). Raw
     numbers without a scale suffix are usually exact ("82.0" life expectancy).
+
+    Raw decimal-display values carry an implicit precision floor: the chart
+    label "0.79" represents a value that's been rounded to 2 decimal places,
+    so the underlying CSV can drift up to half-the-last-displayed-digit
+    (±0.005 here) before the labels disagree. For small magnitudes (sub-1.0)
+    this implicit window is wider than the 0.5% relative default. Use the
+    more lenient of the two so chart-rounded labels verify against precise
+    source values without admitting unrelated cells.
+
     Adaptive default reflects this; explicit `override` bypasses entirely.
     """
     if override is not None:
         return override
     if record.scale is not None:
         return 0.05   # 5% for K/M/B/T-suffixed display values
-    return 0.005      # 0.5% for raw numbers
+    if record.display_decimals > 0 and record.value != 0:
+        # Half-last-displayed-digit absolute window, expressed as relative.
+        # max() with the 0.5% baseline keeps existing behavior for larger
+        # magnitudes where the relative window is already wider.
+        rel_window = 0.005 * abs(record.value)
+        abs_window = 0.5 * (10 ** -record.display_decimals)
+        return max(rel_window, abs_window) / abs(record.value)
+    return 0.005      # 0.5% for raw integer values
 
 
 def match_records(
