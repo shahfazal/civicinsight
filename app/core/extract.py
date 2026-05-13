@@ -41,6 +41,8 @@ class NumberRecord:
     context_phrase: str      # window of surrounding text (for downstream disambiguation)
     char_start: int          # offset of the matched token in the original prose
     char_end: int
+    display_decimals: int = 0  # digits after the decimal separator in the displayed form
+                               # (used by the matcher for precision-aware comparison; 0 for integers)
 
 
 _CURRENCY_BY_SYMBOL = {
@@ -141,6 +143,43 @@ def _normalize_digits(digits: str, locale: str) -> Optional[float]:
         return _resolve_single_separator(s, ".", locale)
 
     return float(s)
+
+
+def _count_display_decimals(digits: str, locale: str) -> int:
+    """
+    Count digits after the decimal separator in the original display form,
+    locale-aware. Mirrors the separator-resolution rules in `_normalize_digits`
+    so the matcher can apply precision-aware tolerance ("0.79" carries an
+    implicit ±0.005 window, not a ±0.5% relative window).
+
+    Returns 0 for integer display, separator-as-thousands, and unparseable input.
+    """
+    s = digits.replace(" ", "").replace(" ", "")
+    has_comma = "," in s
+    has_period = "." in s
+
+    if has_comma and has_period:
+        # Rightmost is decimal in either locale.
+        rightmost = max(s.rfind(","), s.rfind("."))
+        return len(s) - rightmost - 1
+
+    if has_comma:
+        if s.count(",") > 1:
+            return 0  # multiple commas: thousands grouping
+        after = s.split(",")[1]
+        if len(after) == 3:
+            return 3 if locale == "fr" else 0  # en treats single-comma-3 as thousands
+        return len(after)
+
+    if has_period:
+        if s.count(".") > 1:
+            return 0
+        after = s.split(".")[1]
+        if len(after) == 3:
+            return 3 if locale == "en" else 0  # fr treats single-period-3 as thousands
+        return len(after)
+
+    return 0
 
 
 def _resolve_single_separator(s: str, sep: str, locale: str) -> float:
@@ -300,6 +339,7 @@ def extract(text: str, locale: str = "en") -> list[NumberRecord]:
 
         context_left = text[max(0, raw_start - 30):raw_start]
         kind = _classify_kind(digits, scale, is_percent, is_currency, context_left)
+        display_decimals = _count_display_decimals(digits, locale)
 
         records.append(NumberRecord(
             raw=raw,
@@ -312,6 +352,7 @@ def extract(text: str, locale: str = "en") -> list[NumberRecord]:
             context_phrase=_context_phrase(text, raw_start, raw_end),
             char_start=raw_start,
             char_end=raw_end,
+            display_decimals=display_decimals,
         ))
 
     return records
